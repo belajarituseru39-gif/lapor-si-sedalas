@@ -1,0 +1,2689 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SI SEDALAS — SDN 011 Balikpapan Tengah</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        sedalas: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        },
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Scrollbar & Print Styles */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Official Print Area formatting */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printableArea, #printableArea * {
+                visibility: visible;
+            }
+            #printableArea {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white !important;
+                color: black !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* Radio Card custom active transition */
+        .score-option:checked + label {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(13, 148, 136, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- TOP STATUS BAR (Cloud Status & Quick Info) -->
+    <div class="bg-navy-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800 no-print">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 font-medium text-teal-400">
+                    <i class="fa-solid fa-school"></i> SDN 011 Balikpapan Tengah
+                </span>
+                <span class="hidden sm:inline text-slate-500">|</span>
+                <span class="hidden sm:inline text-slate-300">Layanan Pengaduan Masyarakat & Survei Kepuasan Internal</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span id="cloudStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" id="cloudStatusDot"></span>
+                    <span id="cloudStatusText">Server Aktif • SDN 011 Balikpapan Tengah</span>
+                </span>
+                <button onclick="toggleRoleModal()" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+                    <i class="fa-solid fa-user-shield text-teal-400"></i>
+                    <span id="activeRoleLabel">Mode: Publik & Petugas</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER & NAVIGATION -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-200 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3.5 gap-3">
+                <!-- Brand Logo & Title -->
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('beranda')">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-600 to-emerald-700 flex items-center justify-center text-white shadow-md shadow-teal-600/20 font-display font-extrabold text-xl shrink-0">
+                            011
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h1 class="font-display font-extrabold text-xl sm:text-2xl tracking-tight text-slate-900">
+                                    SI SEDALAS
+                                </h1>
+                                <span class="text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-teal-100 text-teal-800 border border-teal-200">
+                                    Resmi
+                                </span>
+                            </div>
+                            <p class="text-xs text-slate-500 font-medium">
+                                Sistem Informasi Sebelas • Pengaduan & Survei Kepuasan SDN 011 Balikpapan Tengah
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Pills -->
+                <nav class="flex items-center gap-1 overflow-x-auto pb-1 md:pb-0 scrollbar-none" aria-label="Navigasi Utama">
+                    <button onclick="switchTab('beranda')" id="nav-beranda" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap flex items-center gap-2 bg-teal-600 text-white shadow-sm">
+                        <i class="fa-solid fa-house"></i> Beranda
+                    </button>
+                    <button onclick="switchTab('form01')" id="nav-form01" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap flex items-center gap-2 text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-bullhorn text-rose-500"></i> Form 01: Pengaduan
+                    </button>
+                    <button onclick="switchTab('form02')" id="nav-form02" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap flex items-center gap-2 text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-star text-amber-500"></i> Form 02: Survei
+                    </button>
+                    <button onclick="switchTab('lampiran01')" id="nav-lampiran01" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap flex items-center gap-2 text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-clipboard-check text-blue-600"></i> Tindak Lanjut (Lamp. 01)
+                    </button>
+                    <button onclick="switchTab('lampiran02')" id="nav-lampiran02" class="nav-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition whitespace-nowrap flex items-center gap-2 text-slate-600 hover:bg-slate-100">
+                        <i class="fa-solid fa-chart-pie text-emerald-600"></i> Rekap Survei (Lamp. 02)
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 no-print">
+
+        <!-- ==========================================
+             TAB 1: BERANDA (HOME & QUICK DASHBOARD)
+             ========================================== -->
+        <section id="tab-beranda" class="tab-section space-y-8">
+            <!-- Hero Banner -->
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-r from-slate-900 via-teal-900 to-emerald-900 text-white shadow-xl border border-teal-800/40">
+                <div class="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+                <div class="relative p-6 sm:p-10 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-teal-500/20 border border-teal-400/30 text-teal-200 text-xs font-semibold">
+                            <i class="fa-solid fa-shield-heart"></i> Transparan • Akuntabel • Berorientasi Layanan
+                        </div>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-tight">
+                            Suara Anda Membangun <span class="text-teal-300">SDN 011 Balikpapan Tengah</span> Lebih Baik.
+                        </h2>
+                        <p class="text-slate-200 text-sm sm:text-base leading-relaxed max-w-2xl">
+                            Selamat datang di <strong>SI SEDALAS</strong>. Sampaikan keluhan, saran, atau aspirasi terkait layanan sekolah melalui <strong>Formulir Pengaduan (Form 01)</strong>, atau berikan penilaian objektif melalui <strong>Survei Kepuasan Masyarakat (Form 02)</strong>.
+                        </p>
+                        <div class="flex flex-wrap gap-3 pt-2">
+                            <button onclick="switchTab('form01')" class="px-6 py-3.5 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-bold text-sm shadow-lg shadow-rose-500/30 transition flex items-center gap-2.5">
+                                <i class="fa-solid fa-paper-plane"></i> Buat Laporan Pengaduan (Form 01)
+                            </button>
+                            <button onclick="switchTab('form02')" class="px-6 py-3.5 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-sm shadow-lg shadow-amber-400/20 transition flex items-center gap-2.5">
+                                <i class="fa-solid fa-star"></i> Isi Survei Kepuasan (Form 02)
+                            </button>
+                            <button onclick="switchTab('lampiran01')" class="px-5 py-3.5 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-semibold text-sm border border-white/20 transition flex items-center gap-2">
+                                <i class="fa-solid fa-magnifying-glass"></i> Lacak Nomor Pengaduan
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live Summary Cards in Hero -->
+                    <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                        <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/20 text-rose-300 flex items-center justify-center mb-3 text-lg">
+                                <i class="fa-solid fa-envelope-open-text"></i>
+                            </div>
+                            <p class="text-xs text-slate-300 font-medium">Total Pengaduan Masuk</p>
+                            <p class="text-3xl font-display font-extrabold text-white mt-1" id="stat-total-pengaduan">0</p>
+                            <p class="text-[11px] text-teal-300 mt-1" id="stat-selesai-pengaduan">0 telah ditindaklanjuti</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-300 flex items-center justify-center mb-3 text-lg">
+                                <i class="fa-solid fa-users-viewfinder"></i>
+                            </div>
+                            <p class="text-xs text-slate-300 font-medium">Responden Survei (Form 02)</p>
+                            <p class="text-3xl font-display font-extrabold text-white mt-1" id="stat-total-survei">0</p>
+                            <p class="text-[11px] text-amber-200 mt-1" id="stat-sah-survei">0 formulir sah</p>
+                        </div>
+                        <div class="col-span-2 bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 flex items-center justify-between">
+                            <div>
+                                <p class="text-xs text-slate-300 font-medium">Rata-rata Kepuasan Layanan (Skala 1–4)</p>
+                                <div class="flex items-baseline gap-3 mt-1">
+                                    <span class="text-3xl font-display font-extrabold text-teal-300" id="stat-avg-skor">0.00</span>
+                                    <span class="text-xs px-2.5 py-0.5 rounded-full bg-teal-500/30 text-teal-200 font-semibold" id="stat-persen-puas">0% Puas / Sangat Puas</span>
+                                </div>
+                            </div>
+                            <button onclick="switchTab('lampiran02')" class="px-3.5 py-2 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-xs transition shrink-0">
+                                Lihat Rekap <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4-Module Document Workflow Overview -->
+            <div>
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between mb-5 gap-2">
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-display font-bold text-slate-900">Struktur Dokumen Standar SI SEDALAS</h3>
+                        <p class="text-sm text-slate-500">Seluruh modul dirancang sesuai dokumen resmi Pengaduan & Survei Kepuasan SDN 011 Balikpapan Tengah</p>
+                    </div>
+                    <button onclick="syncFromGoogleSheets()" class="self-start sm:self-auto px-4 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold shadow-sm transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate text-teal-600"></i> Muat Ulang / Sinkronisasi Data
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <!-- Card Form 01 -->
+                    <div onclick="switchTab('form01')" class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-rose-300 transition cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-rose-50 text-rose-700 font-bold text-xs border border-rose-200">FORM 01</span>
+                                <span class="text-xs text-slate-400 font-medium">Diisi oleh Pelapor</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-rose-600 transition">Formulir Pengaduan Masyarakat</h4>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                                Pelaporan masalah pembelajaran, administrasi, sarpras, keamanan/perundungan, atau perilaku pelayanan. Identitas boleh anonim/inisial.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-rose-600">
+                            <span>Buka Formulir</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </div>
+                    </div>
+
+                    <!-- Card Lampiran Form 01 -->
+                    <div onclick="switchTab('lampiran01')" class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-blue-300 transition cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-blue-50 text-blue-700 font-bold text-xs border border-blue-200">LAMPIRAN FORM 01</span>
+                                <span class="text-xs text-slate-400 font-medium">Diisi Petugas Sekolah</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-blue-600 transition">Lembar Tindak Lanjut Pengaduan</h4>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                                Pencatatan pemeriksaan awal, penugasan PIC, tabel riwayat tindakan, hasil penyelesaian, hingga cetak bukti penutupan pengaduan.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-blue-600">
+                            <span>Kelola & Lacak</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </div>
+                    </div>
+
+                    <!-- Card Form 02 -->
+                    <div onclick="switchTab('form02')" class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-amber-300 transition cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-700 font-bold text-xs border border-amber-200">FORM 02</span>
+                                <span class="text-xs text-slate-400 font-medium">Pengguna Layanan</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-amber-600 transition">Survei Kepuasan Masyarakat</h4>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                                Survei anonim tanpa nama mencakup 9 aspek pelayanan sekolah dengan skala 1–4 dan opsi TB (Tidak/Belum dapat menilai) serta kolom saran.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-amber-600">
+                            <span>Mulai Penilaian</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </div>
+                    </div>
+
+                    <!-- Card Lampiran Form 02 -->
+                    <div onclick="switchTab('lampiran02')" class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm hover:shadow-md hover:border-emerald-300 transition cursor-pointer group flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 font-bold text-xs border border-emerald-200">LAMPIRAN FORM 02</span>
+                                <span class="text-xs text-slate-400 font-medium">Pengelola Survei</span>
+                            </div>
+                            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-emerald-600 transition">Rekapitulasi & Rencana Perbaikan</h4>
+                            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+                                Perhitungan otomatis Jawaban Sah (n), Jumlah Skor, Rata-rata (1–4), % Puas + Sangat Puas, serta penyusunan Rencana Perbaikan.
+                            </p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-600">
+                            <span>Buka Rekapitulasi</span>
+                            <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 2: FORM 01 (FORMULIR PENGADUAN MASYARAKAT)
+             ========================================== -->
+        <section id="tab-form01" class="tab-section hidden space-y-6">
+            <!-- Header Document Banner -->
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-rose-50 text-rose-700 font-bold text-xs border border-rose-200 mb-2">
+                            FORM 01 &nbsp;|&nbsp; Diisi oleh pelapor
+                        </div>
+                        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+                            Formulir Pengaduan Masyarakat
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1">
+                            SDN 011 BALIKPAPAN TENGAH — Sampaikan keluhan atau dugaan masalah terkait layanan sekolah secara jelas.
+                        </p>
+                    </div>
+                    <!-- Auto-generated Metadata Preview -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 text-xs space-y-1.5 shrink-0">
+                        <div class="flex items-center justify-between gap-4">
+                            <span class="text-slate-500 font-medium">Nomor Pengaduan Otomatis:</span>
+                            <span id="previewNomorPengaduan" class="font-mono font-bold text-slate-900 bg-white px-2 py-0.5 rounded border border-slate-200">SEDALAS-011-...</span>
+                        </div>
+                        <div class="flex items-center justify-between gap-4">
+                            <span class="text-slate-500 font-medium">Tanggal Diterima Sistem:</span>
+                            <span id="previewTanggalTerima" class="font-semibold text-slate-800">-</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 italic pt-0.5">*Nomor & tanggal penerimaan dicatat otomatis untuk petugas sekolah.</p>
+                    </div>
+                </div>
+
+                <form id="formPengaduan" onsubmit="handleForm01Submit(event)" class="mt-6 space-y-8">
+                    <!-- BAGIAN A: IDENTITAS DAN KONTAK PELAPOR -->
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-teal-600 text-white font-display font-bold flex items-center justify-center shrink-0 text-sm">A</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-slate-900">Identitas dan Kontak Pelapor</h3>
+                                <p class="text-xs text-slate-500">Nama dan kontak boleh dikosongkan. Kontak diperlukan jika pelapor menginginkan tanggapan langsung.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pl-0 sm:pl-11">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Nama atau Inisial <span class="text-slate-400 font-normal normal-case">(Opsional / Boleh Dikosongkan)</span>
+                                </label>
+                                <input type="text" id="f01_nama" placeholder="Contoh: Budi Santoso / BS / Kosongkan jika Anonim"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 outline-none text-sm transition">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Status / Kategori Pelapor <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="grid grid-cols-3 gap-2.5">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="f01_kategori_pelapor" value="Orang tua/wali murid" checked onchange="toggleLainnyaInput('f01_kategori_pelapor', 'f01_kategori_lainnya_wrap')" class="peer sr-only">
+                                        <div class="px-3 py-2.5 rounded-xl border border-slate-200 text-center text-xs font-semibold text-slate-600 peer-checked:bg-teal-50 peer-checked:border-teal-600 peer-checked:text-teal-800 transition">
+                                            Orang Tua/Wali
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="f01_kategori_pelapor" value="Masyarakat" onchange="toggleLainnyaInput('f01_kategori_pelapor', 'f01_kategori_lainnya_wrap')" class="peer sr-only">
+                                        <div class="px-3 py-2.5 rounded-xl border border-slate-200 text-center text-xs font-semibold text-slate-600 peer-checked:bg-teal-50 peer-checked:border-teal-600 peer-checked:text-teal-800 transition">
+                                            Masyarakat
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="f01_kategori_pelapor" value="Lainnya" onchange="toggleLainnyaInput('f01_kategori_pelapor', 'f01_kategori_lainnya_wrap')" class="peer sr-only">
+                                        <div class="px-3 py-2.5 rounded-xl border border-slate-200 text-center text-xs font-semibold text-slate-600 peer-checked:bg-teal-50 peer-checked:border-teal-600 peer-checked:text-teal-800 transition">
+                                            Lainnya
+                                        </div>
+                                    </label>
+                                </div>
+                                <div id="f01_kategori_lainnya_wrap" class="hidden mt-2">
+                                    <input type="text" id="f01_kategori_lainnya" placeholder="Sebutkan peran lainnya..."
+                                        class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs outline-none focus:border-teal-600">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Nomor Telepon / WhatsApp atau Email yang Dapat Dihubungi
+                                </label>
+                                <input type="text" id="f01_kontak" placeholder="Contoh: 0812xxxx / email@contoh.com"
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 outline-none text-sm transition">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Kesediaan Dihubungi Petugas <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="f01_bersedia" value="Bersedia dihubungi" checked class="peer sr-only">
+                                        <div class="px-4 py-3 rounded-xl border border-slate-200 flex items-center justify-center gap-2 text-xs font-semibold text-slate-700 peer-checked:bg-emerald-50 peer-checked:border-emerald-600 peer-checked:text-emerald-800 transition">
+                                            <i class="fa-solid fa-phone-volume"></i> Bersedia dihubungi
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="f01_bersedia" value="Tidak bersedia dihubungi" class="peer sr-only">
+                                        <div class="px-4 py-3 rounded-xl border border-slate-200 flex items-center justify-center gap-2 text-xs font-semibold text-slate-700 peer-checked:bg-rose-50 peer-checked:border-rose-600 peer-checked:text-rose-800 transition">
+                                            <i class="fa-solid fa-phone-slash"></i> Tidak bersedia dihubungi
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-slate-200">
+
+                    <!-- BAGIAN B: INFORMASI PENGADUAN -->
+                    <div class="space-y-5">
+                        <div class="flex items-start gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-teal-600 text-white font-display font-bold flex items-center justify-center shrink-0 text-sm">B</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-slate-900">Informasi Pengaduan</h3>
+                                <p class="text-xs text-slate-500">Pilih kategori pengaduan dan tuliskan rincian kejadian secara objektif.</p>
+                            </div>
+                        </div>
+
+                        <div class="pl-0 sm:pl-11 space-y-5">
+                            <!-- Kategori Pengaduan Checkboxes/Radios -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2.5">
+                                    Bidang / Kategori Masalah yang Diadukan <span class="text-rose-500">*</span> <span class="text-slate-400 font-normal normal-case">(Bisa pilih lebih dari satu)</span>
+                                </label>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                    <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                        <input type="checkbox" name="f01_jenis" value="Pembelajaran" class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
+                                        <span class="text-xs sm:text-sm font-medium text-slate-700">Pembelajaran</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                        <input type="checkbox" name="f01_jenis" value="Administrasi" class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
+                                        <span class="text-xs sm:text-sm font-medium text-slate-700">Administrasi</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                        <input type="checkbox" name="f01_jenis" value="Sarana dan prasarana" class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
+                                        <span class="text-xs sm:text-sm font-medium text-slate-700">Sarana dan prasarana</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                        <input type="checkbox" name="f01_jenis" value="Keamanan/perundungan" class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
+                                        <span class="text-xs sm:text-sm font-medium text-slate-700">Keamanan/perundungan</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                        <input type="checkbox" name="f01_jenis" value="Perilaku pelayanan" class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
+                                        <span class="text-xs sm:text-sm font-medium text-slate-700">Perilaku pelayanan</span>
+                                    </label>
+                                    <label class="flex items-center gap-2.5 p-3 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
+                                        <input type="checkbox" name="f01_jenis" id="f01_jenis_lainnya_chk" value="Lainnya" onchange="document.getElementById('f01_jenis_lainnya_input').classList.toggle('hidden', !this.checked)" class="w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
+                                        <span class="text-xs sm:text-sm font-medium text-slate-700">Lainnya</span>
+                                    </label>
+                                </div>
+                                <input type="text" id="f01_jenis_lainnya_input" placeholder="Tuliskan kategori pengaduan lainnya..."
+                                    class="hidden mt-2.5 w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-teal-600">
+                            </div>
+
+                            <!-- Waktu, Lokasi, Pihak Terkait -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                        Tanggal & Waktu Kejadian <span class="text-rose-500">*</span>
+                                    </label>
+                                    <input type="text" id="f01_waktu_kejadian" required placeholder="Contoh: Senin, 16 Nov 2026 Pukul 09.00 WITA"
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                        Lokasi atau Layanan Terkait <span class="text-rose-500">*</span>
+                                    </label>
+                                    <input type="text" id="f01_lokasi" required placeholder="Contoh: Ruang TU / Kelas IV / Halaman Sekolah"
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                        Pihak yang Terkait (Jika Diketahui)
+                                    </label>
+                                    <input type="text" id="f01_pihak" placeholder="Nama petugas/oknum/unit terkait (opsional)"
+                                        class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 outline-none text-sm">
+                                </div>
+                            </div>
+
+                            <!-- Uraian Kejadian -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Uraian Kejadian dan Masalah yang Dialami <span class="text-rose-500">*</span>
+                                </label>
+                                <textarea id="f01_uraian" rows="4" required placeholder="Ceritakan kronologi kejadian dan permasalahan yang Anda alami secara jelas..."
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 outline-none text-sm"></textarea>
+                            </div>
+
+                            <!-- Penyelesaian yang diharapkan -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Penyelesaian atau Perbaikan yang Diharapkan <span class="text-rose-500">*</span>
+                                </label>
+                                <textarea id="f01_harapan" rows="3" required placeholder="Tuliskan solusi atau tindak lanjut yang Anda harapkan dari pihak sekolah..."
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 focus:ring-2 focus:ring-teal-500/20 outline-none text-sm"></textarea>
+                            </div>
+
+                            <!-- Bukti & Keterangan Tambahan -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                        Status Bukti Pendukung <span class="text-rose-500">*</span>
+                                    </label>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="f01_status_bukti" value="Bukti terlampir" class="peer sr-only">
+                                            <div class="px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-center text-xs font-semibold text-slate-700 peer-checked:bg-teal-50 peer-checked:border-teal-600 peer-checked:text-teal-800 transition">
+                                                <i class="fa-solid fa-paperclip mr-1"></i> Bukti terlampir
+                                            </div>
+                                        </label>
+                                        <label class="cursor-pointer">
+                                            <input type="radio" name="f01_status_bukti" value="Bukti belum tersedia" checked class="peer sr-only">
+                                            <div class="px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-center text-xs font-semibold text-slate-700 peer-checked:bg-amber-50 peer-checked:border-amber-600 peer-checked:text-amber-800 transition">
+                                                <i class="fa-regular fa-clock mr-1"></i> Bukti belum tersedia
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                        Jenis/Jumlah Bukti atau Tautan/Keterangan Tambahan
+                                    </label>
+                                    <input type="text" id="f01_ket_bukti" placeholder="Contoh: 2 Foto dokumentasi / Link Google Drive / Saksi mata"
+                                        class="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white focus:border-teal-600 outline-none text-sm">
+                                </div>
+                            </div>
+
+                            <!-- Pernyataan Pelapor & Tanda Tangan Opsional -->
+                            <div class="bg-teal-50/70 border border-teal-200 rounded-2xl p-5 space-y-4">
+                                <label class="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" id="f01_pernyataan" required checked class="mt-1 w-4 h-4 text-teal-600 rounded focus:ring-teal-500">
+                                    <span class="text-xs sm:text-sm text-slate-800 font-medium leading-relaxed">
+                                        <strong>Pernyataan Pelapor:</strong> Informasi ini saya sampaikan sesuai pengetahuan dan pengalaman saya. Saya memahami bahwa identitas dan bukti pengaduan digunakan untuk penanganan oleh pihak yang berwenang di SDN 011 Balikpapan Tengah.
+                                    </span>
+                                </label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-teal-200/60">
+                                    <div>
+                                        <span class="block text-xs text-slate-500">Lokasi & Tanggal Pelaporan:</span>
+                                        <span class="text-sm font-bold text-slate-800" id="f01_kota_tanggal">Balikpapan, -</span>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Terang / Paraf Digital Pelapor (Opsional):</label>
+                                        <input type="text" id="f01_ttd_pelapor" placeholder="Ketik nama/inisial sebagai tanda tangan digital (opsional)"
+                                            class="w-full px-3.5 py-2 rounded-xl border border-teal-300 bg-white text-xs outline-none focus:border-teal-600">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Catatan Pengelolaan Footer -->
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2">
+                                <p class="text-xs text-slate-500 italic max-w-xl">
+                                    <i class="fa-solid fa-lock text-teal-600 mr-1"></i> <strong>Catatan pengelolaan:</strong> Identitas dan bukti pengaduan digunakan untuk penanganan oleh pihak yang berwenang. Hindari mencantumkan data pribadi yang tidak diperlukan.
+                                </p>
+                                <button type="submit" id="btnSubmitForm01" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-bold text-sm shadow-lg shadow-teal-600/20 transition flex items-center justify-center gap-2 shrink-0">
+                                    <i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 3: FORM 02 (SURVEI KEPUASAN MASYARAKAT)
+             ========================================== -->
+        <section id="tab-form02" class="tab-section hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 font-bold text-xs border border-amber-200 mb-2">
+                            FORM 02 &nbsp;|&nbsp; Diisi oleh pengguna layanan (Tanpa Nama / Anonim)
+                        </div>
+                        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+                            Survei Kepuasan Masyarakat
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1">
+                            Penilaian Anda membantu <strong>SDN 011 Balikpapan Tengah</strong> memperbaiki layanan. Survei ini tidak meminta nama. Jawablah berdasarkan pengalaman Anda sendiri.
+                        </p>
+                    </div>
+                    <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 text-xs space-y-1 shrink-0 max-w-xs">
+                        <p class="font-bold text-amber-900"><i class="fa-solid fa-circle-info mr-1"></i> Petunjuk Skala Nilai:</p>
+                        <div class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-slate-700">
+                            <span><strong>1</strong> = Tidak puas</span>
+                            <span><strong>2</strong> = Kurang puas</span>
+                            <span><strong>3</strong> = Puas</span>
+                            <span><strong>4</strong> = Sangat puas</span>
+                        </div>
+                        <p class="text-[11px] text-slate-600 pt-1 border-t border-amber-200/80">
+                            <strong>TB</strong> = Tidak/belum dapat menilai (tidak dimasukkan ke dalam perhitungan).
+                        </p>
+                    </div>
+                </div>
+
+                <form id="formSurvei" onsubmit="handleForm02Submit(event)" class="mt-6 space-y-8">
+                    <!-- Metadata Responden Survei -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Tanggal Pengisian <span class="text-rose-500">*</span></label>
+                            <input type="date" id="f02_tanggal" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Periode Layanan yang Dinilai <span class="text-rose-500">*</span></label>
+                            <select id="f02_periode" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
+                                <option value="Semester Ganjil 2026/2027">Semester Ganjil 2026/2027</option>
+                                <option value="Semester Genap 2025/2026">Semester Genap 2025/2026</option>
+                                <option value="Triwulan IV - 2026">Triwulan IV - 2026</option>
+                                <option value="Tahun Ajaran 2026/2027">Tahun Ajaran 2026/2027</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Kategori Responden <span class="text-rose-500">*</span></label>
+                            <select id="f02_responden" onchange="document.getElementById('f02_responden_lainnya').classList.toggle('hidden', this.value !== 'Lainnya')" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
+                                <option value="Orang tua/wali murid">Orang tua/wali murid</option>
+                                <option value="Masyarakat">Masyarakat</option>
+                                <option value="Lainnya">Lainnya...</option>
+                            </select>
+                            <input type="text" id="f02_responden_lainnya" placeholder="Sebutkan kategori..." class="hidden mt-2 w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Layanan yang Digunakan <span class="text-rose-500">*</span></label>
+                            <input type="text" id="f02_layanan" required placeholder="Contoh: Pembelajaran / Administrasi TU / PPDB"
+                                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
+                        </div>
+                    </div>
+
+                    <!-- BAGIAN A: 9 ASPEK PENILAIAN -->
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 font-display font-bold flex items-center justify-center shrink-0 text-sm">A</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-slate-900">Penilaian 9 Aspek Layanan Sekolah</h3>
+                                <p class="text-xs text-slate-500">Beri satu pilihan pada setiap baris. Pilih <strong>TB</strong> jika belum menggunakan layanan atau tidak dapat menilai aspek tersebut.</p>
+                            </div>
+                        </div>
+
+                        <!-- Container 9 Aspek generated dynamically via JS -->
+                        <div id="aspekQuestionsContainer" class="space-y-3"></div>
+                    </div>
+
+                    <hr class="border-slate-200">
+
+                    <!-- BAGIAN B: SARAN DAN MASUKAN -->
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <span class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 font-display font-bold flex items-center justify-center shrink-0 text-sm">B</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-slate-900">Saran dan Masukan</h3>
+                                <p class="text-xs text-slate-500">Masukan kualitatif Anda sangat berharga untuk menentukan prioritas perbaikan SDN 011 Balikpapan Tengah.</p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pl-0 sm:pl-11">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Hal yang Sudah Baik dan Perlu Dipertahankan
+                                </label>
+                                <textarea id="f02_hal_baik" rows="3" placeholder="Tuliskan hal positif dari layanan guru/petugas/sekolah yang menurut Anda sudah baik..."
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 outline-none text-sm"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                                    Perbaikan yang Paling Anda Harapkan
+                                </label>
+                                <textarea id="f02_perbaikan" rows="3" placeholder="Tuliskan saran perbaikan fasilitas, prosedur, atau pelayanan ke depannya..."
+                                    class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 outline-none text-sm"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 pl-0 sm:pl-11">
+                            <p class="text-xs text-slate-500 font-medium">
+                                <i class="fa-solid fa-heart text-rose-500 mr-1"></i> Terima kasih atas partisipasi Anda dalam meningkatkan mutu layanan SDN 011 Balikpapan Tengah.
+                            </p>
+                            <button type="submit" id="btnSubmitForm02" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 transition flex items-center justify-center gap-2 shrink-0">
+                                <i class="fa-solid fa-check-double"></i> Kirim Penilaian Survei
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 4: LAMPIRAN FORM 01 (LEMBAR TINDAK LANJUT & LACAK PENGADUAN)
+             ========================================== -->
+        <section id="tab-lampiran01" class="tab-section hidden space-y-6">
+            <!-- Top Search & Filter Bar -->
+            <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-blue-50 text-blue-700 font-bold text-xs border border-blue-200 mb-2">
+                            LAMPIRAN FORM 01 &nbsp;|&nbsp; Diisi oleh petugas sekolah & Pelacakan Tiket
+                        </div>
+                        <h2 class="font-display font-extrabold text-2xl text-slate-900">
+                            Daftar Pengaduan & Lembar Tindak Lanjut
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-500">
+                            Pilih salah satu pengaduan di bawah untuk melihat status atau mengisi <strong>Lembar Tindak Lanjut Pengaduan (Lampiran Form 01)</strong>.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap items-center gap-2.5">
+                        <div class="relative flex-grow sm:flex-grow-0 sm:w-64">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+                            <input type="text" id="searchPengaduanInput" oninput="renderDaftarPengaduan()" placeholder="Cari Nomor Tiket / Uraian..."
+                                class="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-300 text-xs outline-none focus:border-blue-600">
+                        </div>
+                        <select id="filterStatusPengaduan" onchange="renderDaftarPengaduan()" class="px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-semibold bg-white outline-none">
+                            <option value="ALL">Semua Status</option>
+                            <option value="Diterima">Diterima</option>
+                            <option value="Dalam proses">Dalam proses</option>
+                            <option value="Selesai">Selesai</option>
+                            <option value="Diteruskan kepada pihak terkait">Diteruskan</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Master-Detail Layout: List of Complaints (Left) + Lampiran Form 01 Editor (Right) -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+                    <!-- Left Column: Ticket List -->
+                    <div class="lg:col-span-4 space-y-3 max-h-[750px] overflow-y-auto pr-1" id="pengaduanListContainer">
+                        <!-- Populated via JS -->
+                    </div>
+
+                    <!-- Right Column: LAMPIRAN FORM 01 (Lembar Tindak Lanjut Pengaduan) -->
+                    <div class="lg:col-span-8 bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-200" id="tindakLanjutDetailWrap">
+                        <!-- Populated via JS when a complaint is selected -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             TAB 5: LAMPIRAN FORM 02 (REKAPITULASI HASIL SURVEI KEPUASAN)
+             ========================================== -->
+        <section id="tab-lampiran02" class="tab-section hidden space-y-6">
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8">
+                <!-- Header & Action Buttons -->
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-slate-200">
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-50 text-emerald-800 font-bold text-xs border border-emerald-200 mb-2">
+                            LAMPIRAN FORM 02 &nbsp;|&nbsp; Diisi oleh pengelola survei
+                        </div>
+                        <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
+                            Rekapitulasi Hasil Survei Kepuasan
+                        </h2>
+                        <p class="text-sm text-slate-600 mt-1">
+                            SDN 011 BALIKPAPAN TENGAH — Gunakan rekap ini untuk memantau hasil survei internal sekolah dan menentukan prioritas perbaikan layanan.
+                        </p>
+                    </div>
+                    <div class="flex flex-wrap gap-2.5 shrink-0">
+                        <button onclick="printLampiran02()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-print"></i> Cetak Lampiran Form 02 (Resmi)
+                        </button>
+                        <button onclick="exportSurveiCSV()" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-file-csv"></i> Unduh Data CSV
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Metadata Rekapitulasi Survei -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Periode Survei</label>
+                        <select id="rekap_periode_filter" onchange="renderRekapSurvei()" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-bold text-slate-800">
+                            <option value="ALL">Semua Periode</option>
+                            <option value="Semester Ganjil 2026/2027">Semester Ganjil 2026/2027</option>
+                            <option value="Semester Genap 2025/2026">Semester Genap 2025/2026</option>
+                            <option value="Triwulan IV - 2026">Triwulan IV - 2026</option>
+                            <option value="Tahun Ajaran 2026/2027">Tahun Ajaran 2026/2027</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Tanggal Rekap</label>
+                        <input type="date" id="rekap_tanggal" onchange="saveRencanaPerbaikanLocal()" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-semibold text-slate-800">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Formulir Terkumpul</label>
+                        <div class="px-3.5 py-2 rounded-xl bg-white border border-slate-200 font-display font-extrabold text-base text-slate-900" id="rekap_total_form">0</div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1" title="Formulir dengan minimal satu jawaban skor 1, 2, 3, atau 4">Formulir Min. 1 Jawaban Sah</label>
+                        <div class="px-3.5 py-2 rounded-xl bg-emerald-50 border border-emerald-200 font-display font-extrabold text-base text-emerald-800" id="rekap_form_sah">0</div>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Nama Pengelola Survei</label>
+                        <input type="text" id="rekap_pengelola" oninput="saveRencanaPerbaikanLocal()" placeholder="Tim Penjaminan Mutu SDN 011" value="Tim Layanan & Humas SDN 011"
+                            class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-semibold text-slate-800">
+                    </div>
+                </div>
+
+                <!-- BAGIAN A: REKAP PER ASPEK LAYANAN (TABEL RESMI) -->
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white font-display font-bold flex items-center justify-center text-xs">A</span>
+                            <h3 class="font-display font-bold text-lg text-slate-900">Rekap per Aspek Layanan</h3>
+                        </div>
+                        <span class="text-xs text-slate-500 hidden sm:inline">Diurutkan sesuai 9 Aspek Standar Form 02</span>
+                    </div>
+
+                    <div class="overflow-x-auto rounded-2xl border border-slate-200">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-900 text-white text-xs uppercase tracking-wider">
+                                    <th class="py-3.5 px-4 font-bold">Aspek Layanan</th>
+                                    <th class="py-3.5 px-4 font-bold text-center">Jawaban Sah (n)</th>
+                                    <th class="py-3.5 px-4 font-bold text-center">Jumlah Skor</th>
+                                    <th class="py-3.5 px-4 font-bold text-center">Rata-rata (1–4)</th>
+                                    <th class="py-3.5 px-4 font-bold text-center">Puas + Sangat Puas (%)</th>
+                                    <th class="py-3.5 px-4 font-bold">Visualisasi Kepuasan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabelRekapAspekBody" class="divide-y divide-slate-200 text-sm bg-white">
+                                <!-- Rendered via JS -->
+                            </tbody>
+                            <tfoot id="tabelRekapAspekFoot" class="bg-slate-50 font-bold text-sm border-t-2 border-slate-300">
+                                <!-- Rendered via JS -->
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- BAGIAN B: CARA MENGHITUNG (REFERENSI DOKUMEN) -->
+                <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 space-y-2 text-xs text-slate-600">
+                    <div class="flex items-center gap-2 font-bold text-slate-900 text-sm mb-1">
+                        <span class="w-6 h-6 rounded-md bg-slate-800 text-white flex items-center justify-center text-xs">B</span>
+                        <span>Cara Menghitung (Standar Lampiran Form 02)</span>
+                    </div>
+                    <ul class="list-disc list-inside space-y-1 leading-relaxed">
+                        <li><strong>Jawaban sah (n)</strong> adalah satu pilihan skor <strong>1, 2, 3, atau 4</strong> pada sebuah aspek. Pilihan <strong>TB</strong>, jawaban kosong, dan pilihan ganda dalam satu baris tidak dihitung. Jumlah jawaban sah dapat berbeda antar-aspek.</li>
+                        <li><strong>Rata-rata per aspek</strong> = jumlah skor pada aspek tersebut ÷ jumlah jawaban sah.</li>
+                        <li><strong>Persentase puas</strong> = jumlah jawaban skor 3 dan 4 ÷ jumlah jawaban sah × 100%.</li>
+                        <li>Jika tidak ada jawaban sah, sistem menampilkan <em>“belum ada data”</em>. Rekap ini merupakan ukuran internal sekolah dan tidak diberi label Indeks Kepuasan Masyarakat resmi.</li>
+                    </ul>
+                </div>
+
+                <!-- DAFTAR MASUKAN RESPONDEN -->
+                <div class="space-y-3">
+                    <h4 class="font-display font-bold text-base text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-comments text-teal-600"></i> Rangkuman Suara & Masukan Responden (Form 02 Bagian B)
+                    </h4>
+                    <div id="daftarMasukanContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4 max-h-80 overflow-y-auto pr-1">
+                        <!-- Rendered via JS -->
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <!-- BAGIAN C: RENCANA PERBAIKAN -->
+                <div class="space-y-5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div class="flex items-center gap-3">
+                            <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white font-display font-bold flex items-center justify-center text-xs">C</span>
+                            <div>
+                                <h3 class="font-display font-bold text-lg text-slate-900">Rencana Perbaikan Layanan</h3>
+                                <p class="text-xs text-slate-500">Tindak lanjut pengelola survei bersama Kepala SDN 011 Balikpapan Tengah</p>
+                            </div>
+                        </div>
+                        <button type="button" onclick="autoFillPrioritasAspek()" class="self-start sm:self-auto px-3.5 py-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-200 text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Deteksi Otomatis Aspek Skor Terendah
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                                Aspek Prioritas Berdasarkan Nilai dan Masukan Responden
+                            </label>
+                            <textarea id="rp_aspek_prioritas" rows="2" oninput="saveRencanaPerbaikanLocal()"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                                Tindakan Perbaikan yang Akan Dilakukan
+                            </label>
+                            <textarea id="rp_tindakan" rows="2" oninput="saveRencanaPerbaikanLocal()"
+                                class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm outline-none focus:border-emerald-600"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Penanggung Jawab</label>
+                            <input type="text" id="rp_pj" oninput="saveRencanaPerbaikanLocal()" placeholder="Contoh: Wakasek Sarpras & Koordinator TU"
+                                class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-emerald-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Target Waktu</label>
+                            <input type="text" id="rp_target_waktu" oninput="saveRencanaPerbaikanLocal()" placeholder="Contoh: Desember 2026"
+                                class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-emerald-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Tanggal Evaluasi</label>
+                            <input type="date" id="rp_tgl_evaluasi" onchange="saveRencanaPerbaikanLocal()"
+                                class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-emerald-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Bukti Keberhasilan</label>
+                            <input type="text" id="rp_bukti" oninput="saveRencanaPerbaikanLocal()" placeholder="Contoh: SOP Layanan Terpublikasi & Dokumentasi Perbaikan"
+                                class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-emerald-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Nama Kepala Sekolah (Untuk Lembar Pengesahan)</label>
+                            <input type="text" id="rp_kepsek" oninput="saveRencanaPerbaikanLocal()" value="Kepala SDN 011 Balikpapan Tengah"
+                                class="w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm outline-none focus:border-emerald-600">
+                        </div>
+                        <div class="flex items-end">
+                            <button type="button" onclick="saveRencanaPerbaikanCloud()" class="w-full py-2.5 px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-sm transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Simpan Rencana Perbaikan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==========================================
+         OFFICIAL PRINT AREA (HIDDEN ON SCREEN, VISIBLE ON PRINT)
+         ========================================== -->
+    <div id="printableArea" class="hidden print:block p-8 bg-white text-black text-sm leading-normal"></div>
+
+    <!-- ==========================================
+         CUSTOM TOAST & MODAL SYSTEM (NO ALERT/CONFIRM)
+         ========================================== -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 space-y-2 max-w-sm w-full pointer-events-none no-print"></div>
+
+    <!-- Modal Receipt / Info -->
+    <div id="customModal" class="fixed inset-0 z-50 hidden bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4 no-print">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-5 animate-[fadeIn_0.2s_ease-out]">
+            <div class="flex items-start justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div id="modalIconWrap" class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-700 flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div>
+                        <h3 id="modalTitle" class="font-display font-extrabold text-xl text-slate-900">Judul Informasi</h3>
+                        <p id="modalSubtitle" class="text-xs text-slate-500">SI SEDALAS SDN 011 Balikpapan Tengah</p>
+                    </div>
+                </div>
+                <button onclick="closeCustomModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="text-sm text-slate-700 space-y-3"></div>
+            <div id="modalFooter" class="flex flex-wrap justify-end gap-2.5 pt-3 border-t border-slate-100">
+                <button onclick="closeCustomModal()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-slate-200 py-6 px-4 text-xs text-slate-500 mt-auto no-print">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <span class="w-7 h-7 rounded-lg bg-teal-700 text-white font-display font-bold flex items-center justify-center text-xs">011</span>
+                <span><strong>SI SEDALAS</strong> — Sistem Informasi Pengaduan Masyarakat & Survei Kepuasan Layanan <strong>SDN 011 Balikpapan Tengah</strong></span>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="switchTab('form01')" class="hover:text-teal-700 font-medium">Form 01</button>
+                <span>•</span>
+                <button onclick="switchTab('lampiran01')" class="hover:text-teal-700 font-medium">Lampiran 01</button>
+                <span>•</span>
+                <button onclick="switchTab('form02')" class="hover:text-teal-700 font-medium">Form 02</button>
+                <span>•</span>
+                <button onclick="switchTab('lampiran02')" class="hover:text-teal-700 font-medium">Lampiran 02</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         APPLICATION LOGIC & STATE MANAGEMENT
+         ========================================== -->
+    <script>
+        /**
+         * 9 ASPEK SURVEI KEPUASAN MASYARAKAT (SESUAI FORM 02 & LAMPIRAN FORM 02)
+         */
+        const ASPEK_LIST = [
+            { no: 1, kode: 'Informasi persyaratan', lengkap: 'Kejelasan informasi persyaratan layanan', catatan: '' },
+            { no: 2, kode: 'Prosedur layanan', lengkap: 'Kemudahan prosedur atau alur layanan', catatan: '' },
+            { no: 3, kode: 'Waktu penyelesaian', lengkap: 'Kecepatan penyelesaian layanan', catatan: '' },
+            { no: 4, kode: 'Informasi biaya', lengkap: 'Kejelasan informasi biaya atau keterangan layanan tanpa biaya', catatan: '' },
+            { no: 5, kode: 'Hasil layanan', lengkap: 'Kesesuaian hasil layanan dengan kebutuhan', catatan: '' },
+            { no: 6, kode: 'Kemampuan petugas', lengkap: 'Kemampuan petugas dalam memberikan layanan', catatan: '' },
+            { no: 7, kode: 'Kesopanan dan keramahan', lengkap: 'Kesopanan dan keramahan petugas', catatan: '' },
+            { no: 8, kode: 'Penanganan pengaduan', lengkap: 'Penanganan pengaduan dan tindak lanjutnya', catatan: 'Untuk aspek 8, pilih TB jika Anda belum pernah menyampaikan pengaduan atau menerima tindak lanjutnya.' },
+            { no: 9, kode: 'Sarana dan prasarana', lengkap: 'Kenyamanan serta kelayakan sarana dan prasarana layanan', catatan: '' }
+        ];
+
+        // Storage Keys
+        const STORAGE_KEYS = {
+            PENGADUAN: 'sisedalas_011_pengaduan_v1',
+            SURVEI: 'sisedalas_011_survei_v1',
+            RENCANA: 'sisedalas_011_rencana_v1',
+            GAS_URL: 'sisedalas_011_gas_url_v1'
+        };
+
+        /**
+         * OPSIONAL: Jika admin ingin menanamkan URL Web App Google Apps Script secara permanen
+         * di dalam kode sumber, isi variabel DEFAULT_GAS_WEB_APP_URL di bawah ini.
+         */
+        const DEFAULT_GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzV0tPVM5wTd4bFjKe2sunhb4PjcfUnnyHoKysCzvxkIx9z1Y7y_eY9OiQGSU13EA2ZKQ/exec';
+
+        // App State
+        let statePengaduan = [];
+        let stateSurvei = [];
+        let stateRencana = {
+            tanggalRekap: new Date().toISOString().split('T')[0],
+            pengelola: 'Tim Layanan & Humas SDN 011 Balikpapan Tengah',
+            aspekPrioritas: 'Aspek 8 (Penanganan pengaduan) dan Aspek 9 (Sarana dan prasarana ruang tunggu layanan)',
+            tindakan: '1. Sosialisasi kanal digital SI SEDALAS kepada seluruh orang tua/wali murid.\n2. Penambahan kursi tunggu dan penunjuk arah ruang pelayanan di SDN 011 Balikpapan Tengah.',
+            pj: 'Wakasek Sarpras & Koordinator Tata Usaha',
+            targetWaktu: 'Desember 2026',
+            tglEvaluasi: '2026-12-20',
+            bukti: 'Laporan Rekap SI SEDALAS & Dokumentasi Ruang Layanan',
+            kepsek: 'Kepala SDN 011 Balikpapan Tengah'
+        };
+        let selectedPengaduanNomor = null;
+
+        /**
+         * INITIAL SAMPLE DATA (Agar pengguna langsung melihat simulasi nyata sesuai dokumen)
+         */
+        function getInitialPengaduan() {
+            return [
+                {
+                    nomor: 'SEDALAS-2026-0101',
+                    tanggalTerima: '2026-11-10',
+                    nama: 'Ibu Rahmawati (Wali Murid Kelas IV)',
+                    kategoriPelapor: 'Orang tua/wali murid',
+                    kontak: '0812-5400-XXXX',
+                    bersedia: 'Bersedia dihubungi',
+                    jenis: ['Sarana dan prasarana', 'Keamanan/perundungan'],
+                    waktuKejadian: 'Senin, 09 November 2026 Pukul 12.15 WITA',
+                    lokasi: 'Area Gerbang Depan & Keran Cuci Tangan Kelas IV',
+                    pihak: 'Petugas Keamanan & Tim Sarpras',
+                    uraian: 'Keran air tempat cuci tangan di depan ruang kelas IV bocor sehingga lantai koridor licin saat jam istirahat. Selain itu mohon pengawasan ekstra saat jam pulang sekolah.',
+                    harapan: 'Keran segera diperbaiki agar siswa tidak terpeleset dan petugas piket mengatur alur penjemputan di gerbang.',
+                    statusBukti: 'Bukti terlampir',
+                    ketBukti: '2 Foto kondisi keran air dan koridor depan kelas IV',
+                    ttdPelapor: 'Rahmawati',
+                    tindakLanjut: {
+                        petugasPenerima: 'Bpk. Hendra (Staf TU)',
+                        saluran: 'Telepon/pesan',
+                        ringkasan: 'Perbaikan keran cuci tangan koridor kelas IV yang bocor serta penertiban jadwal piket gerbang saat jam pulang.',
+                        pemeriksaanAwal: 'Telah dicek langsung ke koridor kelas IV, ditemukan seal keran aus. Jadwal piket gerbang dikoordinasikan bersama guru piket.',
+                        pic: 'Tim Sarpras & Koordinator Keamanan Sekolah',
+                        targetWaktu: '12 November 2026',
+                        catatanTindakan: [
+                            { tanggal: '2026-11-10', tindakan: 'Penerimaan laporan dan pengecekan lokasi koridor Kelas IV', pic: 'Hendra' },
+                            { tanggal: '2026-11-11', tindakan: 'Penggantian keran air baru dan pengeringan lantai koridor', pic: 'Tim Sarpras' },
+                            { tanggal: '2026-11-12', tindakan: 'Penempatan petugas piket penjemputan pukul 12.00-13.00 WITA', pic: 'Guru Piket' }
+                        ],
+                        status: 'Selesai',
+                        hasilPenyelesaian: 'Keran telah diganti baru (tidak bocor) dan petugas keamanan berjaga di gerbang utama setiap jam pulang.',
+                        tglCaraTanggapan: '12 November 2026 melalui pesan WhatsApp beserta foto perbaikan',
+                        tanggapanPelapor: 'Pelapor menyampaikan terima kasih atas respon cepat pihak sekolah.',
+                        tglPenutupan: '12 November 2026 (Bukti foto perbaikan terlampir)',
+                        kepsek: 'Kepala SDN 011 Balikpapan Tengah'
+                    }
+                },
+                {
+                    nomor: 'SEDALAS-2026-0102',
+                    tanggalTerima: '2026-11-16',
+                    nama: 'Anonim (WM-02)',
+                    kategoriPelapor: 'Orang tua/wali murid',
+                    kontak: '0853-4811-XXXX',
+                    bersedia: 'Bersedia dihubungi',
+                    jenis: ['Administrasi'],
+                    waktuKejadian: 'Senin, 16 November 2026 Pukul 08.30 WITA',
+                    lokasi: 'Ruang Pelayanan Administrasi / Tata Usaha',
+                    pihak: 'Staf Administrasi',
+                    uraian: 'Informasi persyaratan surat keterangan aktif siswa untuk keperluan beasiswa belum tercantum di papan pengumuman depan ruang TU sehingga orang tua harus bolak-balik melengkapi berkas.',
+                    harapan: 'Daftar syarat pengurusan surat administrasi dipasang pada poster/papan informasi dan dibagikan lewat grup kelas.',
+                    statusBukti: 'Bukti belum tersedia',
+                    ketBukti: '-',
+                    ttdPelapor: 'WM-02',
+                    tindakLanjut: {
+                        petugasPenerima: 'Ibu Siti Aminah (KA TU)',
+                        saluran: 'Datang langsung',
+                        ringkasan: 'Permintaan publikasi daftar persyaratan pengurusan surat keterangan siswa di papan informasi dan kanal digital.',
+                        pemeriksaanAwal: 'Perlu pembuatan infografis standar persyaratan layanan administrasi siswa SDN 011 Balikpapan Tengah.',
+                        pic: 'Ibu Siti Aminah (Koordinator Administrasi)',
+                        targetWaktu: '20 November 2026',
+                        catatanTindakan: [
+                            { tanggal: '2026-11-16', tindakan: 'Mencatat keluhan dan menyusun daftar standar persyaratan surat siswa', pic: 'Siti Aminah' },
+                            { tanggal: '2026-11-17', tindakan: 'Mencetak banner alur layanan dan persyaratan di depan Ruang TU', pic: 'Staf TU' }
+                        ],
+                        status: 'Dalam proses',
+                        hasilPenyelesaian: 'Banner persyaratan sedang dipasang dan file PDF disiapkan untuk wali kelas.',
+                        tglCaraTanggapan: '17 November 2026 via WhatsApp',
+                        tanggapanPelapor: 'Menunggu pembagian file PDF persyaratan di grup kelas.',
+                        tglPenutupan: '-',
+                        kepsek: 'Kepala SDN 011 Balikpapan Tengah'
+                    }
+                }
+            ];
+        }
+
+        function getInitialSurvei() {
+            return [
+                {
+                    id: 'SRV-001',
+                    tanggal: '2026-11-10',
+                    periode: 'Semester Ganjil 2026/2027',
+                    responden: 'Orang tua/wali murid',
+                    layanan: 'Layanan Pembelajaran & Konsultasi Wali Kelas',
+                    skor: { 1: 4, 2: 4, 3: 3, 4: 4, 5: 4, 6: 4, 7: 4, 8: 'TB', 9: 3 },
+                    halBaik: 'Guru wali kelas sangat ramah, komunikatif, dan sabar dalam membimbing siswa.',
+                    perbaikan: 'Mohon ruang tunggu orang tua di dekat gerbang ditambah tempat duduknya.'
+                },
+                {
+                    id: 'SRV-002',
+                    tanggal: '2026-11-12',
+                    periode: 'Semester Ganjil 2026/2027',
+                    responden: 'Orang tua/wali murid',
+                    layanan: 'Administrasi Surat Keterangan Siswa',
+                    skor: { 1: 2, 2: 3, 3: 3, 4: 4, 5: 3, 6: 4, 7: 4, 8: 3, 9: 3 },
+                    halBaik: 'Pelayanan tidak dipungut biaya (gratis) dan petugas melayani dengan sopan.',
+                    perbaikan: 'Persyaratan berkas sebaiknya ditempel di papan informasi atau diinfokan lewat WhatsApp.'
+                },
+                {
+                    id: 'SRV-003',
+                    tanggal: '2026-11-14',
+                    periode: 'Semester Ganjil 2026/2027',
+                    responden: 'Masyarakat',
+                    layanan: 'Koordinasi Kegiatan Lingkungan Sekolah',
+                    skor: { 1: 4, 2: 3, 3: 4, 4: 4, 5: 4, 6: 3, 7: 4, 8: 'TB', 9: 4 },
+                    halBaik: 'Lingkungan SDN 011 Balikpapan Tengah bersih, tertib, dan pihak sekolah terbuka bekerja sama.',
+                    perbaikan: 'Pertahankan kebersihan drainase di depan sekolah saat musim hujan.'
+                },
+                {
+                    id: 'SRV-004',
+                    tanggal: '2026-11-15',
+                    periode: 'Semester Ganjil 2026/2027',
+                    responden: 'Orang tua/wali murid',
+                    layanan: 'Penanganan Pengaduan Sarana Kelas',
+                    skor: { 1: 3, 2: 3, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 3 },
+                    halBaik: 'Respon tindak lanjut laporan keran rusak sangat cepat dan transparan.',
+                    perbaikan: 'Pengecekan berkala fasilitas kamar mandi dan tempat cuci tangan siswa.'
+                },
+                {
+                    id: 'SRV-005',
+                    tanggal: '2026-11-17',
+                    periode: 'Semester Ganjil 2026/2027',
+                    responden: 'Orang tua/wali murid',
+                    layanan: 'Layanan Perpustakaan & Ekstrakurikuler',
+                    skor: { 1: 3, 2: 3, 3: 3, 4: 4, 5: 3, 6: 3, 7: 4, 8: 2, 9: 2 },
+                    halBaik: 'Kegiatan ekstrakurikuler anak sangat beragam dan positif.',
+                    perbaikan: 'Kipas angin dan ventilasi di ruang baca perlu ditambah agar anak lebih nyaman.'
+                }
+            ];
+        }
+
+        /**
+         * INITIALIZE APPLICATION ON LOAD
+         */
+        window.onload = function () {
+            loadLocalData();
+            initForm01Metadata();
+            renderForm02AspekQuestions();
+            initForm02Metadata();
+            updateCloudStatusBadge();
+            refreshAllViews();
+        };
+
+        function loadLocalData() {
+            try {
+                const rawP = localStorage.getItem(STORAGE_KEYS.PENGADUAN);
+                statePengaduan = rawP ? JSON.parse(rawP) : getInitialPengaduan();
+
+                const rawS = localStorage.getItem(STORAGE_KEYS.SURVEI);
+                stateSurvei = rawS ? JSON.parse(rawS) : getInitialSurvei();
+
+                const rawR = localStorage.getItem(STORAGE_KEYS.RENCANA);
+                if (rawR) stateRencana = JSON.parse(rawR);
+
+                const savedUrl = DEFAULT_GAS_WEB_APP_URL;
+                localStorage.setItem(STORAGE_KEYS.GAS_URL, savedUrl);
+                const urlInput = document.getElementById('gasWebAppUrlInput');
+                if (urlInput) urlInput.value = savedUrl;
+            } catch (e) {
+                statePengaduan = getInitialPengaduan();
+                stateSurvei = getInitialSurvei();
+            }
+            saveLocalData();
+        }
+
+        function saveLocalData() {
+            try {
+                localStorage.setItem(STORAGE_KEYS.PENGADUAN, JSON.stringify(statePengaduan));
+                localStorage.setItem(STORAGE_KEYS.SURVEI, JSON.stringify(stateSurvei));
+                localStorage.setItem(STORAGE_KEYS.RENCANA, JSON.stringify(stateRencana));
+            } catch (e) {
+                console.error('Gagal menyimpan ke localStorage:', e);
+            }
+        }
+
+        function refreshAllViews() {
+            updateBerandaStats();
+            renderDaftarPengaduan();
+            renderRekapSurvei();
+            populateRencanaInputs();
+        }
+
+        /**
+         * NAVIGATION TAB SWITCHER
+         */
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-section').forEach(sec => sec.classList.add('hidden'));
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-teal-600', 'text-white', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            });
+            const activeBtn = document.getElementById('nav-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+                activeBtn.classList.add('bg-teal-600', 'text-white', 'shadow-sm');
+            }
+
+            if (tabId === 'lampiran01') renderDaftarPengaduan();
+            if (tabId === 'lampiran02') renderRekapSurvei();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * TOAST & MODAL HELPERS
+         */
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            const colors = {
+                success: 'bg-slate-900 text-white border-teal-500',
+                warning: 'bg-amber-950 text-amber-100 border-amber-400',
+                error: 'bg-rose-950 text-rose-100 border-rose-400'
+            };
+            const icons = {
+                success: 'fa-circle-check text-teal-400',
+                warning: 'fa-triangle-exclamation text-amber-400',
+                error: 'fa-circle-exclamation text-rose-400'
+            };
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3.5 rounded-2xl shadow-xl border-l-4 ${colors[type] || colors.success} text-xs font-medium transition-all duration-300`;
+            toast.innerHTML = `
+                <i class="fa-solid ${icons[type] || icons.success} text-base shrink-0"></i>
+                <div class="flex-grow leading-relaxed">${message}</div>
+            `;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        function openCustomModal({ title, subtitle, bodyHtml, footerHtml, iconClass = 'fa-circle-check', iconBg = 'bg-teal-100 text-teal-700' }) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalSubtitle').textContent = subtitle || 'SI SEDALAS SDN 011 Balikpapan Tengah';
+            document.getElementById('modalBody').innerHTML = bodyHtml;
+            const iconWrap = document.getElementById('modalIconWrap');
+            iconWrap.className = `w-12 h-12 rounded-2xl flex items-center justify-center text-xl shrink-0 ${iconBg}`;
+            iconWrap.innerHTML = `<i class="fa-solid ${iconClass}"></i>`;
+
+            const footer = document.getElementById('modalFooter');
+            if (footerHtml) {
+                footer.innerHTML = footerHtml;
+            } else {
+                footer.innerHTML = `<button onclick="closeCustomModal()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition">Tutup</button>`;
+            }
+            document.getElementById('customModal').classList.remove('hidden');
+        }
+
+        function closeCustomModal() {
+            document.getElementById('customModal').classList.add('hidden');
+        }
+
+        function toggleRoleModal() {
+            openCustomModal({
+                title: 'Mode Akses SI SEDALAS',
+                subtitle: 'Simulasi Interaktif Pelapor, Pengguna Layanan & Petugas Sekolah',
+                iconClass: 'fa-user-shield',
+                iconBg: 'bg-blue-100 text-blue-700',
+                bodyHtml: `
+                    <p class="leading-relaxed">Dalam lingkungan demonstrasi dan operasional terpadu ini, Anda dapat mengakses seluruh alur dokumen:</p>
+                    <ul class="space-y-2 text-xs bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                        <li><strong>1. Mode Masyarakat / Orang Tua:</strong> Mengisi <em>Form 01 (Pengaduan)</em>, melacak tiket, dan mengisi <em>Form 02 (Survei Kepuasan)</em>.</li>
+                        <li><strong>2. Mode Petugas Sekolah & Kepala Sekolah:</strong> Mengisi <em>Lampiran Form 01 (Lembar Tindak Lanjut Pengaduan)</em>, memantau <em>Lampiran Form 02 (Rekapitulasi Survei & Rencana Perbaikan)</em>, serta mencetak dokumen resmi berformat tanda tangan.</li>
+                    </ul>
+                `
+            });
+        }
+
+        /**
+         * ==========================================
+         * FORM 01 LOGIC (FORMULIR PENGADUAN MASYARAKAT)
+         * ==========================================
+         */
+        function generateNomorPengaduan() {
+            const year = new Date().getFullYear();
+            const seq = String(statePengaduan.length + 101).padStart(4, '0');
+            return `SEDALAS-${year}-${seq}`;
+        }
+
+        function formatIndonesianDate(dateStr) {
+            if (!dateStr) return '-';
+            try {
+                const d = new Date(dateStr);
+                return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            } catch (e) {
+                return dateStr;
+            }
+        }
+
+        function initForm01Metadata() {
+            const todayISO = new Date().toISOString().split('T')[0];
+            document.getElementById('previewNomorPengaduan').textContent = generateNomorPengaduan();
+            document.getElementById('previewTanggalTerima').textContent = formatIndonesianDate(todayISO);
+            document.getElementById('f01_kota_tanggal').textContent = `Balikpapan, ${formatIndonesianDate(todayISO)}`;
+        }
+
+        function toggleLainnyaInput(radioName, wrapId) {
+            const selected = document.querySelector(`input[name="${radioName}"]:checked`);
+            const wrap = document.getElementById(wrapId);
+            if (selected && selected.value === 'Lainnya') {
+                wrap.classList.remove('hidden');
+            } else {
+                wrap.classList.add('hidden');
+            }
+        }
+
+        async function handleForm01Submit(e) {
+            e.preventDefault();
+
+            // Validate at least 1 category checkbox
+            const checkedJenis = Array.from(document.querySelectorAll('input[name="f01_jenis"]:checked')).map(cb => {
+                if (cb.value === 'Lainnya') {
+                    const custom = document.getElementById('f01_jenis_lainnya_input').value.trim();
+                    return custom ? `Lainnya (${custom})` : 'Lainnya';
+                }
+                return cb.value;
+            });
+
+            if (checkedJenis.length === 0) {
+                showToast('Pilih minimal satu bidang/kategori informasi pengaduan pada Bagian B.', 'warning');
+                return;
+            }
+
+            const nomor = generateNomorPengaduan();
+            const tanggalTerima = new Date().toISOString().split('T')[0];
+            const namaRaw = document.getElementById('f01_nama').value.trim();
+            const katRadio = document.querySelector('input[name="f01_kategori_pelapor"]:checked').value;
+            const katLain = document.getElementById('f01_kategori_lainnya').value.trim();
+            const kategoriPelapor = (katRadio === 'Lainnya' && katLain) ? `Lainnya (${katLain})` : katRadio;
+
+            const newPengaduan = {
+                nomor: nomor,
+                tanggalTerima: tanggalTerima,
+                nama: namaRaw || 'Anonim (Tanpa Nama)',
+                kategoriPelapor: kategoriPelapor,
+                kontak: document.getElementById('f01_kontak').value.trim() || '-',
+                bersedia: document.querySelector('input[name="f01_bersedia"]:checked').value,
+                jenis: checkedJenis,
+                waktuKejadian: document.getElementById('f01_waktu_kejadian').value.trim(),
+                lokasi: document.getElementById('f01_lokasi').value.trim(),
+                pihak: document.getElementById('f01_pihak').value.trim() || '-',
+                uraian: document.getElementById('f01_uraian').value.trim(),
+                harapan: document.getElementById('f01_harapan').value.trim(),
+                statusBukti: document.querySelector('input[name="f01_status_bukti"]:checked').value,
+                ketBukti: document.getElementById('f01_ket_bukti').value.trim() || '-',
+                ttdPelapor: document.getElementById('f01_ttd_pelapor').value.trim() || (namaRaw || 'Pelapor'),
+                tindakLanjut: {
+                    petugasPenerima: 'Petugas Layanan SI SEDALAS',
+                    saluran: 'Lainnya (Portal Web SI SEDALAS)',
+                    ringkasan: document.getElementById('f01_uraian').value.trim().slice(0, 160),
+                    pemeriksaanAwal: 'Menunggu verifikasi dan klarifikasi petugas penerima pengaduan.',
+                    pic: 'Tim Penanganan Pengaduan SDN 011',
+                    targetWaktu: '-',
+                    catatanTindakan: [
+                        {
+                            tanggal: tanggalTerima,
+                            tindakan: 'Pengaduan diterima melalui sistem SI SEDALAS dan menunggu penugasan PIC',
+                            pic: 'Sistem / Petugas'
+                        }
+                    ],
+                    status: 'Diterima',
+                    hasilPenyelesaian: '-',
+                    tglCaraTanggapan: '-',
+                    tanggapanPelapor: '-',
+                    tglPenutupan: '-',
+                    kepsek: 'Kepala SDN 011 Balikpapan Tengah'
+                }
+            };
+
+            statePengaduan.unshift(newPengaduan);
+            selectedPengaduanNomor = newPengaduan.nomor;
+            saveLocalData();
+            refreshAllViews();
+
+            // Send to Google Sheets via Google Apps Script
+            const btnSubmit = document.getElementById('btnSubmitForm01');
+            const originalBtnHtml = btnSubmit.innerHTML;
+            btnSubmit.disabled = true;
+            btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim ke Google Apps Script...';
+            const syncResult = await sendToGoogleSheets({ action: 'UPSERT_PENGADUAN', data: newPengaduan, label: `Form 01 Pengaduan (${newPengaduan.nomor})` });
+            btnSubmit.disabled = false;
+            btnSubmit.innerHTML = originalBtnHtml;
+
+            // Reset Form
+            document.getElementById('formPengaduan').reset();
+            document.getElementById('f01_jenis_lainnya_input').classList.add('hidden');
+            document.getElementById('f01_kategori_lainnya_wrap').classList.add('hidden');
+            initForm01Metadata();
+
+            const syncBadgeModal = syncResult.sent
+                ? `<div class="px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-cloud-check text-emerald-600"></i> Data pengaduan telah tersimpan secara otomatis ke database sekolah.</div>`
+                : `<div class="px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-database mr-1"></i> Data pengaduan tersimpan di sistem.</div>`;
+
+            // Show Receipt Modal
+            openCustomModal({
+                title: 'Pengaduan Berhasil Diterima!',
+                subtitle: 'Bukti Penerimaan FORM 01 — SDN 011 Balikpapan Tengah',
+                iconClass: 'fa-file-circle-check',
+                iconBg: 'bg-teal-100 text-teal-700',
+                bodyHtml: `
+                    ${syncBadgeModal}
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500">Nomor Pengaduan:</span>
+                            <span class="font-mono font-extrabold text-sm text-teal-700 bg-teal-50 px-2.5 py-1 rounded border border-teal-200">${newPengaduan.nomor}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500">Tanggal Diterima:</span>
+                            <span class="font-semibold text-slate-800">${formatIndonesianDate(newPengaduan.tanggalTerima)}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500">Kategori:</span>
+                            <span class="font-semibold text-slate-800">${newPengaduan.jenis.join(', ')}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-500">Status Awal:</span>
+                            <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold">Diterima</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Simpan <strong>Nomor Pengaduan</strong> di atas untuk memantau tindak lanjut pada menu <strong>Tindak Lanjut (Lampiran 01)</strong> atau cetak salinan Formulir Pengaduan Anda.
+                    </p>
+                `,
+                footerHtml: `
+                    <button onclick="printForm01('${newPengaduan.nomor}')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-print"></i> Cetak Form 01
+                    </button>
+                    <button onclick="closeCustomModal(); switchTab('lampiran01');" class="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-clipboard-check"></i> Lihat Lembar Tindak Lanjut
+                    </button>
+                `
+            });
+        }
+
+        /**
+         * ==========================================
+         * LAMPIRAN FORM 01 LOGIC (TINDAK LANJUT PENGADUAN)
+         * ==========================================
+         */
+        function getStatusBadgeHtml(status) {
+            const map = {
+                'Diterima': 'bg-blue-50 text-blue-700 border-blue-200',
+                'Dalam proses': 'bg-amber-50 text-amber-700 border-amber-200',
+                'Selesai': 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                'Diteruskan kepada pihak terkait': 'bg-purple-50 text-purple-700 border-purple-200'
+            };
+            const cls = map[status] || 'bg-slate-100 text-slate-700 border-slate-200';
+            return `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${cls}">${status}</span>`;
+        }
+
+        function renderDaftarPengaduan() {
+            const container = document.getElementById('pengaduanListContainer');
+            const q = (document.getElementById('searchPengaduanInput')?.value || '').toLowerCase();
+            const statusFilter = document.getElementById('filterStatusPengaduan')?.value || 'ALL';
+
+            const filtered = statePengaduan.filter(item => {
+                const matchQ = item.nomor.toLowerCase().includes(q) ||
+                    item.uraian.toLowerCase().includes(q) ||
+                    item.nama.toLowerCase().includes(q) ||
+                    item.lokasi.toLowerCase().includes(q);
+                const matchStatus = statusFilter === 'ALL' || item.tindakLanjut.status === statusFilter;
+                return matchQ && matchStatus;
+            });
+
+            if (!selectedPengaduanNomor && filtered.length > 0) {
+                selectedPengaduanNomor = filtered[0].nomor;
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="bg-slate-50 rounded-2xl p-6 text-center border border-slate-200 text-xs text-slate-500">
+                        <i class="fa-regular fa-folder-open text-2xl text-slate-400 mb-2 block"></i>
+                        Tidak ada pengaduan yang sesuai dengan pencarian.
+                    </div>
+                `;
+                document.getElementById('tindakLanjutDetailWrap').innerHTML = `
+                    <div class="text-center py-12 text-slate-400 text-sm">Pilih salah satu pengaduan untuk menampilkan Lembar Tindak Lanjut.</div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(item => {
+                const isSelected = item.nomor === selectedPengaduanNomor;
+                return `
+                    <div onclick="selectPengaduan('${item.nomor}')" class="p-4 rounded-2xl border transition cursor-pointer ${isSelected ? 'bg-blue-50/70 border-blue-500 shadow-sm' : 'bg-white border-slate-200 hover:border-slate-300'}">
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span class="font-mono font-bold text-xs text-slate-900">${item.nomor}</span>
+                            ${getStatusBadgeHtml(item.tindakLanjut.status)}
+                        </div>
+                        <p class="text-xs font-bold text-slate-800 line-clamp-1">${item.jenis.join(', ')} — ${item.lokasi}</p>
+                        <p class="text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed">${item.uraian}</p>
+                        <div class="flex items-center justify-between text-[11px] text-slate-400 mt-3 pt-2 border-t border-slate-100">
+                            <span><i class="fa-regular fa-user mr-1"></i>${item.nama}</span>
+                            <span>${formatIndonesianDate(item.tanggalTerima)}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            renderTindakLanjutDetail();
+        }
+
+        function selectPengaduan(nomor) {
+            selectedPengaduanNomor = nomor;
+            renderDaftarPengaduan();
+        }
+
+        function renderTindakLanjutDetail() {
+            const wrap = document.getElementById('tindakLanjutDetailWrap');
+            const item = statePengaduan.find(p => p.nomor === selectedPengaduanNomor);
+            if (!item) return;
+
+            const tl = item.tindakLanjut;
+            const saluranOpts = ['Datang langsung', 'Surat/kotak pengaduan', 'Telepon/pesan', 'Lainnya (Portal Web SI SEDALAS)'];
+            const statusOpts = ['Diterima', 'Dalam proses', 'Selesai', 'Diteruskan kepada pihak terkait'];
+
+            wrap.innerHTML = `
+                <div class="space-y-6">
+                    <!-- Top Header & Print Actions -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-mono font-extrabold text-base text-slate-900">${item.nomor}</span>
+                                ${getStatusBadgeHtml(tl.status)}
+                            </div>
+                            <p class="text-xs text-slate-500 mt-0.5">
+                                Diterima: <strong>${formatIndonesianDate(item.tanggalTerima)}</strong> • Pelapor: <strong>${item.nama}</strong> (${item.kategoriPelapor})
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <button type="button" onclick="printForm01('${item.nomor}')" class="px-3.5 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-bold transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-print text-rose-600"></i> Cetak Form 01
+                            </button>
+                            <button type="button" onclick="printLampiran01('${item.nomor}')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition flex items-center gap-1.5">
+                                <i class="fa-solid fa-print text-teal-400"></i> Cetak Lampiran Form 01
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Ringkasan Laporan Awal (Form 01) -->
+                    <div class="bg-white rounded-2xl p-4 border border-slate-200 space-y-2 text-xs">
+                        <div class="flex items-center justify-between font-bold text-slate-800">
+                            <span><i class="fa-solid fa-file-lines text-rose-500 mr-1.5"></i>Data Pengaduan Awal (Form 01)</span>
+                            <span class="text-slate-500 font-normal">${item.bersedia} (${item.kontak})</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-slate-600">
+                            <div><strong>Waktu Kejadian:</strong> ${item.waktuKejadian}</div>
+                            <div><strong>Lokasi/Layanan:</strong> ${item.lokasi}</div>
+                            <div><strong>Pihak Terkait:</strong> ${item.pihak}</div>
+                        </div>
+                        <div class="pt-1 text-slate-700">
+                            <strong>Uraian Masalah:</strong> ${item.uraian}
+                        </div>
+                        <div class="text-slate-700">
+                            <strong>Harapan Penyelesaian:</strong> ${item.harapan}
+                        </div>
+                        <div class="text-slate-500 italic">
+                            <strong>Bukti:</strong> ${item.statusBukti} (${item.ketBukti})
+                        </div>
+                    </div>
+
+                    <!-- FORM LAMPIRAN 01: LEMBAR TINDAK LANJUT PENGADUAN -->
+                    <form onsubmit="saveTindakLanjut(event, '${item.nomor}')" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggal Diterima & Nama Petugas Penerima</label>
+                                <input type="text" id="tl_petugasPenerima" value="${tl.petugasPenerima}"
+                                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-medium outline-none focus:border-blue-600">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Cara / Saluran Penyampaian</label>
+                                <select id="tl_saluran" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-medium outline-none focus:border-blue-600">
+                                    ${saluranOpts.map(opt => `<option value="${opt}" ${tl.saluran === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                                </select>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Ringkasan Pokok Pengaduan</label>
+                                <textarea id="tl_ringkasan" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">${tl.ringkasan}</textarea>
+                            </div>
+                        </div>
+
+                        <!-- A. Pemeriksaan dan Penugasan -->
+                        <div class="space-y-3 pt-2 border-t border-slate-200">
+                            <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-lg bg-blue-600 text-white text-xs flex items-center justify-center">A</span>
+                                Pemeriksaan dan Penugasan
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Hasil Pemeriksaan Awal dan Hal yang Perlu Diklarifikasi</label>
+                                    <textarea id="tl_pemeriksaanAwal" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">${tl.pemeriksaanAwal}</textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Penanggung Jawab Penanganan (PIC)</label>
+                                    <input type="text" id="tl_pic" value="${tl.pic}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Target Penyelesaian yang Ditetapkan</label>
+                                    <input type="text" id="tl_targetWaktu" value="${tl.targetWaktu}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- B. Catatan Tindakan (Tabel Dinamis) -->
+                        <div class="space-y-3 pt-2 border-t border-slate-200">
+                            <div class="flex items-center justify-between">
+                                <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
+                                    <span class="w-6 h-6 rounded-lg bg-blue-600 text-white text-xs flex items-center justify-center">B</span>
+                                    Catatan Tindakan
+                                </h4>
+                                <button type="button" onclick="addBarisTindakan('${item.nomor}')" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs border border-blue-200 transition">
+                                    <i class="fa-solid fa-plus mr-1"></i> Tambah Baris Tindakan
+                                </button>
+                            </div>
+                            <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                            <th class="p-2.5 w-36">Tanggal</th>
+                                            <th class="p-2.5">Tindakan dan Hasil</th>
+                                            <th class="p-2.5 w-40">Petugas/PIC</th>
+                                            <th class="p-2.5 w-10 text-center">Hapus</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tl_tabelTindakanBody" class="divide-y divide-slate-200">
+                                        ${(tl.catatanTindakan || []).map((row, idx) => `
+                                            <tr>
+                                                <td class="p-2"><input type="date" value="${row.tanggal || ''}" class="tl-row-tgl w-full px-2 py-1.5 rounded border border-slate-200 text-xs"></td>
+                                                <td class="p-2"><input type="text" value="${row.tindakan || ''}" placeholder="Uraian tindakan dan hasil..." class="tl-row-aksi w-full px-2.5 py-1.5 rounded border border-slate-200 text-xs"></td>
+                                                <td class="p-2"><input type="text" value="${row.pic || ''}" placeholder="Nama PIC" class="tl-row-pic w-full px-2.5 py-1.5 rounded border border-slate-200 text-xs"></td>
+                                                <td class="p-2 text-center">
+                                                    <button type="button" onclick="removeBarisTindakan('${item.nomor}', ${idx})" class="text-rose-500 hover:text-rose-700 p-1">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- C. Hasil dan Status Pengaduan -->
+                        <div class="space-y-3 pt-2 border-t border-slate-200">
+                            <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
+                                <span class="w-6 h-6 rounded-lg bg-blue-600 text-white text-xs flex items-center justify-center">C</span>
+                                Hasil dan Status Pengaduan
+                            </h4>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                                ${statusOpts.map(st => `
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="tl_status" value="${st}" ${tl.status === st ? 'checked' : ''} class="peer sr-only">
+                                        <div class="p-2.5 rounded-xl border border-slate-200 bg-white text-center text-xs font-bold text-slate-600 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 transition">
+                                            ${st}
+                                        </div>
+                                    </label>
+                                `).join('')}
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Hasil Penyelesaian atau Alasan Diteruskan Beserta Tujuan Penerusan</label>
+                                    <textarea id="tl_hasilPenyelesaian" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">${tl.hasilPenyelesaian}</textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggal & Cara Tanggapan Disampaikan ke Pelapor</label>
+                                    <input type="text" id="tl_tglCaraTanggapan" value="${tl.tglCaraTanggapan}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggal Penutupan dan Bukti Penyelesaian</label>
+                                    <input type="text" id="tl_tglPenutupan" value="${tl.tglPenutupan}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                </div>
+                                <div class="sm:col-span-2">
+                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggapan Pelapor atau Catatan Jika Pelapor Tidak Dapat Dihubungi</label>
+                                    <input type="text" id="tl_tanggapanPelapor" value="${tl.tanggapanPelapor}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-slate-200">
+                            <p class="text-[11px] text-slate-500 italic">
+                                Simpan lembar ini bersama formulir awal dan bukti tindak lanjut dengan akses terbatas kepada petugas terkait.
+                            </p>
+                            <button type="submit" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 shrink-0">
+                                <i class="fa-solid fa-floppy-disk"></i> Simpan Tindak Lanjut & Sinkronkan Cloud
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            `;
+        }
+
+        function syncCurrentTableRowsToState(nomor) {
+            const item = statePengaduan.find(p => p.nomor === nomor);
+            if (!item) return;
+            const tgls = document.querySelectorAll('.tl-row-tgl');
+            const aksis = document.querySelectorAll('.tl-row-aksi');
+            const pics = document.querySelectorAll('.tl-row-pic');
+            const rows = [];
+            for (let i = 0; i < tgls.length; i++) {
+                rows.push({
+                    tanggal: tgls[i].value,
+                    tindakan: aksis[i].value,
+                    pic: pics[i].value
+                });
+            }
+            item.tindakLanjut.catatanTindakan = rows;
+        }
+
+        function addBarisTindakan(nomor) {
+            const item = statePengaduan.find(p => p.nomor === nomor);
+            if (!item) return;
+            syncCurrentTableRowsToState(nomor);
+            const todayISO = new Date().toISOString().split('T')[0];
+            item.tindakLanjut.catatanTindakan.push({
+                tanggal: todayISO,
+                tindakan: '',
+                pic: item.tindakLanjut.pic || 'Petugas Sekolah'
+            });
+            renderTindakLanjutDetail();
+        }
+
+        function removeBarisTindakan(nomor, idx) {
+            const item = statePengaduan.find(p => p.nomor === nomor);
+            if (!item) return;
+            syncCurrentTableRowsToState(nomor);
+            item.tindakLanjut.catatanTindakan.splice(idx, 1);
+            renderTindakLanjutDetail();
+        }
+
+        function saveTindakLanjut(e, nomor) {
+            e.preventDefault();
+            const item = statePengaduan.find(p => p.nomor === nomor);
+            if (!item) return;
+
+            syncCurrentTableRowsToState(nomor);
+
+            const statusRadio = document.querySelector('input[name="tl_status"]:checked');
+            item.tindakLanjut.petugasPenerima = document.getElementById('tl_petugasPenerima').value.trim();
+            item.tindakLanjut.saluran = document.getElementById('tl_saluran').value;
+            item.tindakLanjut.ringkasan = document.getElementById('tl_ringkasan').value.trim();
+            item.tindakLanjut.pemeriksaanAwal = document.getElementById('tl_pemeriksaanAwal').value.trim();
+            item.tindakLanjut.pic = document.getElementById('tl_pic').value.trim();
+            item.tindakLanjut.targetWaktu = document.getElementById('tl_targetWaktu').value.trim();
+            item.tindakLanjut.status = statusRadio ? statusRadio.value : 'Diterima';
+            item.tindakLanjut.hasilPenyelesaian = document.getElementById('tl_hasilPenyelesaian').value.trim();
+            item.tindakLanjut.tglCaraTanggapan = document.getElementById('tl_tglCaraTanggapan').value.trim();
+            item.tindakLanjut.tglPenutupan = document.getElementById('tl_tglPenutupan').value.trim();
+            item.tindakLanjut.tanggapanPelapor = document.getElementById('tl_tanggapanPelapor').value.trim();
+
+            saveLocalData();
+            refreshAllViews();
+
+            // Sync to Google Sheets if connected
+            sendToGoogleSheets({ action: 'UPSERT_PENGADUAN', data: item, label: `Lampiran 01 Tindak Lanjut (${nomor})` });
+            showToast(`Lembar Tindak Lanjut (${nomor}) berhasil diperbarui!`);
+        }
+
+        /**
+         * ==========================================
+         * FORM 02 LOGIC (SURVEI KEPUASAN MASYARAKAT)
+         * ==========================================
+         */
+        function initForm02Metadata() {
+            const todayISO = new Date().toISOString().split('T')[0];
+            const el = document.getElementById('f02_tanggal');
+            if (el) el.value = todayISO;
+        }
+
+        function renderForm02AspekQuestions() {
+            const container = document.getElementById('aspekQuestionsContainer');
+            if (!container) return;
+
+            const scaleOptions = [
+                { val: '1', label: '1', desc: 'Tidak puas', activeCls: 'peer-checked:bg-rose-600 peer-checked:text-white peer-checked:border-rose-600' },
+                { val: '2', label: '2', desc: 'Kurang puas', activeCls: 'peer-checked:bg-amber-500 peer-checked:text-white peer-checked:border-amber-500' },
+                { val: '3', label: '3', desc: 'Puas', activeCls: 'peer-checked:bg-teal-600 peer-checked:text-white peer-checked:border-teal-600' },
+                { val: '4', label: '4', desc: 'Sangat puas', activeCls: 'peer-checked:bg-emerald-600 peer-checked:text-white peer-checked:border-emerald-600' },
+                { val: 'TB', label: 'TB', desc: 'Tidak/belum menilai', activeCls: 'peer-checked:bg-slate-700 peer-checked:text-white peer-checked:border-slate-700' }
+            ];
+
+            container.innerHTML = ASPEK_LIST.map(a => `
+                <div class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:border-slate-300 transition">
+                    <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        <div class="space-y-1 max-w-xl">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-6 h-6 rounded-lg bg-slate-900 text-white font-display font-bold text-xs flex items-center justify-center shrink-0">${a.no}</span>
+                                <span class="font-display font-bold text-sm sm:text-base text-slate-900">${a.lengkap}</span>
+                            </div>
+                            <p class="text-xs text-slate-500 pl-8">Aspek Rekap: <strong>${a.kode}</strong></p>
+                            ${a.catatan ? `<p class="text-xs text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl mt-1.5 ml-8"><i class="fa-solid fa-circle-info mr-1"></i>${a.catatan}</p>` : ''}
+                        </div>
+
+                        <div class="grid grid-cols-5 gap-2 sm:w-96 shrink-0 pl-8 lg:pl-0">
+                            ${scaleOptions.map(opt => `
+                                <div class="relative">
+                                    <input type="radio" name="aspek_${a.no}" id="aspek_${a.no}_${opt.val}" value="${opt.val}" ${opt.val === '4' && a.no !== 8 ? 'checked' : (a.no === 8 && opt.val === 'TB' ? 'checked' : '')} class="score-option peer sr-only">
+                                    <label for="aspek_${a.no}_${opt.val}" class="flex flex-col items-center justify-center p-2 rounded-xl border border-slate-200 bg-white cursor-pointer text-slate-700 hover:border-slate-300 transition ${opt.activeCls}">
+                                        <span class="font-display font-extrabold text-sm">${opt.label}</span>
+                                        <span class="text-[10px] leading-tight text-center opacity-80 mt-0.5 hidden sm:block">${opt.desc}</span>
+                                    </label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function handleForm02Submit(e) {
+            e.preventDefault();
+            const skorObj = {};
+            ASPEK_LIST.forEach(a => {
+                const checked = document.querySelector(`input[name="aspek_${a.no}"]:checked`);
+                if (!checked) {
+                    skorObj[a.no] = 'TB';
+                } else {
+                    skorObj[a.no] = checked.value === 'TB' ? 'TB' : Number(checked.value);
+                }
+            });
+
+            const katSel = document.getElementById('f02_responden').value;
+            const katLain = document.getElementById('f02_responden_lainnya').value.trim();
+            const respondenFinal = (katSel === 'Lainnya' && katLain) ? `Lainnya (${katLain})` : katSel;
+
+            const newSurvei = {
+                id: 'SRV-' + String(stateSurvei.length + 1).padStart(3, '0'),
+                tanggal: document.getElementById('f02_tanggal').value,
+                periode: document.getElementById('f02_periode').value,
+                responden: respondenFinal,
+                layanan: document.getElementById('f02_layanan').value.trim(),
+                skor: skorObj,
+                halBaik: document.getElementById('f02_hal_baik').value.trim() || '-',
+                perbaikan: document.getElementById('f02_perbaikan').value.trim() || '-'
+            };
+
+            stateSurvei.unshift(newSurvei);
+            saveLocalData();
+            refreshAllViews();
+
+            // Sync to Google Sheets via Google Apps Script
+            const btnSubmit2 = document.getElementById('btnSubmitForm02');
+            const origBtn2 = btnSubmit2.innerHTML;
+            btnSubmit2.disabled = true;
+            btnSubmit2.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim ke Google Apps Script...';
+            const syncRes2 = await sendToGoogleSheets({ action: 'INSERT_SURVEI', data: newSurvei, label: `Form 02 Survei Kepuasan (${newSurvei.id})` });
+            btnSubmit2.disabled = false;
+            btnSubmit2.innerHTML = origBtn2;
+
+            // Reset form
+            document.getElementById('formSurvei').reset();
+            initForm02Metadata();
+            renderForm02AspekQuestions();
+
+            const syncBadgeModal2 = syncRes2.sent
+                ? `<div class="px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-cloud-check text-emerald-600"></i> Jawaban survei otomatis tercatat di database sekolah.</div>`
+                : `<div class="px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-database mr-1"></i> Tersimpan di sistem aplikasi.</div>`;
+
+            openCustomModal({
+                title: 'Terima Kasih Atas Penilaian Anda!',
+                subtitle: 'Survei Kepuasan Masyarakat (FORM 02) — SDN 011 Balikpapan Tengah',
+                iconClass: 'fa-star',
+                iconBg: 'bg-amber-100 text-amber-700',
+                bodyHtml: `
+                    ${syncBadgeModal2}
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Penilaian anonim Anda telah masuk ke dalam <strong>Rekapitulasi Hasil Survei Kepuasan (Lampiran Form 02)</strong> dan menjadi dasar penentuan prioritas perbaikan layanan SDN 011 Balikpapan Tengah.
+                    </p>
+                `,
+                footerHtml: `
+                    <button onclick="closeCustomModal()" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">Tutup</button>
+                    <button onclick="closeCustomModal(); switchTab('lampiran02');" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-chart-pie"></i> Lihat Rekapitulasi Survei
+                    </button>
+                `
+            });
+        }
+
+        /**
+         * ==========================================
+         * LAMPIRAN FORM 02 LOGIC (REKAPITULASI & PERHITUNGAN RESMI)
+         * ==========================================
+         * Aturan Perhitungan Sesuai Dokumen:
+         * - Jawaban sah (n) adalah satu pilihan skor 1, 2, 3, atau 4 pada sebuah aspek.
+         * - TB, jawaban kosong, dan pilihan ganda tidak dihitung.
+         * - Rata-rata per aspek = jumlah skor pada aspek tersebut ÷ jumlah jawaban sah.
+         * - Persentase puas = jumlah jawaban skor 3 dan 4 ÷ jumlah jawaban sah × 100%.
+         * - Jika tidak ada jawaban sah, tulis "belum ada data".
+         */
+        function calculateRekapData(periodeFilter = 'ALL') {
+            const filteredSurvei = stateSurvei.filter(s => periodeFilter === 'ALL' || s.periode === periodeFilter);
+            const totalFormulir = filteredSurvei.length;
+
+            // Hitung formulir yang memiliki minimal 1 jawaban sah (1, 2, 3, atau 4)
+            let formulirSahCount = 0;
+            filteredSurvei.forEach(s => {
+                const hasValid = ASPEK_LIST.some(a => {
+                    const v = Number(s.skor?.[a.no]);
+                    return [1, 2, 3, 4].includes(v);
+                });
+                if (hasValid) formulirSahCount++;
+            });
+
+            const rekapPerAspek = ASPEK_LIST.map(a => {
+                let n = 0;
+                let jumlahSkor = 0;
+                let countPuasSangatPuas = 0;
+
+                filteredSurvei.forEach(s => {
+                    const val = Number(s.skor?.[a.no]);
+                    if ([1, 2, 3, 4].includes(val)) {
+                        n++;
+                        jumlahSkor += val;
+                        if (val === 3 || val === 4) {
+                            countPuasSangatPuas++;
+                        }
+                    }
+                });
+
+                const rataRata = n > 0 ? (jumlahSkor / n) : null;
+                const persenPuas = n > 0 ? ((countPuasSangatPuas / n) * 100) : null;
+
+                return {
+                    no: a.no,
+                    kode: a.kode,
+                    lengkap: a.lengkap,
+                    n: n,
+                    jumlahSkor: jumlahSkor,
+                    rataRata: rataRata,
+                    persenPuas: persenPuas
+                };
+            });
+
+            return {
+                totalFormulir,
+                formulirSahCount,
+                rekapPerAspek,
+                filteredSurvei
+            };
+        }
+
+        function renderRekapSurvei() {
+            const periodeFilter = document.getElementById('rekap_periode_filter')?.value || 'ALL';
+            const { totalFormulir, formulirSahCount, rekapPerAspek, filteredSurvei } = calculateRekapData(periodeFilter);
+
+            document.getElementById('rekap_total_form').textContent = totalFormulir;
+            document.getElementById('rekap_form_sah').textContent = formulirSahCount;
+
+            const tbody = document.getElementById('tabelRekapAspekBody');
+            const tfoot = document.getElementById('tabelRekapAspekFoot');
+
+            let sumN = 0;
+            let sumSkor = 0;
+            let validAspekCount = 0;
+            let sumAvg = 0;
+            let sumPersen = 0;
+
+            tbody.innerHTML = rekapPerAspek.map(row => {
+                const hasData = row.n > 0;
+                if (hasData) {
+                    sumN += row.n;
+                    sumSkor += row.jumlahSkor;
+                    validAspekCount++;
+                    sumAvg += row.rataRata;
+                    sumPersen += row.persenPuas;
+                }
+
+                const avgText = hasData ? row.rataRata.toFixed(2).replace('.', ',') : '<span class="text-slate-400 italic text-xs">belum ada data</span>';
+                const persenText = hasData ? `${row.persenPuas.toFixed(0)}%` : '<span class="text-slate-400 italic text-xs">belum ada data</span>';
+                const barWidth = hasData ? Math.round(row.persenPuas) : 0;
+                const barColor = !hasData ? 'bg-slate-200' : (row.rataRata >= 3.25 ? 'bg-emerald-500' : (row.rataRata >= 2.5 ? 'bg-teal-500' : 'bg-amber-500'));
+
+                return `
+                    <tr class="hover:bg-slate-50 transition">
+                        <td class="py-3.5 px-4">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-700 font-bold text-xs flex items-center justify-center shrink-0">${row.no}</span>
+                                <div>
+                                    <p class="font-bold text-slate-900">${row.kode}</p>
+                                    <p class="text-xs text-slate-500">${row.lengkap}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-4 text-center font-mono font-bold text-slate-800">${row.n}</td>
+                        <td class="py-3.5 px-4 text-center font-mono font-bold text-slate-800">${hasData ? row.jumlahSkor : '-'}</td>
+                        <td class="py-3.5 px-4 text-center font-display font-extrabold text-slate-900">${avgText}</td>
+                        <td class="py-3.5 px-4 text-center font-display font-extrabold text-teal-700">${persenText}</td>
+                        <td class="py-3.5 px-4 w-48">
+                            <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full ${barColor} rounded-full transition-all duration-500" style="width: ${barWidth}%"></div>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            const overallAvg = validAspekCount > 0 ? (sumAvg / validAspekCount).toFixed(2).replace('.', ',') : 'belum ada data';
+            const overallPersen = validAspekCount > 0 ? `${(sumPersen / validAspekCount).toFixed(0)}%` : 'belum ada data';
+
+            tfoot.innerHTML = `
+                <tr>
+                    <td class="py-3.5 px-4 text-slate-900">Rata-rata Keseluruhan Aspek Layanan Internal</td>
+                    <td class="py-3.5 px-4 text-center font-mono">${sumN}</td>
+                    <td class="py-3.5 px-4 text-center font-mono">${sumSkor}</td>
+                    <td class="py-3.5 px-4 text-center text-emerald-700 text-base">${overallAvg}</td>
+                    <td class="py-3.5 px-4 text-center text-emerald-700 text-base">${overallPersen}</td>
+                    <td class="py-3.5 px-4 text-xs text-slate-500 font-normal italic">Ukuran Internal Sekolah</td>
+                </tr>
+            `;
+
+            // Render Qualitative Feedback List
+            const masukanContainer = document.getElementById('daftarMasukanContainer');
+            if (filteredSurvei.length === 0) {
+                masukanContainer.innerHTML = `<div class="col-span-2 text-center py-6 text-xs text-slate-400">Belum ada masukan responden pada periode ini.</div>`;
+            } else {
+                masukanContainer.innerHTML = filteredSurvei.map(s => `
+                    <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
+                        <div class="flex items-center justify-between text-slate-400">
+                            <span class="font-bold text-slate-700">${s.responden} • ${s.layanan}</span>
+                            <span>${formatIndonesianDate(s.tanggal)}</span>
+                        </div>
+                        <div class="text-slate-700">
+                            <span class="font-bold text-emerald-700"><i class="fa-solid fa-thumbs-up mr-1"></i>Sudah Baik:</span> ${s.halBaik}
+                        </div>
+                        <div class="text-slate-700">
+                            <span class="font-bold text-amber-700"><i class="fa-solid fa-lightbulb mr-1"></i>Harapan Perbaikan:</span> ${s.perbaikan}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function populateRencanaInputs() {
+            document.getElementById('rekap_tanggal').value = stateRencana.tanggalRekap || new Date().toISOString().split('T')[0];
+            document.getElementById('rekap_pengelola').value = stateRencana.pengelola || '';
+            document.getElementById('rp_aspek_prioritas').value = stateRencana.aspekPrioritas || '';
+            document.getElementById('rp_tindakan').value = stateRencana.tindakan || '';
+            document.getElementById('rp_pj').value = stateRencana.pj || '';
+            document.getElementById('rp_target_waktu').value = stateRencana.targetWaktu || '';
+            document.getElementById('rp_tgl_evaluasi').value = stateRencana.tglEvaluasi || '';
+            document.getElementById('rp_bukti').value = stateRencana.bukti || '';
+            document.getElementById('rp_kepsek').value = stateRencana.kepsek || 'Kepala SDN 011 Balikpapan Tengah';
+        }
+
+        function saveRencanaPerbaikanLocal() {
+            stateRencana = {
+                tanggalRekap: document.getElementById('rekap_tanggal').value,
+                pengelola: document.getElementById('rekap_pengelola').value.trim(),
+                aspekPrioritas: document.getElementById('rp_aspek_prioritas').value.trim(),
+                tindakan: document.getElementById('rp_tindakan').value.trim(),
+                pj: document.getElementById('rp_pj').value.trim(),
+                targetWaktu: document.getElementById('rp_target_waktu').value.trim(),
+                tglEvaluasi: document.getElementById('rp_tgl_evaluasi').value,
+                bukti: document.getElementById('rp_bukti').value.trim(),
+                kepsek: document.getElementById('rp_kepsek').value.trim()
+            };
+            saveLocalData();
+        }
+
+        function saveRencanaPerbaikanCloud() {
+            saveRencanaPerbaikanLocal();
+            sendToGoogleSheets({ action: 'SAVE_RENCANA', data: stateRencana, label: 'Lampiran 02 Rencana Perbaikan' });
+            showToast('Rencana Perbaikan (Lampiran Form 02) berhasil disimpan!');
+        }
+
+        function autoFillPrioritasAspek() {
+            const { rekapPerAspek } = calculateRekapData('ALL');
+            const validRows = rekapPerAspek.filter(r => r.n > 0).sort((a, b) => a.rataRata - b.rataRata);
+            if (validRows.length === 0) {
+                showToast('Belum ada data jawaban sah untuk dianalisis.', 'warning');
+                return;
+            }
+            const lowest = validRows.slice(0, 2);
+            const textPrioritas = lowest.map(r => `Aspek ${r.no} (${r.kode} — Rata-rata: ${r.rataRata.toFixed(2).replace('.', ',')})`).join(' dan ');
+            document.getElementById('rp_aspek_prioritas').value = `Prioritas peningkatan pada ${textPrioritas} beserta tindak lanjut masukan fasilitas ruang layanan.`;
+            saveRencanaPerbaikanLocal();
+            showToast('Aspek prioritas otomatis diisi berdasarkan skor rata-rata terendah.');
+        }
+
+        /**
+         * UPDATE HERO STATS ON BERANDA
+         */
+        function updateBerandaStats() {
+            const totalP = statePengaduan.length;
+            const selesaiP = statePengaduan.filter(p => p.tindakLanjut.status === 'Selesai').length;
+            document.getElementById('stat-total-pengaduan').textContent = totalP;
+            document.getElementById('stat-selesai-pengaduan').textContent = `${selesaiP} telah selesai ditindaklanjuti`;
+
+            const { totalFormulir, formulirSahCount, rekapPerAspek } = calculateRekapData('ALL');
+            document.getElementById('stat-total-survei').textContent = totalFormulir;
+            document.getElementById('stat-sah-survei').textContent = `${formulirSahCount} formulir minimal 1 jawaban sah`;
+
+            const validAspek = rekapPerAspek.filter(r => r.n > 0);
+            if (validAspek.length > 0) {
+                const avgAll = validAspek.reduce((acc, r) => acc + r.rataRata, 0) / validAspek.length;
+                const persenAll = validAspek.reduce((acc, r) => acc + r.persenPuas, 0) / validAspek.length;
+                document.getElementById('stat-avg-skor').textContent = avgAll.toFixed(2).replace('.', ',');
+                document.getElementById('stat-persen-puas').textContent = `${persenAll.toFixed(0)}% Puas / Sangat Puas`;
+            } else {
+                document.getElementById('stat-avg-skor').textContent = '-';
+                document.getElementById('stat-persen-puas').textContent = 'Belum ada data';
+            }
+        }
+
+        /**
+         * ==========================================
+         * OFFICIAL PRINT ENGINE (FORM 01, LAMPIRAN 01, LAMPIRAN 02)
+         * ==========================================
+         */
+        function printForm01(nomor) {
+            const item = statePengaduan.find(p => p.nomor === nomor);
+            if (!item) return;
+
+            const printArea = document.getElementById('printableArea');
+            printArea.innerHTML = `
+                <div class="max-w-3xl mx-auto border border-black p-6 space-y-4">
+                    <div class="border-b-2 border-black pb-3 flex justify-between items-start">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-widest">SDN 011 BALIKPAPAN TENGAH</p>
+                            <h1 class="text-xl font-bold mt-0.5">Formulir Pengaduan Masyarakat</h1>
+                            <p class="text-xs font-semibold">FORM 01 &nbsp;|&nbsp; Diisi oleh pelapor</p>
+                        </div>
+                        <div class="text-right text-xs">
+                            <p><strong>Nomor pengaduan:</strong> ${item.nomor}</p>
+                            <p><strong>Tanggal diterima:</strong> ${formatIndonesianDate(item.tanggalTerima)}</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 text-xs">
+                        <p class="font-bold text-sm bg-gray-100 px-2 py-1 border border-black">A. Identitas dan kontak pelapor</p>
+                        <p><strong>Nama atau inisial:</strong> ${item.nama}</p>
+                        <p><strong>Kategori pelapor:</strong> ${item.kategoriPelapor}</p>
+                        <p><strong>Nomor telepon atau email:</strong> ${item.kontak}</p>
+                        <p><strong>Kesediaan dihubungi:</strong> ${item.bersedia}</p>
+                    </div>
+
+                    <div class="space-y-2 text-xs">
+                        <p class="font-bold text-sm bg-gray-100 px-2 py-1 border border-black">B. Informasi pengaduan</p>
+                        <p><strong>Kategori masalah:</strong> ${item.jenis.join(', ')}</p>
+                        <p><strong>Tanggal dan waktu kejadian:</strong> ${item.waktuKejadian}</p>
+                        <p><strong>Lokasi atau layanan terkait:</strong> ${item.lokasi}</p>
+                        <p><strong>Pihak yang terkait jika diketahui:</strong> ${item.pihak}</p>
+                        <div class="border border-black p-2.5 mt-1">
+                            <p class="font-bold mb-1">Uraian kejadian dan masalah yang dialami:</p>
+                            <p class="whitespace-pre-line">${item.uraian}</p>
+                        </div>
+                        <div class="border border-black p-2.5 mt-1">
+                            <p class="font-bold mb-1">Penyelesaian atau perbaikan yang diharapkan:</p>
+                            <p class="whitespace-pre-line">${item.harapan}</p>
+                        </div>
+                        <p><strong>Status Bukti:</strong> ${item.statusBukti} &nbsp;|&nbsp; <strong>Keterangan bukti:</strong> ${item.ketBukti}</p>
+                    </div>
+
+                    <div class="pt-3 border-t border-black text-xs space-y-4">
+                        <p><strong>Pernyataan pelapor:</strong> Informasi ini saya sampaikan sesuai pengetahuan dan pengalaman saya.</p>
+                        <div class="flex justify-between items-end pt-4">
+                            <div>
+                                <p>Balikpapan, ${formatIndonesianDate(item.tanggalTerima)}</p>
+                            </div>
+                            <div class="text-center">
+                                <p>Nama/tanda tangan pelapor (opsional)</p>
+                                <div class="h-14"></div>
+                                <p class="font-bold underline">(${item.ttdPelapor || '............................................'})</p>
+                            </div>
+                        </div>
+                        <p class="text-[10px] italic pt-2 border-t border-gray-300">
+                            Catatan pengelolaan: Identitas dan bukti pengaduan digunakan untuk penanganan oleh pihak yang berwenang. Hindari mencantumkan data pribadi yang tidak diperlukan.
+                        </p>
+                    </div>
+                </div>
+            `;
+            window.print();
+        }
+
+        function printLampiran01(nomor) {
+            const item = statePengaduan.find(p => p.nomor === nomor);
+            if (!item) return;
+            const tl = item.tindakLanjut;
+
+            const printArea = document.getElementById('printableArea');
+            printArea.innerHTML = `
+                <div class="max-w-3xl mx-auto border border-black p-6 space-y-4 text-xs">
+                    <div class="border-b-2 border-black pb-3">
+                        <p class="text-xs font-bold uppercase tracking-widest">SDN 011 BALIKPAPAN TENGAH</p>
+                        <h1 class="text-xl font-bold mt-0.5">Lembar Tindak Lanjut Pengaduan</h1>
+                        <p class="text-xs font-semibold">LAMPIRAN FORM 01 &nbsp;|&nbsp; Diisi oleh petugas sekolah</p>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <p><strong>Nomor pengaduan:</strong> ${item.nomor}</p>
+                        <p><strong>Tanggal diterima dan nama petugas penerima:</strong> ${formatIndonesianDate(item.tanggalTerima)} — ${tl.petugasPenerima}</p>
+                        <p><strong>Saluran pengaduan:</strong> ${tl.saluran}</p>
+                        <div class="border border-black p-2 mt-1">
+                            <p class="font-bold">Ringkasan pokok pengaduan:</p>
+                            <p>${tl.ringkasan}</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <p class="font-bold text-sm bg-gray-100 px-2 py-1 border border-black">A. Pemeriksaan dan penugasan</p>
+                        <div class="border border-black p-2">
+                            <p class="font-bold">Hasil pemeriksaan awal dan hal yang perlu diklarifikasi:</p>
+                            <p>${tl.pemeriksaanAwal}</p>
+                        </div>
+                        <p><strong>Penanggung jawab penanganan:</strong> ${tl.pic}</p>
+                        <p><strong>Target penyelesaian yang ditetapkan:</strong> ${tl.targetWaktu}</p>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <p class="font-bold text-sm bg-gray-100 px-2 py-1 border border-black">B. Catatan tindakan</p>
+                        <table class="w-full border-collapse border border-black text-xs">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-black p-1.5 w-28">Tanggal</th>
+                                    <th class="border border-black p-1.5">Tindakan dan hasil</th>
+                                    <th class="border border-black p-1.5 w-36">Petugas/PIC</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${(tl.catatanTindakan || []).map(r => `
+                                    <tr>
+                                        <td class="border border-black p-1.5">${r.tanggal}</td>
+                                        <td class="border border-black p-1.5">${r.tindakan}</td>
+                                        <td class="border border-black p-1.5">${r.pic}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <p class="font-bold text-sm bg-gray-100 px-2 py-1 border border-black">C. Hasil dan status pengaduan</p>
+                        <p><strong>Status Pengaduan:</strong> ${tl.status}</p>
+                        <div class="border border-black p-2">
+                            <p class="font-bold">Hasil penyelesaian atau alasan diteruskan beserta tujuan penerusan:</p>
+                            <p>${tl.hasilPenyelesaian}</p>
+                        </div>
+                        <p><strong>Tanggal dan cara tanggapan disampaikan kepada pelapor:</strong> ${tl.tglCaraTanggapan}</p>
+                        <p><strong>Tanggapan pelapor atau catatan jika pelapor tidak dapat dihubungi:</strong> ${tl.tanggapanPelapor}</p>
+                        <p><strong>Tanggal penutupan dan bukti penyelesaian:</strong> ${tl.tglPenutupan}</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-8 pt-6 text-center">
+                        <div>
+                            <p>Petugas penanganan</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold">(${tl.pic || '...................................................'})</p>
+                        </div>
+                        <div>
+                            <p>Kepala sekolah/penanggung jawab</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold">(${tl.kepsek || '...................................................'})</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            window.print();
+        }
+
+        function printLampiran02() {
+            saveRencanaPerbaikanLocal();
+            const periodeFilter = document.getElementById('rekap_periode_filter')?.value || 'ALL';
+            const { totalFormulir, formulirSahCount, rekapPerAspek } = calculateRekapData(periodeFilter);
+
+            const printArea = document.getElementById('printableArea');
+            printArea.innerHTML = `
+                <div class="max-w-4xl mx-auto border border-black p-6 space-y-4 text-xs">
+                    <div class="border-b-2 border-black pb-3">
+                        <p class="text-xs font-bold uppercase tracking-widest">SDN 011 BALIKPAPAN TENGAH</p>
+                        <h1 class="text-xl font-bold mt-0.5">Rekapitulasi Hasil Survei Kepuasan</h1>
+                        <p class="text-xs font-semibold">LAMPIRAN FORM 02 &nbsp;|&nbsp; Diisi oleh pengelola survei</p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <p><strong>Periode survei:</strong> ${periodeFilter === 'ALL' ? 'Semua Periode' : periodeFilter}</p>
+                        <p><strong>Tanggal rekap:</strong> ${formatIndonesianDate(stateRencana.tanggalRekap)}</p>
+                        <p><strong>Formulir terkumpul:</strong> ${totalFormulir}</p>
+                        <p><strong>Formulir dengan minimal satu jawaban sah:</strong> ${formulirSahCount}</p>
+                        <p class="col-span-2"><strong>Nama pengelola survei:</strong> ${stateRencana.pengelola}</p>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <p class="font-bold text-sm bg-gray-100 px-2 py-1 border border-black">A. Rekap per aspek layanan</p>
+                        <table class="w-full border-collapse border border-black text-xs">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-black p-1.5 text-left">Aspek</th>
+                                    <th class="border border-black p-1.5 text-center">Jawaban sah (n)</th>
+                                    <th class="border border-black p-1.5 text-center">Jumlah skor</th>
+                                    <th class="border border-black p-1.5 text-center">Rata-rata 1–4</th>
+                                    <th class="border border-black p-1.5 text-center">Puas + sangat puas (%)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rekapPerAspek.map(r => `
+                                    <tr>
+                                        <td class="border border-black p-1.5">${r.no}. ${r.kode}</td>
+                                        <td class="border border-black p-1.5 text-center">${r.n}</td>
+                                        <td class="border border-black p-1.5 text-center">${r.n > 0 ? r.jumlahSkor : '-'}</td>
+                                        <td class="border border-black p-1.5 text-center">${r.n > 0 ? r.rataRata.toFixed(2).replace('.', ',') : 'belum ada data'}</td>
+                                        <td class="border border-black p-1.5 text-center">${r.n > 0 ? r.persenPuas.toFixed(0) + '%' : 'belum ada data'}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="space-y-1.5">
+                        <p class="font-bold text-sm bg-gray-100 px-2 py-1 border border-black">C. Rencana perbaikan</p>
+                        <p><strong>Aspek prioritas berdasarkan nilai dan masukan responden:</strong><br>${stateRencana.aspekPrioritas}</p>
+                        <p><strong>Tindakan perbaikan yang akan dilakukan:</strong><br><span class="whitespace-pre-line">${stateRencana.tindakan}</span></p>
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <p><strong>Penanggung jawab:</strong> ${stateRencana.pj}</p>
+                            <p><strong>Target waktu:</strong> ${stateRencana.targetWaktu}</p>
+                            <p><strong>Tanggal evaluasi:</strong> ${formatIndonesianDate(stateRencana.tglEvaluasi)}</p>
+                            <p><strong>Bukti keberhasilan:</strong> ${stateRencana.bukti}</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-8 pt-6 text-center">
+                        <div>
+                            <p>Pengelola survei</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold">(${stateRencana.pengelola || '...................................................'})</p>
+                        </div>
+                        <div>
+                            <p>Mengetahui Kepala Sekolah</p>
+                            <div class="h-16"></div>
+                            <p class="font-bold">(${stateRencana.kepsek || '...................................................'})</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            window.print();
+        }
+
+        function exportSurveiCSV() {
+            const headers = ['ID', 'Tanggal', 'Periode', 'Kategori Responden', 'Layanan', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'Hal Sudah Baik', 'Harapan Perbaikan'];
+            const rows = stateSurvei.map(s => [
+                s.id, s.tanggal, `"${s.periode}"`, `"${s.responden}"`, `"${s.layanan}"`,
+                s.skor[1], s.skor[2], s.skor[3], s.skor[4], s.skor[5], s.skor[6], s.skor[7], s.skor[8], s.skor[9],
+                `"${(s.halBaik || '').replace(/"/g, '""')}"`,
+                `"${(s.perbaikan || '').replace(/"/g, '""')}"`
+            ]);
+            const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', `Rekap_Survei_SI_SEDALAS_SDN011_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            showToast('File CSV Rekap Survei berhasil diunduh!');
+        }
+
+        /**
+         * ==========================================
+         * GOOGLE SHEETS & APPS SCRIPT CLOUD CONNECTOR
+         * ==========================================
+         */
+        function isNativeGasEnvironment() {
+            return (typeof google !== 'undefined' && google.script && google.script.run);
+        }
+
+        function getGasUrl() {
+            const localUrl = (localStorage.getItem(STORAGE_KEYS.GAS_URL) || '').trim();
+            return localUrl || DEFAULT_GAS_WEB_APP_URL.trim();
+        }
+
+        function appendSyncLog(message, status = 'info') {
+            const logBox = document.getElementById('gasSyncLogContainer');
+            if (!logBox) return;
+            const timeStr = new Date().toLocaleTimeString('id-ID');
+            const colorCls = status === 'success' ? 'text-emerald-400' : (status === 'warn' ? 'text-amber-300' : 'text-teal-300');
+            const entry = document.createElement('div');
+            entry.className = `${colorCls}`;
+            entry.textContent = `[${timeStr}] ${message}`;
+            if (logBox.firstElementChild && logBox.firstElementChild.classList.contains('text-slate-500')) {
+                logBox.innerHTML = '';
+            }
+            logBox.prepend(entry);
+        }
+
+        function clearSyncLogs() {
+            const logBox = document.getElementById('gasSyncLogContainer');
+            if (logBox) {
+                logBox.innerHTML = '<div class="text-slate-500">Log dibersihkan. Menunggu aktivitas pengiriman formulir...</div>';
+            }
+        }
+
+        function saveGasUrl() {
+            const url = document.getElementById('gasWebAppUrlInput').value.trim();
+            localStorage.setItem(STORAGE_KEYS.GAS_URL, url);
+            updateCloudStatusBadge();
+            if (url && url.startsWith('https://script.google.com')) {
+                appendSyncLog(`URL Web App Google Apps Script berhasil disimpan: ${url.slice(0, 48)}...`, 'success');
+                showToast('URL Google Apps Script berhasil dihubungkan!');
+            } else if (url) {
+                appendSyncLog('Format URL belum sesuai (harus diawali https://script.google.com/macros/s/...)', 'warn');
+                showToast('Pastikan URL diawali https://script.google.com/macros/s/...', 'warning');
+            } else {
+                appendSyncLog('Mode Lokal diaktifkan (URL dikosongkan).', 'warn');
+                showToast('Mode Lokal diaktifkan (URL Google Apps Script dikosongkan).', 'warning');
+            }
+        }
+
+        function updateCloudStatusBadge() {
+            const url = getGasUrl();
+            const badge = document.getElementById('cloudStatusBadge');
+            const dot = document.getElementById('cloudStatusDot');
+            const text = document.getElementById('cloudStatusText');
+            if (!badge || !dot || !text) return;
+
+            if (isNativeGasEnvironment() || (url && url.startsWith('https://script.google.com'))) {
+                badge.className = 'inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30';
+                dot.className = 'w-2 h-2 rounded-full bg-emerald-400 animate-pulse';
+                text.textContent = 'Server Aktif • SDN 011 Balikpapan Tengah';
+            }
+        }
+
+        async function sendToGoogleSheets(payload) {
+            const label = payload.label || payload.action;
+
+            // Mode 1: Jika dijalankan langsung di dalam Google Apps Script HtmlService
+            if (isNativeGasEnvironment()) {
+                return new Promise((resolve) => {
+                    google.script.run
+                        .withSuccessHandler((res) => {
+                            appendSyncLog(`Sukses kirim [${label}] via google.script.run`, 'success');
+                            showToast(`Data ${label} tersimpan di Google Sheets!`, 'success');
+                            resolve({ sent: true, res });
+                        })
+                        .withFailureHandler((err) => {
+                            appendSyncLog(`Gagal kirim [${label}]: ${err}`, 'warn');
+                            resolve({ sent: false, err });
+                        })
+                        .processSedalasPayload(payload);
+                });
+            }
+
+            // Mode 2: Pengiriman via Fetch ke Web App URL Google Apps Script
+            const url = getGasUrl();
+            if (!url || !url.startsWith('https://script.google.com')) {
+                appendSyncLog(`[${label}] disimpan di memori browser (URL Google Apps Script belum diisi).`, 'warn');
+                return { sent: false, reason: 'NO_URL' };
+            }
+
+            try {
+                appendSyncLog(`Mengirim [${label}] ke Google Apps Script...`, 'info');
+                await fetch(url, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify(payload)
+                });
+                appendSyncLog(`Berhasil mengirim [${label}] ke Google Sheets!`, 'success');
+                showToast(`Data ${label} berhasil dikirim ke Google Sheets!`, 'success');
+                return { sent: true };
+            } catch (err) {
+                console.error('Error sinkronisasi Google Sheets:', err);
+                appendSyncLog(`Gagal mengirim [${label}] ke Google Sheets: ${err.message}`, 'warn');
+                showToast('Data tersimpan di lokal, namun gagal mengirim ke Google Sheets.', 'warning');
+                return { sent: false, error: err };
+            }
+        }
+
+        async function sendTestPingToGas() {
+            saveGasUrl();
+            const url = getGasUrl();
+            if (!isNativeGasEnvironment() && (!url || !url.startsWith('https://script.google.com'))) {
+                showToast('Tempelkan URL Web App Google Apps Script terlebih dahulu pada Langkah 1!', 'warning');
+                return;
+            }
+            showToast('Menguji koneksi & menginisialisasi 5 Sheet di Google Sheets...', 'success');
+            if (statePengaduan.length > 0) {
+                await sendToGoogleSheets({
+                    action: 'UPSERT_PENGADUAN',
+                    data: statePengaduan[0],
+                    label: `Uji Koneksi & Buat Sheet (${statePengaduan[0].nomor})`
+                });
+            }
+            if (stateSurvei.length > 0) {
+                await sendToGoogleSheets({
+                    action: 'INSERT_SURVEI',
+                    data: stateSurvei[0],
+                    label: `Uji Koneksi Survei (${stateSurvei[0].id})`
+                });
+            }
+            openCustomModal({
+                title: 'Paket Uji Berhasil Dikirim ke Google Apps Script!',
+                subtitle: 'Verifikasi Spreadsheet SDN 011 Balikpapan Tengah',
+                iconClass: 'fa-cloud-arrow-up',
+                iconBg: 'bg-emerald-100 text-emerald-700',
+                bodyHtml: `
+                    <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                        Sistem telah mengirimkan paket data uji ke URL Google Apps Script Anda. Silakan buka Google Sheets Anda dan periksa bahwa <strong>5 Sheet</strong> berikut telah terbentuk otomatis:
+                    </p>
+                    <ul class="text-xs bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-1 font-mono text-slate-700">
+                        <li>1. Form01_Pengaduan</li>
+                        <li>2. Lampiran01_TindakLanjut</li>
+                        <li>3. Form02_Survei</li>
+                        <li>4. Lampiran02_RekapOtomatis</li>
+                        <li>5. Lampiran02_RencanaPerbaikan</li>
+                    </ul>
+                `
+            });
+        }
+
+        async function pushAllLocalToCloud() {
+            const url = getGasUrl();
+            if (!url || !url.startsWith('https://script.google.com')) {
+                showToast('Masukkan & simpan URL Web App Google Apps Script terlebih dahulu!', 'warning');
+                switchTab('integrasi');
+                return;
+            }
+
+            showToast('Mengirim seluruh data pengaduan & survei ke Google Sheets...', 'success');
+            for (const p of statePengaduan) {
+                await sendToGoogleSheets({ action: 'UPSERT_PENGADUAN', data: p });
+            }
+            for (const s of stateSurvei) {
+                await sendToGoogleSheets({ action: 'INSERT_SURVEI', data: s });
+            }
+            await sendToGoogleSheets({ action: 'SAVE_RENCANA', data: stateRencana });
+            showToast('Seluruh data berhasil diunggah ke Google Sheets SDN 011 Balikpapan Tengah!');
+        }
+
+        async function syncFromGoogleSheets() {
+            const url = getGasUrl();
+            if (!url || !url.startsWith('https://script.google.com')) {
+                refreshAllViews();
+                showToast('Data lokal dimuat ulang. Hubungkan URL Google Apps Script untuk sinkronisasi Cloud.', 'warning');
+                return;
+            }
+
+            try {
+                showToast('Menarik data terbaru dari Google Sheets...', 'success');
+                const res = await fetch(url);
+                const json = await res.json();
+                if (json && json.status === 'success') {
+                    if (Array.isArray(json.pengaduan) && json.pengaduan.length > 0) {
+                        statePengaduan = json.pengaduan.map(row => ({
+                            nomor: row[0],
+                            tanggalTerima: String(row[1]).split('T')[0],
+                            nama: row[2],
+                            kategoriPelapor: row[3],
+                            kontak: row[4],
+                            bersedia: row[5],
+                            jenis: String(row[6] || '').split(',').map(s => s.trim()).filter(Boolean),
+                            waktuKejadian: row[7],
+                            lokasi: row[8],
+                            pihak: row[9],
+                            uraian: row[10],
+                            harapan: row[11],
+                            statusBukti: row[12],
+                            ketBukti: row[13],
+                            ttdPelapor: row[14],
+                            tindakLanjut: {
+                                status: row[15] || 'Diterima',
+                                petugasPenerima: row[16] || '',
+                                saluran: row[17] || 'Lainnya',
+                                ringkasan: row[18] || '',
+                                pemeriksaanAwal: row[19] || '',
+                                pic: row[20] || '',
+                                targetWaktu: row[21] || '',
+                                catatanTindakan: safeParseJson(row[22], []),
+                                hasilPenyelesaian: row[23] || '',
+                                tglCaraTanggapan: row[24] || '',
+                                tanggapanPelapor: row[25] || '',
+                                tglPenutupan: row[26] || '',
+                                kepsek: row[27] || 'Kepala SDN 011 Balikpapan Tengah'
+                            }
+                        }));
+                    }
+                    if (Array.isArray(json.survei) && json.survei.length > 0) {
+                        stateSurvei = json.survei.map(row => ({
+                            id: row[0],
+                            tanggal: String(row[2]).split('T')[0],
+                            periode: row[3],
+                            responden: row[4],
+                            layanan: row[5],
+                            skor: {
+                                1: row[6], 2: row[7], 3: row[8], 4: row[9], 5: row[10],
+                                6: row[11], 7: row[12], 8: row[13], 9: row[14]
+                            },
+                            halBaik: row[15],
+                            perbaikan: row[16]
+                        }));
+                    }
+                    saveLocalData();
+                    refreshAllViews();
+                    showToast('Berhasil menyinkronkan data dari Google Sheets!');
+                }
+            } catch (e) {
+                console.error(e);
+                showToast('Koneksi pengiriman aktif. Pastikan izin Web App disetel ke "Anyone" untuk tarik data.', 'warning');
+            }
+        }
+
+        function testGasConnection() {
+            saveGasUrl();
+            syncFromGoogleSheets();
+        }
+
+        function safeParseJson(str, fallback) {
+            try {
+                return JSON.parse(str) || fallback;
+            } catch (e) {
+                return fallback;
+            }
+        }
+
+        function copyAppsScriptCode() {
+            const code = document.getElementById('gasCodeBlock').innerText;
+            const textarea = document.createElement('textarea');
+            textarea.value = code;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            textarea.remove();
+            showToast('Kode Google Apps Script (Code.gs) berhasil disalin ke Clipboard!');
+        }
+
+        function resetDemoData() {
+            statePengaduan = getInitialPengaduan();
+            stateSurvei = getInitialSurvei();
+            selectedPengaduanNomor = statePengaduan[0].nomor;
+            saveLocalData();
+            refreshAllViews();
+            showToast('Data contoh awal SI SEDALAS berhasil dipulihkan.');
+        }
+    </script>
+</body>
+</html>
