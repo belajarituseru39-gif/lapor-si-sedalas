@@ -1058,14 +1058,13 @@
             PENGADUAN: 'sisedalas_011_pengaduan_v3_sd',
             SURVEI: 'sisedalas_011_survei_v3_sd',
             RENCANA: 'sisedalas_011_rencana_v3_sd',
-            GAS_URL: 'sisedalas_011_gas_url_v1'
+            GAS_URL: 'sisedalas_011_gas_url_v2'
         };
 
         /**
-         * OPSIONAL: Jika admin ingin menanamkan URL Web App Google Apps Script secara permanen
-         * di dalam kode sumber, isi variabel DEFAULT_GAS_WEB_APP_URL di bawah ini.
+         * URL Web App Google Apps Script Resmi SDN 011 Balikpapan Tengah (Versi Revisi SD 12 Butir)
          */
-        const DEFAULT_GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzV0tPVM5wTd4bFjKe2sunhb4PjcfUnnyHoKysCzvxkIx9z1Y7y_eY9OiQGSU13EA2ZKQ/exec';
+        const DEFAULT_GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzNzGOLFnvWgFQJFI3pue7AaFWZeS7RAeySloNaaOYcOAI5Ho5YMb6_sBMJH8TUeQEF/exec';
 
         // App State (dimulai dalam keadaan kosong)
         let statePengaduan = [];
@@ -1122,10 +1121,7 @@
                 const rawR = localStorage.getItem(STORAGE_KEYS.RENCANA);
                 if (rawR) stateRencana = JSON.parse(rawR);
 
-                const savedUrl = DEFAULT_GAS_WEB_APP_URL;
-                localStorage.setItem(STORAGE_KEYS.GAS_URL, savedUrl);
-                const urlInput = document.getElementById('gasWebAppUrlInput');
-                if (urlInput) urlInput.value = savedUrl;
+                localStorage.setItem(STORAGE_KEYS.GAS_URL, DEFAULT_GAS_WEB_APP_URL);
             } catch (e) {
                 statePengaduan = getInitialPengaduan();
                 stateSurvei = getInitialSurvei();
@@ -2347,8 +2343,7 @@
         }
 
         function getGasUrl() {
-            const localUrl = (localStorage.getItem(STORAGE_KEYS.GAS_URL) || '').trim();
-            return localUrl || DEFAULT_GAS_WEB_APP_URL.trim();
+            return DEFAULT_GAS_WEB_APP_URL.trim();
         }
 
         function appendSyncLog(message, status = 'info') {
@@ -2375,10 +2370,14 @@
         function saveGasUrl() {
             const url = document.getElementById('gasWebAppUrlInput').value.trim();
             localStorage.setItem(STORAGE_KEYS.GAS_URL, url);
+            const previewEl = document.getElementById('activeGasUrlPreview');
+            if (previewEl) {
+                previewEl.textContent = url ? (url.slice(0, 55) + '...') : 'Belum diatur';
+            }
             updateCloudStatusBadge();
             if (url && url.startsWith('https://script.google.com')) {
-                appendSyncLog(`URL Web App Google Apps Script berhasil disimpan: ${url.slice(0, 48)}...`, 'success');
-                showToast('URL Google Apps Script berhasil dihubungkan!');
+                appendSyncLog(`URL Web App Google Apps Script baru berhasil disimpan: ${url.slice(0, 48)}...`, 'success');
+                showToast('URL Google Sheets baru berhasil disimpan dan dihubungkan!');
             } else if (url) {
                 appendSyncLog('Format URL belum sesuai (harus diawali https://script.google.com/macros/s/...)', 'warn');
                 showToast('Pastikan URL diawali https://script.google.com/macros/s/...', 'warning');
@@ -2557,23 +2556,46 @@
                         }));
                     }
                     if (Array.isArray(json.survei) && json.survei.length > 0) {
-                        stateSurvei = json.survei.map(row => ({
-                            id: row[0],
-                            tanggal: String(row[2]).split('T')[0],
-                            periode: row[3],
-                            responden: row[4],
-                            layanan: row[5],
-                            skor: {
-                                1: row[6], 2: row[7], 3: row[8], 4: row[9], 5: row[10],
-                                6: row[11], 7: row[12], 8: row[13], 9: row[14],
-                                10: row[17] || 'TB', 11: row[18] || 'TB', 12: row[19] || 'TB'
-                            },
-                            halBaik: row[15],
-                            perbaikan: row[16],
-                            tahunAjaran: row[20] || '',
-                            semester: row[21] || '',
-                            kelasAnak: row[22] || '-'
-                        }));
+                        stateSurvei = json.survei.map(row => {
+                            // Deteksi apakah menggunakan struktur kolom Revisi SD 23 kolom (row[5] adalah Kelas Anak)
+                            const isNewStructure = row.length >= 21;
+                            if (isNewStructure) {
+                                return {
+                                    id: row[0],
+                                    tanggal: String(row[2]).split('T')[0],
+                                    periode: row[3],
+                                    responden: row[4],
+                                    kelasAnak: row[5] || '-',
+                                    layanan: row[6],
+                                    skor: {
+                                        1: row[7], 2: row[8], 3: row[9], 4: row[10],
+                                        5: row[11], 6: row[12], 7: row[13], 8: row[14],
+                                        9: row[15], 10: row[16], 11: row[17], 12: row[18]
+                                    },
+                                    halBaik: row[19] || '-',
+                                    perbaikan: row[20] || '-',
+                                    tahunAjaran: row[21] || '',
+                                    semester: row[22] || ''
+                                };
+                            }
+                            return {
+                                id: row[0],
+                                tanggal: String(row[2]).split('T')[0],
+                                periode: row[3],
+                                responden: row[4],
+                                layanan: row[5],
+                                skor: {
+                                    1: row[6], 2: row[7], 3: row[8], 4: row[9], 5: row[10],
+                                    6: row[11], 7: row[12], 8: row[13], 9: row[14],
+                                    10: row[17] || 'TB', 11: row[18] || 'TB', 12: row[19] || 'TB'
+                                },
+                                halBaik: row[15],
+                                perbaikan: row[16],
+                                tahunAjaran: row[20] || '',
+                                semester: row[21] || '',
+                                kelasAnak: row[22] || '-'
+                            };
+                        });
                     }
                     saveLocalData();
                     refreshAllViews();
