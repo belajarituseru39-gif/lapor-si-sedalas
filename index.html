@@ -1018,11 +1018,11 @@
             { no: 9, kode: 'Sarana dan prasarana', lengkap: 'Kenyamanan serta kelayakan sarana dan prasarana layanan', catatan: '' }
         ];
 
-        // Storage Keys
+        // Storage Keys (versi bersih tanpa data sampel)
         const STORAGE_KEYS = {
-            PENGADUAN: 'sisedalas_011_pengaduan_v1',
-            SURVEI: 'sisedalas_011_survei_v1',
-            RENCANA: 'sisedalas_011_rencana_v1',
+            PENGADUAN: 'sisedalas_011_pengaduan_v2_empty',
+            SURVEI: 'sisedalas_011_survei_v2_empty',
+            RENCANA: 'sisedalas_011_rencana_v2_empty',
             GAS_URL: 'sisedalas_011_gas_url_v1'
         };
 
@@ -1032,160 +1032,42 @@
          */
         const DEFAULT_GAS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbzV0tPVM5wTd4bFjKe2sunhb4PjcfUnnyHoKysCzvxkIx9z1Y7y_eY9OiQGSU13EA2ZKQ/exec';
 
-        // App State
+        // App State (dimulai dalam keadaan kosong)
         let statePengaduan = [];
         let stateSurvei = [];
         let stateRencana = {
             tanggalRekap: new Date().toISOString().split('T')[0],
-            pengelola: 'Tim Layanan & Humas SDN 011 Balikpapan Tengah',
-            aspekPrioritas: 'Aspek 8 (Penanganan pengaduan) dan Aspek 9 (Sarana dan prasarana ruang tunggu layanan)',
-            tindakan: '1. Sosialisasi kanal digital SI SEDALAS kepada seluruh orang tua/wali murid.\n2. Penambahan kursi tunggu dan penunjuk arah ruang pelayanan di SDN 011 Balikpapan Tengah.',
-            pj: 'Wakasek Sarpras & Koordinator Tata Usaha',
-            targetWaktu: 'Desember 2026',
-            tglEvaluasi: '2026-12-20',
-            bukti: 'Laporan Rekap SI SEDALAS & Dokumentasi Ruang Layanan',
+            pengelola: '',
+            aspekPrioritas: '',
+            tindakan: '',
+            pj: '',
+            targetWaktu: '',
+            tglEvaluasi: '',
+            bukti: '',
             kepsek: 'Kepala SDN 011 Balikpapan Tengah'
         };
         let selectedPengaduanNomor = null;
 
         /**
-         * INITIAL SAMPLE DATA (Agar pengguna langsung melihat simulasi nyata sesuai dokumen)
+         * DATA AWAL KOSONG (Siap digunakan untuk data riil)
          */
         function getInitialPengaduan() {
-            return [
-                {
-                    nomor: 'SEDALAS-2026-0101',
-                    tanggalTerima: '2026-11-10',
-                    nama: 'Ibu Rahmawati (Wali Murid Kelas IV)',
-                    kategoriPelapor: 'Orang tua/wali murid',
-                    kontak: '0812-5400-XXXX',
-                    bersedia: 'Bersedia dihubungi',
-                    jenis: ['Sarana dan prasarana', 'Keamanan/perundungan'],
-                    waktuKejadian: 'Senin, 09 November 2026 Pukul 12.15 WITA',
-                    lokasi: 'Area Gerbang Depan & Keran Cuci Tangan Kelas IV',
-                    pihak: 'Petugas Keamanan & Tim Sarpras',
-                    uraian: 'Keran air tempat cuci tangan di depan ruang kelas IV bocor sehingga lantai koridor licin saat jam istirahat. Selain itu mohon pengawasan ekstra saat jam pulang sekolah.',
-                    harapan: 'Keran segera diperbaiki agar siswa tidak terpeleset dan petugas piket mengatur alur penjemputan di gerbang.',
-                    statusBukti: 'Bukti terlampir',
-                    ketBukti: '2 Foto kondisi keran air dan koridor depan kelas IV',
-                    ttdPelapor: 'Rahmawati',
-                    tindakLanjut: {
-                        petugasPenerima: 'Bpk. Hendra (Staf TU)',
-                        saluran: 'Telepon/pesan',
-                        ringkasan: 'Perbaikan keran cuci tangan koridor kelas IV yang bocor serta penertiban jadwal piket gerbang saat jam pulang.',
-                        pemeriksaanAwal: 'Telah dicek langsung ke koridor kelas IV, ditemukan seal keran aus. Jadwal piket gerbang dikoordinasikan bersama guru piket.',
-                        pic: 'Tim Sarpras & Koordinator Keamanan Sekolah',
-                        targetWaktu: '12 November 2026',
-                        catatanTindakan: [
-                            { tanggal: '2026-11-10', tindakan: 'Penerimaan laporan dan pengecekan lokasi koridor Kelas IV', pic: 'Hendra' },
-                            { tanggal: '2026-11-11', tindakan: 'Penggantian keran air baru dan pengeringan lantai koridor', pic: 'Tim Sarpras' },
-                            { tanggal: '2026-11-12', tindakan: 'Penempatan petugas piket penjemputan pukul 12.00-13.00 WITA', pic: 'Guru Piket' }
-                        ],
-                        status: 'Selesai',
-                        hasilPenyelesaian: 'Keran telah diganti baru (tidak bocor) dan petugas keamanan berjaga di gerbang utama setiap jam pulang.',
-                        tglCaraTanggapan: '12 November 2026 melalui pesan WhatsApp beserta foto perbaikan',
-                        tanggapanPelapor: 'Pelapor menyampaikan terima kasih atas respon cepat pihak sekolah.',
-                        tglPenutupan: '12 November 2026 (Bukti foto perbaikan terlampir)',
-                        kepsek: 'Kepala SDN 011 Balikpapan Tengah'
-                    }
-                },
-                {
-                    nomor: 'SEDALAS-2026-0102',
-                    tanggalTerima: '2026-11-16',
-                    nama: 'Anonim (WM-02)',
-                    kategoriPelapor: 'Orang tua/wali murid',
-                    kontak: '0853-4811-XXXX',
-                    bersedia: 'Bersedia dihubungi',
-                    jenis: ['Administrasi'],
-                    waktuKejadian: 'Senin, 16 November 2026 Pukul 08.30 WITA',
-                    lokasi: 'Ruang Pelayanan Administrasi / Tata Usaha',
-                    pihak: 'Staf Administrasi',
-                    uraian: 'Informasi persyaratan surat keterangan aktif siswa untuk keperluan beasiswa belum tercantum di papan pengumuman depan ruang TU sehingga orang tua harus bolak-balik melengkapi berkas.',
-                    harapan: 'Daftar syarat pengurusan surat administrasi dipasang pada poster/papan informasi dan dibagikan lewat grup kelas.',
-                    statusBukti: 'Bukti belum tersedia',
-                    ketBukti: '-',
-                    ttdPelapor: 'WM-02',
-                    tindakLanjut: {
-                        petugasPenerima: 'Ibu Siti Aminah (KA TU)',
-                        saluran: 'Datang langsung',
-                        ringkasan: 'Permintaan publikasi daftar persyaratan pengurusan surat keterangan siswa di papan informasi dan kanal digital.',
-                        pemeriksaanAwal: 'Perlu pembuatan infografis standar persyaratan layanan administrasi siswa SDN 011 Balikpapan Tengah.',
-                        pic: 'Ibu Siti Aminah (Koordinator Administrasi)',
-                        targetWaktu: '20 November 2026',
-                        catatanTindakan: [
-                            { tanggal: '2026-11-16', tindakan: 'Mencatat keluhan dan menyusun daftar standar persyaratan surat siswa', pic: 'Siti Aminah' },
-                            { tanggal: '2026-11-17', tindakan: 'Mencetak banner alur layanan dan persyaratan di depan Ruang TU', pic: 'Staf TU' }
-                        ],
-                        status: 'Dalam proses',
-                        hasilPenyelesaian: 'Banner persyaratan sedang dipasang dan file PDF disiapkan untuk wali kelas.',
-                        tglCaraTanggapan: '17 November 2026 via WhatsApp',
-                        tanggapanPelapor: 'Menunggu pembagian file PDF persyaratan di grup kelas.',
-                        tglPenutupan: '-',
-                        kepsek: 'Kepala SDN 011 Balikpapan Tengah'
-                    }
-                }
-            ];
+            return [];
         }
 
         function getInitialSurvei() {
-            return [
-                {
-                    id: 'SRV-001',
-                    tanggal: '2026-11-10',
-                    periode: 'Semester Ganjil 2026/2027',
-                    responden: 'Orang tua/wali murid',
-                    layanan: 'Layanan Pembelajaran & Konsultasi Wali Kelas',
-                    skor: { 1: 4, 2: 4, 3: 3, 4: 4, 5: 4, 6: 4, 7: 4, 8: 'TB', 9: 3 },
-                    halBaik: 'Guru wali kelas sangat ramah, komunikatif, dan sabar dalam membimbing siswa.',
-                    perbaikan: 'Mohon ruang tunggu orang tua di dekat gerbang ditambah tempat duduknya.'
-                },
-                {
-                    id: 'SRV-002',
-                    tanggal: '2026-11-12',
-                    periode: 'Semester Ganjil 2026/2027',
-                    responden: 'Orang tua/wali murid',
-                    layanan: 'Administrasi Surat Keterangan Siswa',
-                    skor: { 1: 2, 2: 3, 3: 3, 4: 4, 5: 3, 6: 4, 7: 4, 8: 3, 9: 3 },
-                    halBaik: 'Pelayanan tidak dipungut biaya (gratis) dan petugas melayani dengan sopan.',
-                    perbaikan: 'Persyaratan berkas sebaiknya ditempel di papan informasi atau diinfokan lewat WhatsApp.'
-                },
-                {
-                    id: 'SRV-003',
-                    tanggal: '2026-11-14',
-                    periode: 'Semester Ganjil 2026/2027',
-                    responden: 'Masyarakat',
-                    layanan: 'Koordinasi Kegiatan Lingkungan Sekolah',
-                    skor: { 1: 4, 2: 3, 3: 4, 4: 4, 5: 4, 6: 3, 7: 4, 8: 'TB', 9: 4 },
-                    halBaik: 'Lingkungan SDN 011 Balikpapan Tengah bersih, tertib, dan pihak sekolah terbuka bekerja sama.',
-                    perbaikan: 'Pertahankan kebersihan drainase di depan sekolah saat musim hujan.'
-                },
-                {
-                    id: 'SRV-004',
-                    tanggal: '2026-11-15',
-                    periode: 'Semester Ganjil 2026/2027',
-                    responden: 'Orang tua/wali murid',
-                    layanan: 'Penanganan Pengaduan Sarana Kelas',
-                    skor: { 1: 3, 2: 3, 3: 4, 4: 4, 5: 4, 6: 4, 7: 4, 8: 4, 9: 3 },
-                    halBaik: 'Respon tindak lanjut laporan keran rusak sangat cepat dan transparan.',
-                    perbaikan: 'Pengecekan berkala fasilitas kamar mandi dan tempat cuci tangan siswa.'
-                },
-                {
-                    id: 'SRV-005',
-                    tanggal: '2026-11-17',
-                    periode: 'Semester Ganjil 2026/2027',
-                    responden: 'Orang tua/wali murid',
-                    layanan: 'Layanan Perpustakaan & Ekstrakurikuler',
-                    skor: { 1: 3, 2: 3, 3: 3, 4: 4, 5: 3, 6: 3, 7: 4, 8: 2, 9: 2 },
-                    halBaik: 'Kegiatan ekstrakurikuler anak sangat beragam dan positif.',
-                    perbaikan: 'Kipas angin dan ventilasi di ruang baca perlu ditambah agar anak lebih nyaman.'
-                }
-            ];
+            return [];
         }
 
         /**
          * INITIALIZE APPLICATION ON LOAD
          */
         window.onload = function () {
+            // Hapus cache data contoh lama jika ada
+            localStorage.removeItem('sisedalas_011_pengaduan_v1');
+            localStorage.removeItem('sisedalas_011_survei_v1');
+            localStorage.removeItem('sisedalas_011_rencana_v1');
+
             loadLocalData();
             initForm01Metadata();
             renderForm02AspekQuestions();
@@ -2677,12 +2559,12 @@
         }
 
         function resetDemoData() {
-            statePengaduan = getInitialPengaduan();
-            stateSurvei = getInitialSurvei();
-            selectedPengaduanNomor = statePengaduan[0].nomor;
+            statePengaduan = [];
+            stateSurvei = [];
+            selectedPengaduanNomor = null;
             saveLocalData();
             refreshAllViews();
-            showToast('Data contoh awal SI SEDALAS berhasil dipulihkan.');
+            showToast('Seluruh data pengaduan dan survei kepuasan telah dikosongkan.');
         }
     </script>
 </body>
