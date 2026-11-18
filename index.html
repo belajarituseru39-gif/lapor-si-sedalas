@@ -289,11 +289,11 @@
                         <div>
                             <div class="flex items-center justify-between mb-3">
                                 <span class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-700 font-bold text-xs border border-amber-200">FORM 02</span>
-                                <span class="text-xs text-slate-400 font-medium">Pengguna Layanan</span>
+                                <span class="text-xs text-slate-400 font-medium">Orang Tua/Wali & Masyarakat</span>
                             </div>
-                            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-amber-600 transition">Survei Kepuasan Masyarakat</h4>
+                            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-amber-600 transition">Survei Kepuasan Layanan Sekolah Dasar</h4>
                             <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-                                Survei anonim tanpa nama mencakup 9 aspek pelayanan sekolah dengan skala 1–4 dan opsi TB (Tidak/Belum dapat menilai) serta kolom saran.
+                                Survei anonim (tanpa nama orang tua atau anak) mencakup 12 butir layanan sekolah dasar dengan skala 1–4 dan opsi TB serta kolom saran perbaikan.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-amber-600">
@@ -309,9 +309,9 @@
                                 <span class="px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 font-bold text-xs border border-emerald-200">LAMPIRAN FORM 02</span>
                                 <span class="text-xs text-slate-400 font-medium">Pengelola Survei</span>
                             </div>
-                            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-emerald-600 transition">Rekapitulasi & Rencana Perbaikan</h4>
+                            <h4 class="font-display font-bold text-slate-900 text-base group-hover:text-emerald-600 transition">Rekapitulasi 12 Butir & Rencana Perbaikan</h4>
                             <p class="text-xs text-slate-500 mt-2 leading-relaxed">
-                                Perhitungan otomatis Jawaban Sah (n), Jumlah Skor, Rata-rata (1–4), % Puas + Sangat Puas, serta penyusunan Rencana Perbaikan.
+                                Rekap otomatis 12 aspek layanan SD, perbandingan kelompok responden (Orang tua/wali vs Masyarakat), serta penyusunan Rencana Perbaikan.
                             </p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-emerald-600">
@@ -593,24 +593,24 @@
         </section>
 
         <!-- ==========================================
-             TAB 3: FORM 02 (SURVEI KEPUASAN MASYARAKAT)
+             TAB 3: FORM 02 (SURVEI KEPUASAN LAYANAN SEKOLAH DASAR)
              ========================================== -->
         <section id="tab-form02" class="tab-section hidden space-y-6">
             <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-200">
                     <div>
                         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-50 text-amber-800 font-bold text-xs border border-amber-200 mb-2">
-                            FORM 02 &nbsp;|&nbsp; Diisi oleh pengguna layanan (Tanpa Nama / Anonim)
+                            FORM 02 &nbsp;|&nbsp; Orang tua atau wali murid dan masyarakat pengguna layanan
                         </div>
                         <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-slate-900">
-                            Survei Kepuasan Masyarakat
+                            Survei Kepuasan Layanan Sekolah Dasar
                         </h2>
                         <p class="text-sm text-slate-600 mt-1">
-                            Penilaian Anda membantu <strong>SDN 011 Balikpapan Tengah</strong> memperbaiki layanan. Survei ini tidak meminta nama. Jawablah berdasarkan pengalaman Anda sendiri.
+                            Masukan Anda membantu <strong>SDN 011 Balikpapan Tengah</strong> memperbaiki pembelajaran dan layanan bagi anak. <strong>Tidak perlu menuliskan nama Anda atau nama anak.</strong>
                         </p>
                     </div>
                     <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-4 text-xs space-y-1 shrink-0 max-w-xs">
-                        <p class="font-bold text-amber-900"><i class="fa-solid fa-circle-info mr-1"></i> Petunjuk Skala Nilai:</p>
+                        <p class="font-bold text-amber-900"><i class="fa-solid fa-circle-info mr-1"></i> Petunjuk Penilaian:</p>
                         <div class="grid grid-cols-2 gap-x-3 gap-y-0.5 text-slate-700">
                             <span><strong>1</strong> = Tidak puas</span>
                             <span><strong>2</strong> = Kurang puas</span>
@@ -618,54 +618,77 @@
                             <span><strong>4</strong> = Sangat puas</span>
                         </div>
                         <p class="text-[11px] text-slate-600 pt-1 border-t border-amber-200/80">
-                            <strong>TB</strong> = Tidak/belum dapat menilai (tidak dimasukkan ke dalam perhitungan).
+                            <strong>TB</strong> = Tidak/belum dapat menilai. Jawaban TB tidak masuk perhitungan.
                         </p>
                     </div>
                 </div>
 
                 <form id="formSurvei" onsubmit="handleForm02Submit(event)" class="mt-6 space-y-8">
-                    <!-- Metadata Responden Survei -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                    <!-- Metadata Responden Survei (Sesuai Revisi SD) -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Tahun Ajaran <span class="text-rose-500">*</span></label>
+                            <select id="f02_tahun_ajaran" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
+                                <option value="2026/2027">2026/2027</option>
+                                <option value="2025/2026">2025/2026</option>
+                                <option value="2027/2028">2027/2028</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Semester <span class="text-rose-500">*</span></label>
+                            <select id="f02_semester" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
+                                <option value="Ganjil">Semester Ganjil</option>
+                                <option value="Genap">Semester Genap</option>
+                            </select>
+                        </div>
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Tanggal Pengisian <span class="text-rose-500">*</span></label>
                             <input type="date" id="f02_tanggal" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Periode Layanan yang Dinilai <span class="text-rose-500">*</span></label>
-                            <select id="f02_periode" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
-                                <option value="Semester Ganjil 2026/2027">Semester Ganjil 2026/2027</option>
-                                <option value="Semester Genap 2025/2026">Semester Genap 2025/2026</option>
-                                <option value="Triwulan IV - 2026">Triwulan IV - 2026</option>
-                                <option value="Tahun Ajaran 2026/2027">Tahun Ajaran 2026/2027</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Kategori Responden <span class="text-rose-500">*</span></label>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Kelompok Responden <span class="text-rose-500">*</span></label>
                             <select id="f02_responden" onchange="document.getElementById('f02_responden_lainnya').classList.toggle('hidden', this.value !== 'Lainnya')" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
                                 <option value="Orang tua/wali murid">Orang tua/wali murid</option>
-                                <option value="Masyarakat">Masyarakat</option>
+                                <option value="Masyarakat pengguna layanan">Masyarakat pengguna layanan</option>
                                 <option value="Lainnya">Lainnya...</option>
                             </select>
-                            <input type="text" id="f02_responden_lainnya" placeholder="Sebutkan kategori..." class="hidden mt-2 w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs">
+                            <input type="text" id="f02_responden_lainnya" placeholder="Sebutkan kategori responden..." class="hidden mt-2 w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs">
                         </div>
                         <div>
-                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Layanan yang Digunakan <span class="text-rose-500">*</span></label>
-                            <input type="text" id="f02_layanan" required placeholder="Contoh: Pembelajaran / Administrasi TU / PPDB"
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Kelas Anak <span class="text-slate-400 font-normal normal-case">(Opsional)</span></label>
+                            <select id="f02_kelas_anak" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
+                                <option value="-">— Pilih Kelas (Opsional) —</option>
+                                <option value="Kelas I">Kelas I (Satu)</option>
+                                <option value="Kelas II">Kelas II (Dua)</option>
+                                <option value="Kelas III">Kelas III (Tiga)</option>
+                                <option value="Kelas IV">Kelas IV (Empat)</option>
+                                <option value="Kelas V">Kelas V (Lima)</option>
+                                <option value="Kelas VI">Kelas VI (Enam)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">Layanan yang Pernah Digunakan <span class="text-rose-500">*</span></label>
+                            <input type="text" id="f02_layanan" required placeholder="Contoh: Pembelajaran / Administrasi Murid / Perpustakaan"
                                 class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm outline-none focus:border-teal-600">
                         </div>
                     </div>
 
-                    <!-- BAGIAN A: 9 ASPEK PENILAIAN -->
+                    <!-- BAGIAN A: 12 BUTIR PENILAIAN LAYANAN SEKOLAH DASAR -->
                     <div class="space-y-4">
                         <div class="flex items-start gap-3">
                             <span class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 font-display font-bold flex items-center justify-center shrink-0 text-sm">A</span>
                             <div>
-                                <h3 class="font-display font-bold text-lg text-slate-900">Penilaian 9 Aspek Layanan Sekolah</h3>
-                                <p class="text-xs text-slate-500">Beri satu pilihan pada setiap baris. Pilih <strong>TB</strong> jika belum menggunakan layanan atau tidak dapat menilai aspek tersebut.</p>
+                                <h3 class="font-display font-bold text-lg text-slate-900">Seberapa Puas Anda Terhadap Layanan Berikut? (12 Butir Layanan SD)</h3>
+                                <p class="text-xs text-slate-500">Nilai layanan pada semester yang dicantumkan. Beri satu tanda centang per baris berdasarkan pengalaman Anda. Pilih <strong>TB</strong> jika belum mengalami atau belum dapat menilai layanan tersebut.</p>
                             </div>
                         </div>
 
-                        <!-- Container 9 Aspek generated dynamically via JS -->
+                        <div class="bg-blue-50/80 border border-blue-200 rounded-2xl p-3.5 text-xs text-blue-900 flex items-start gap-2.5">
+                            <i class="fa-solid fa-circle-info text-blue-600 mt-0.5"></i>
+                            <span><strong>Catatan Penting:</strong> Masyarakat menilai layanan yang pernah digunakan. Pada <strong>butir 2, 10, dan 12</strong>, pilih <strong>TB</strong> bila belum mengalami layanan tersebut.</span>
+                        </div>
+
+                        <!-- Container 12 Aspek generated dynamically via JS -->
                         <div id="aspekQuestionsContainer" class="space-y-3"></div>
                     </div>
 
@@ -677,30 +700,30 @@
                             <span class="w-8 h-8 rounded-xl bg-amber-500 text-slate-950 font-display font-bold flex items-center justify-center shrink-0 text-sm">B</span>
                             <div>
                                 <h3 class="font-display font-bold text-lg text-slate-900">Saran dan Masukan</h3>
-                                <p class="text-xs text-slate-500">Masukan kualitatif Anda sangat berharga untuk menentukan prioritas perbaikan SDN 011 Balikpapan Tengah.</p>
+                                <p class="text-xs text-slate-500">Masukan Anda membantu SDN 011 Balikpapan Tengah memperbaiki pembelajaran dan layanan bagi anak.</p>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pl-0 sm:pl-11">
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                                    Hal yang Sudah Baik dan Perlu Dipertahankan
+                                    Layanan yang Sudah Baik dan Perlu Dipertahankan
                                 </label>
-                                <textarea id="f02_hal_baik" rows="3" placeholder="Tuliskan hal positif dari layanan guru/petugas/sekolah yang menurut Anda sudah baik..."
+                                <textarea id="f02_hal_baik" rows="3" placeholder="Tuliskan layanan pembelajaran atau sekolah yang sudah baik dan perlu dipertahankan..."
                                     class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 outline-none text-sm"></textarea>
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
-                                    Perbaikan yang Paling Anda Harapkan
+                                    Perbaikan yang Paling Dibutuhkan Anak atau Orang Tua/Wali
                                 </label>
-                                <textarea id="f02_perbaikan" rows="3" placeholder="Tuliskan saran perbaikan fasilitas, prosedur, atau pelayanan ke depannya..."
+                                <textarea id="f02_perbaikan" rows="3" placeholder="Tuliskan perbaikan yang paling dibutuhkan anak atau orang tua/wali..."
                                     class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-teal-600 outline-none text-sm"></textarea>
                             </div>
                         </div>
 
                         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 pl-0 sm:pl-11">
                             <p class="text-xs text-slate-500 font-medium">
-                                <i class="fa-solid fa-heart text-rose-500 mr-1"></i> Terima kasih atas partisipasi Anda dalam meningkatkan mutu layanan SDN 011 Balikpapan Tengah.
+                                <i class="fa-solid fa-heart text-rose-500 mr-1"></i> Terima kasih atas partisipasi Anda.
                             </p>
                             <button type="submit" id="btnSubmitForm02" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-slate-950 font-extrabold text-sm shadow-lg shadow-amber-500/20 transition flex items-center justify-center gap-2 shrink-0">
                                 <i class="fa-solid fa-check-double"></i> Kirim Penilaian Survei
@@ -775,7 +798,7 @@
                             Rekapitulasi Hasil Survei Kepuasan
                         </h2>
                         <p class="text-sm text-slate-600 mt-1">
-                            SDN 011 BALIKPAPAN TENGAH — Gunakan rekap ini untuk memantau hasil survei internal sekolah dan menentukan prioritas perbaikan layanan.
+                            Rekap 12 butir survei layanan sekolah dasar untuk menentukan prioritas perbaikan. Pisahkan hasil orang tua/wali dan masyarakat bila kelompok responden perlu dibandingkan.
                         </p>
                     </div>
                     <div class="flex flex-wrap gap-2.5 shrink-0">
@@ -789,15 +812,24 @@
                 </div>
 
                 <!-- Metadata Rekapitulasi Survei -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
                     <div>
                         <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Periode Survei</label>
                         <select id="rekap_periode_filter" onchange="renderRekapSurvei()" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-bold text-slate-800">
                             <option value="ALL">Semua Periode</option>
-                            <option value="Semester Ganjil 2026/2027">Semester Ganjil 2026/2027</option>
-                            <option value="Semester Genap 2025/2026">Semester Genap 2025/2026</option>
-                            <option value="Triwulan IV - 2026">Triwulan IV - 2026</option>
-                            <option value="Tahun Ajaran 2026/2027">Tahun Ajaran 2026/2027</option>
+                            <option value="2026/2027 - Semester Ganjil">2026/2027 - Semester Ganjil</option>
+                            <option value="2026/2027 - Semester Genap">2026/2027 - Semester Genap</option>
+                            <option value="2025/2026 - Semester Ganjil">2025/2026 - Semester Ganjil</option>
+                            <option value="2025/2026 - Semester Genap">2025/2026 - Semester Genap</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Kelompok Responden</label>
+                        <select id="rekap_responden_filter" onchange="renderRekapSurvei()" class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-bold text-slate-800">
+                            <option value="ALL">Semua Kelompok</option>
+                            <option value="Orang tua/wali murid">Orang tua/wali murid</option>
+                            <option value="Masyarakat pengguna layanan">Masyarakat pengguna layanan</option>
+                            <option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div>
@@ -814,7 +846,7 @@
                     </div>
                     <div>
                         <label class="block text-[11px] font-bold uppercase text-slate-500 mb-1">Nama Pengelola Survei</label>
-                        <input type="text" id="rekap_pengelola" oninput="saveRencanaPerbaikanLocal()" placeholder="Tim Penjaminan Mutu SDN 011" value="Tim Layanan & Humas SDN 011"
+                        <input type="text" id="rekap_pengelola" oninput="saveRencanaPerbaikanLocal()" placeholder="Tim Penjaminan Mutu SDN 011" value=""
                             class="w-full px-3 py-2 rounded-xl border border-slate-300 bg-white text-xs font-semibold text-slate-800">
                     </div>
                 </div>
@@ -824,9 +856,9 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
                             <span class="w-7 h-7 rounded-lg bg-emerald-600 text-white font-display font-bold flex items-center justify-center text-xs">A</span>
-                            <h3 class="font-display font-bold text-lg text-slate-900">Rekap per Aspek Layanan</h3>
+                            <h3 class="font-display font-bold text-lg text-slate-900">Rekap per Aspek Layanan (12 Butir Layanan SD)</h3>
                         </div>
-                        <span class="text-xs text-slate-500 hidden sm:inline">Diurutkan sesuai 9 Aspek Standar Form 02</span>
+                        <span class="text-xs text-slate-500 hidden sm:inline">Diurutkan sesuai 12 Aspek Standar Form 02 Revisi SD</span>
                     </div>
 
                     <div class="overflow-x-auto rounded-2xl border border-slate-200">
@@ -1004,25 +1036,28 @@
          ========================================== -->
     <script>
         /**
-         * 9 ASPEK SURVEI KEPUASAN MASYARAKAT (SESUAI FORM 02 & LAMPIRAN FORM 02)
+         * 12 ASPEK SURVEI KEPUASAN LAYANAN SEKOLAH DASAR (SESUAI FORM 02 & LAMPIRAN FORM 02 REVISI SD)
          */
         const ASPEK_LIST = [
-            { no: 1, kode: 'Informasi persyaratan', lengkap: 'Kejelasan informasi persyaratan layanan', catatan: '' },
-            { no: 2, kode: 'Prosedur layanan', lengkap: 'Kemudahan prosedur atau alur layanan', catatan: '' },
-            { no: 3, kode: 'Waktu penyelesaian', lengkap: 'Kecepatan penyelesaian layanan', catatan: '' },
-            { no: 4, kode: 'Informasi biaya', lengkap: 'Kejelasan informasi biaya atau keterangan layanan tanpa biaya', catatan: '' },
-            { no: 5, kode: 'Hasil layanan', lengkap: 'Kesesuaian hasil layanan dengan kebutuhan', catatan: '' },
-            { no: 6, kode: 'Kemampuan petugas', lengkap: 'Kemampuan petugas dalam memberikan layanan', catatan: '' },
-            { no: 7, kode: 'Kesopanan dan keramahan', lengkap: 'Kesopanan dan keramahan petugas', catatan: '' },
-            { no: 8, kode: 'Penanganan pengaduan', lengkap: 'Penanganan pengaduan dan tindak lanjutnya', catatan: 'Untuk aspek 8, pilih TB jika Anda belum pernah menyampaikan pengaduan atau menerima tindak lanjutnya.' },
-            { no: 9, kode: 'Sarana dan prasarana', lengkap: 'Kenyamanan serta kelayakan sarana dan prasarana layanan', catatan: '' }
+            { no: 1, kode: 'Pendampingan belajar', lengkap: 'Pendampingan guru agar anak memahami pelajaran.', catatan: '' },
+            { no: 2, kode: 'Bantuan kesulitan belajar', lengkap: 'Bantuan belajar bagi anak yang mengalami kesulitan.', catatan: 'Pilih TB bila belum mengalami layanan tersebut.' },
+            { no: 3, kode: 'Informasi perkembangan anak', lengkap: 'Informasi dari guru tentang perkembangan dan hasil belajar anak.', catatan: '' },
+            { no: 4, kode: 'Pembiasaan sikap baik', lengkap: 'Pembiasaan disiplin, tanggung jawab, dan saling menghargai.', catatan: '' },
+            { no: 5, kode: 'Komunikasi dengan guru', lengkap: 'Kemudahan orang tua/wali berkomunikasi dengan guru.', catatan: '' },
+            { no: 6, kode: 'Perlakuan ramah dan adil', lengkap: 'Perlakuan ramah dan adil kepada anak sesuai kebutuhannya.', catatan: '' },
+            { no: 7, kode: 'Keamanan anak', lengkap: 'Upaya sekolah menjaga keamanan anak dari kekerasan dan perundungan.', catatan: '' },
+            { no: 8, kode: 'Kebersihan lingkungan', lengkap: 'Kebersihan ruang kelas, toilet, dan lingkungan sekolah.', catatan: '' },
+            { no: 9, kode: 'Fasilitas belajar', lengkap: 'Ketersediaan fasilitas belajar, termasuk buku bacaan dan alat belajar.', catatan: '' },
+            { no: 10, kode: 'Administrasi murid', lengkap: 'Kemudahan mengurus administrasi murid, seperti surat keterangan dan data murid.', catatan: 'Pilih TB bila belum mengalami layanan tersebut.' },
+            { no: 11, kode: 'Informasi kegiatan dan biaya', lengkap: 'Kejelasan informasi kegiatan sekolah dan pembiayaannya, termasuk kegiatan tanpa biaya.', catatan: '' },
+            { no: 12, kode: 'Tindak lanjut keluhan', lengkap: 'Tanggapan sekolah terhadap keluhan dan tindak lanjutnya.', catatan: 'Pilih TB bila belum pernah menyampaikan keluhan atau belum mengalami tindak lanjutnya.' }
         ];
 
-        // Storage Keys (versi bersih tanpa data sampel)
+        // Storage Keys (versi bersih 12 aspek SD tanpa data sampel)
         const STORAGE_KEYS = {
-            PENGADUAN: 'sisedalas_011_pengaduan_v2_empty',
-            SURVEI: 'sisedalas_011_survei_v2_empty',
-            RENCANA: 'sisedalas_011_rencana_v2_empty',
+            PENGADUAN: 'sisedalas_011_pengaduan_v3_sd',
+            SURVEI: 'sisedalas_011_survei_v3_sd',
+            RENCANA: 'sisedalas_011_rencana_v3_sd',
             GAS_URL: 'sisedalas_011_gas_url_v1'
         };
 
@@ -1208,92 +1243,90 @@
          * FORM 01 LOGIC (FORMULIR PENGADUAN MASYARAKAT)
          * ==========================================
          */
-        function generateNomorPengaduan() {
-            const year = new Date().getFullYear();
-            const seq = String(statePengaduan.length + 101).padStart(4, '0');
-            return `SEDALAS-${year}-${seq}`;
-        }
-
         function formatIndonesianDate(dateStr) {
             if (!dateStr) return '-';
             try {
                 const d = new Date(dateStr);
+                if (isNaN(d.getTime())) return dateStr;
                 return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
             } catch (e) {
                 return dateStr;
             }
         }
 
+        function generateNomorPengaduan() {
+            const year = new Date().getFullYear();
+            const nextSeq = String(statePengaduan.length + 1).padStart(3, '0');
+            return `SEDALAS-011/${year}/${nextSeq}`;
+        }
+
         function initForm01Metadata() {
             const todayISO = new Date().toISOString().split('T')[0];
-            document.getElementById('previewNomorPengaduan').textContent = generateNomorPengaduan();
-            document.getElementById('previewTanggalTerima').textContent = formatIndonesianDate(todayISO);
-            document.getElementById('f01_kota_tanggal').textContent = `Balikpapan, ${formatIndonesianDate(todayISO)}`;
+            const nomorEl = document.getElementById('previewNomorPengaduan');
+            const tglEl = document.getElementById('previewTanggalTerima');
+            const kotaTglEl = document.getElementById('f01_kota_tanggal');
+            if (nomorEl) nomorEl.textContent = generateNomorPengaduan();
+            if (tglEl) tglEl.textContent = formatIndonesianDate(todayISO);
+            if (kotaTglEl) kotaTglEl.textContent = `Balikpapan, ${formatIndonesianDate(todayISO)}`;
         }
 
         function toggleLainnyaInput(radioName, wrapId) {
-            const selected = document.querySelector(`input[name="${radioName}"]:checked`);
+            const selected = document.querySelector(`input[name="${radioName}"]:checked`)?.value;
             const wrap = document.getElementById(wrapId);
-            if (selected && selected.value === 'Lainnya') {
-                wrap.classList.remove('hidden');
-            } else {
-                wrap.classList.add('hidden');
+            if (wrap) {
+                wrap.classList.toggle('hidden', selected !== 'Lainnya');
             }
         }
 
         async function handleForm01Submit(e) {
             e.preventDefault();
 
-            // Validate at least 1 category checkbox
-            const checkedJenis = Array.from(document.querySelectorAll('input[name="f01_jenis"]:checked')).map(cb => {
-                if (cb.value === 'Lainnya') {
-                    const custom = document.getElementById('f01_jenis_lainnya_input').value.trim();
-                    return custom ? `Lainnya (${custom})` : 'Lainnya';
-                }
-                return cb.value;
-            });
-
+            // Ambil kategori masalah yang dicentang
+            const checkedJenis = Array.from(document.querySelectorAll('input[name="f01_jenis"]:checked')).map(el => el.value);
             if (checkedJenis.length === 0) {
-                showToast('Pilih minimal satu bidang/kategori informasi pengaduan pada Bagian B.', 'warning');
+                showToast('Pilih minimal satu Bidang / Kategori Masalah yang diadukan (Bagian B).', 'warning');
                 return;
             }
+            const jenisLainTxt = document.getElementById('f01_jenis_lainnya_input').value.trim();
+            const finalJenis = checkedJenis.map(j => (j === 'Lainnya' && jenisLainTxt) ? `Lainnya (${jenisLainTxt})` : j);
 
-            const nomor = generateNomorPengaduan();
-            const tanggalTerima = new Date().toISOString().split('T')[0];
-            const namaRaw = document.getElementById('f01_nama').value.trim();
-            const katRadio = document.querySelector('input[name="f01_kategori_pelapor"]:checked').value;
-            const katLain = document.getElementById('f01_kategori_lainnya').value.trim();
-            const kategoriPelapor = (katRadio === 'Lainnya' && katLain) ? `Lainnya (${katLain})` : katRadio;
+            // Kategori pelapor
+            let katPelapor = document.querySelector('input[name="f01_kategori_pelapor"]:checked')?.value || 'Orang tua/wali murid';
+            const katLainTxt = document.getElementById('f01_kategori_lainnya').value.trim();
+            if (katPelapor === 'Lainnya' && katLainTxt) {
+                katPelapor = `Lainnya (${katLainTxt})`;
+            }
 
-            const newPengaduan = {
-                nomor: nomor,
-                tanggalTerima: tanggalTerima,
-                nama: namaRaw || 'Anonim (Tanpa Nama)',
-                kategoriPelapor: kategoriPelapor,
+            const nomorBaru = generateNomorPengaduan();
+            const todayISO = new Date().toISOString().split('T')[0];
+            const namaInput = document.getElementById('f01_nama').value.trim() || 'Anonim (Tanpa Nama)';
+            const uraianInput = document.getElementById('f01_uraian').value.trim();
+
+            const newItem = {
+                nomor: nomorBaru,
+                tanggalTerima: todayISO,
+                nama: namaInput,
+                kategoriPelapor: katPelapor,
                 kontak: document.getElementById('f01_kontak').value.trim() || '-',
-                bersedia: document.querySelector('input[name="f01_bersedia"]:checked').value,
-                jenis: checkedJenis,
+                bersedia: document.querySelector('input[name="f01_bersedia"]:checked')?.value || 'Bersedia dihubungi',
+                jenis: finalJenis,
                 waktuKejadian: document.getElementById('f01_waktu_kejadian').value.trim(),
                 lokasi: document.getElementById('f01_lokasi').value.trim(),
                 pihak: document.getElementById('f01_pihak').value.trim() || '-',
-                uraian: document.getElementById('f01_uraian').value.trim(),
+                uraian: uraianInput,
                 harapan: document.getElementById('f01_harapan').value.trim(),
-                statusBukti: document.querySelector('input[name="f01_status_bukti"]:checked').value,
+                statusBukti: document.querySelector('input[name="f01_status_bukti"]:checked')?.value || 'Bukti belum tersedia',
                 ketBukti: document.getElementById('f01_ket_bukti').value.trim() || '-',
-                ttdPelapor: document.getElementById('f01_ttd_pelapor').value.trim() || (namaRaw || 'Pelapor'),
+                ttdPelapor: document.getElementById('f01_ttd_pelapor').value.trim() || namaInput,
                 tindakLanjut: {
-                    petugasPenerima: 'Petugas Layanan SI SEDALAS',
-                    saluran: 'Lainnya (Portal Web SI SEDALAS)',
-                    ringkasan: document.getElementById('f01_uraian').value.trim().slice(0, 160),
-                    pemeriksaanAwal: 'Menunggu verifikasi dan klarifikasi petugas penerima pengaduan.',
-                    pic: 'Tim Penanganan Pengaduan SDN 011',
-                    targetWaktu: '-',
+                    petugasPenerima: 'Petugas Layanan Pengaduan SDN 011',
+                    saluran: 'Lainnya (Web SI SEDALAS)',
+                    ringkasan: uraianInput.length > 140 ? uraianInput.slice(0, 140) + '...' : uraianInput,
+                    pemeriksaanAwal: 'Menunggu pemeriksaan awal oleh petugas penanganan.',
+                    pic: '-',
+                    targetWaktu: '3 - 5 Hari Kerja',
                     catatanTindakan: [
-                        {
-                            tanggal: tanggalTerima,
-                            tindakan: 'Pengaduan diterima melalui sistem SI SEDALAS dan menunggu penugasan PIC',
-                            pic: 'Sistem / Petugas'
-                        }
+                        { tanggal: todayISO, tindakan: 'Pengaduan diterima melalui sistem SI SEDALAS dan diregistrasi.', pic: 'Admin SI SEDALAS' }
                     ],
                     status: 'Diterima',
                     hasilPenyelesaian: '-',
@@ -1304,19 +1337,20 @@
                 }
             };
 
-            statePengaduan.unshift(newPengaduan);
-            selectedPengaduanNomor = newPengaduan.nomor;
+            statePengaduan.unshift(newItem);
+            selectedPengaduanNomor = newItem.nomor;
             saveLocalData();
+            initForm01Metadata();
             refreshAllViews();
 
-            // Send to Google Sheets via Google Apps Script
+            // Sync to Google Sheets via Google Apps Script
             const btnSubmit = document.getElementById('btnSubmitForm01');
-            const originalBtnHtml = btnSubmit.innerHTML;
+            const origText = btnSubmit.innerHTML;
             btnSubmit.disabled = true;
             btnSubmit.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim ke Google Apps Script...';
-            const syncResult = await sendToGoogleSheets({ action: 'UPSERT_PENGADUAN', data: newPengaduan, label: `Form 01 Pengaduan (${newPengaduan.nomor})` });
+            const syncResult = await sendToGoogleSheets({ action: 'UPSERT_PENGADUAN', data: newItem, label: `Form 01 Pengaduan (${newItem.nomor})` });
             btnSubmit.disabled = false;
-            btnSubmit.innerHTML = originalBtnHtml;
+            btnSubmit.innerHTML = origText;
 
             // Reset Form
             document.getElementById('formPengaduan').reset();
@@ -1325,41 +1359,41 @@
             initForm01Metadata();
 
             const syncBadgeModal = syncResult.sent
-                ? `<div class="px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-cloud-check text-emerald-600"></i> Data pengaduan telah tersimpan secara otomatis ke database sekolah.</div>`
-                : `<div class="px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-database mr-1"></i> Data pengaduan tersimpan di sistem.</div>`;
+                ? `<div class="px-3 py-2 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-cloud-check text-emerald-600"></i> Terkirim otomatis ke database SDN 011 Balikpapan Tengah</div>`
+                : `<div class="px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-database text-amber-600"></i> Tersimpan di sistem aplikasi</div>`;
 
             // Show Receipt Modal
             openCustomModal({
                 title: 'Pengaduan Berhasil Diterima!',
-                subtitle: 'Bukti Penerimaan FORM 01 — SDN 011 Balikpapan Tengah',
+                subtitle: 'Bukti Penerimaan Formulir Pengaduan Masyarakat (FORM 01)',
                 iconClass: 'fa-file-circle-check',
                 iconBg: 'bg-teal-100 text-teal-700',
                 bodyHtml: `
                     ${syncBadgeModal}
                     <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2 text-xs">
                         <div class="flex justify-between items-center">
-                            <span class="text-slate-500">Nomor Pengaduan:</span>
-                            <span class="font-mono font-extrabold text-sm text-teal-700 bg-teal-50 px-2.5 py-1 rounded border border-teal-200">${newPengaduan.nomor}</span>
+                            <span class="text-slate-500">Nomor Pengaduan Resmi:</span>
+                            <span class="font-mono font-bold text-sm text-teal-700 bg-teal-50 px-2.5 py-1 rounded-lg border border-teal-200">${newItem.nomor}</span>
                         </div>
-                        <div class="flex justify-between items-center">
+                        <div class="flex justify-between">
                             <span class="text-slate-500">Tanggal Diterima:</span>
-                            <span class="font-semibold text-slate-800">${formatIndonesianDate(newPengaduan.tanggalTerima)}</span>
+                            <span class="font-semibold text-slate-800">${formatIndonesianDate(newItem.tanggalTerima)}</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-500">Kategori:</span>
-                            <span class="font-semibold text-slate-800">${newPengaduan.jenis.join(', ')}</span>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Pelapor:</span>
+                            <span class="font-semibold text-slate-800">${newItem.nama} (${newItem.kategoriPelapor})</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-500">Status Awal:</span>
-                            <span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-bold">Diterima</span>
+                        <div class="flex justify-between">
+                            <span class="text-slate-500">Bidang Pengaduan:</span>
+                            <span class="font-semibold text-slate-800 text-right">${newItem.jenis.join(', ')}</span>
                         </div>
                     </div>
-                    <p class="text-xs text-slate-600 leading-relaxed">
-                        Simpan <strong>Nomor Pengaduan</strong> di atas untuk memantau tindak lanjut pada menu <strong>Tindak Lanjut (Lampiran 01)</strong> atau cetak salinan Formulir Pengaduan Anda.
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Simpan <strong>Nomor Pengaduan</strong> di atas untuk memantau tindak lanjut pada menu <em>Tindak Lanjut (Lampiran Form 01)</em> atau cetak bukti pengaduan Anda.
                     </p>
                 `,
                 footerHtml: `
-                    <button onclick="printForm01('${newPengaduan.nomor}')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition flex items-center gap-1.5">
+                    <button onclick="printForm01('${newItem.nomor}')" class="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold transition flex items-center gap-1.5">
                         <i class="fa-solid fa-print"></i> Cetak Form 01
                     </button>
                     <button onclick="closeCustomModal(); switchTab('lampiran01');" class="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold transition flex items-center gap-1.5">
@@ -1371,62 +1405,64 @@
 
         /**
          * ==========================================
-         * LAMPIRAN FORM 01 LOGIC (TINDAK LANJUT PENGADUAN)
+         * LAMPIRAN FORM 01 LOGIC (LEMBAR TINDAK LANJUT PENGADUAN)
          * ==========================================
          */
-        function getStatusBadgeHtml(status) {
-            const map = {
-                'Diterima': 'bg-blue-50 text-blue-700 border-blue-200',
-                'Dalam proses': 'bg-amber-50 text-amber-700 border-amber-200',
-                'Selesai': 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                'Diteruskan kepada pihak terkait': 'bg-purple-50 text-purple-700 border-purple-200'
-            };
-            const cls = map[status] || 'bg-slate-100 text-slate-700 border-slate-200';
-            return `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-bold border ${cls}">${status}</span>`;
-        }
-
         function renderDaftarPengaduan() {
-            const container = document.getElementById('pengaduanListContainer');
-            const q = (document.getElementById('searchPengaduanInput')?.value || '').toLowerCase();
+            const listContainer = document.getElementById('pengaduanListContainer');
+            if (!listContainer) return;
+
+            const keyword = (document.getElementById('searchPengaduanInput')?.value || '').toLowerCase().trim();
             const statusFilter = document.getElementById('filterStatusPengaduan')?.value || 'ALL';
 
             const filtered = statePengaduan.filter(item => {
-                const matchQ = item.nomor.toLowerCase().includes(q) ||
-                    item.uraian.toLowerCase().includes(q) ||
-                    item.nama.toLowerCase().includes(q) ||
-                    item.lokasi.toLowerCase().includes(q);
                 const matchStatus = statusFilter === 'ALL' || item.tindakLanjut.status === statusFilter;
-                return matchQ && matchStatus;
+                const matchKey = !keyword ||
+                    item.nomor.toLowerCase().includes(keyword) ||
+                    item.uraian.toLowerCase().includes(keyword) ||
+                    item.nama.toLowerCase().includes(keyword) ||
+                    item.lokasi.toLowerCase().includes(keyword);
+                return matchStatus && matchKey;
             });
 
-            if (!selectedPengaduanNomor && filtered.length > 0) {
-                selectedPengaduanNomor = filtered[0].nomor;
-            }
-
             if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="bg-slate-50 rounded-2xl p-6 text-center border border-slate-200 text-xs text-slate-500">
-                        <i class="fa-regular fa-folder-open text-2xl text-slate-400 mb-2 block"></i>
-                        Tidak ada pengaduan yang sesuai dengan pencarian.
+                listContainer.innerHTML = `
+                    <div class="p-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-300 text-slate-400 text-xs space-y-2">
+                        <i class="fa-regular fa-folder-open text-2xl"></i>
+                        <p>Belum ada data pengaduan yang sesuai filter.</p>
                     </div>
                 `;
                 document.getElementById('tindakLanjutDetailWrap').innerHTML = `
-                    <div class="text-center py-12 text-slate-400 text-sm">Pilih salah satu pengaduan untuk menampilkan Lembar Tindak Lanjut.</div>
+                    <div class="p-12 text-center text-slate-400 text-sm">Pilih salah satu nomor pengaduan di sebelah kiri untuk menampilkan Lembar Tindak Lanjut (Lampiran Form 01).</div>
                 `;
                 return;
             }
 
-            container.innerHTML = filtered.map(item => {
+            if (!selectedPengaduanNomor || !filtered.some(f => f.nomor === selectedPengaduanNomor)) {
+                selectedPengaduanNomor = filtered[0].nomor;
+            }
+
+            const statusBadgeMap = {
+                'Diterima': 'bg-slate-100 text-slate-700 border-slate-300',
+                'Dalam proses': 'bg-amber-50 text-amber-800 border-amber-300',
+                'Selesai': 'bg-emerald-50 text-emerald-800 border-emerald-300',
+                'Diteruskan kepada pihak terkait': 'bg-purple-50 text-purple-800 border-purple-300'
+            };
+
+            listContainer.innerHTML = filtered.map(item => {
                 const isSelected = item.nomor === selectedPengaduanNomor;
+                const badgeCls = statusBadgeMap[item.tindakLanjut.status] || statusBadgeMap['Diterima'];
                 return `
-                    <div onclick="selectPengaduan('${item.nomor}')" class="p-4 rounded-2xl border transition cursor-pointer ${isSelected ? 'bg-blue-50/70 border-blue-500 shadow-sm' : 'bg-white border-slate-200 hover:border-slate-300'}">
+                    <div onclick="selectPengaduan('${item.nomor}')" class="p-4 rounded-2xl border transition cursor-pointer ${isSelected ? 'bg-blue-50/70 border-blue-600 shadow-sm' : 'bg-white border-slate-200 hover:border-slate-300'}">
                         <div class="flex items-center justify-between gap-2 mb-1.5">
                             <span class="font-mono font-bold text-xs text-slate-900">${item.nomor}</span>
-                            ${getStatusBadgeHtml(item.tindakLanjut.status)}
+                            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${badgeCls}">
+                                ${item.tindakLanjut.status}
+                            </span>
                         </div>
-                        <p class="text-xs font-bold text-slate-800 line-clamp-1">${item.jenis.join(', ')} — ${item.lokasi}</p>
-                        <p class="text-xs text-slate-500 line-clamp-2 mt-1 leading-relaxed">${item.uraian}</p>
-                        <div class="flex items-center justify-between text-[11px] text-slate-400 mt-3 pt-2 border-t border-slate-100">
+                        <p class="text-xs font-semibold text-slate-800 line-clamp-1">${item.jenis.join(', ')} — ${item.lokasi}</p>
+                        <p class="text-xs text-slate-500 line-clamp-2 mt-1">${item.uraian}</p>
+                        <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
                             <span><i class="fa-regular fa-user mr-1"></i>${item.nama}</span>
                             <span>${formatIndonesianDate(item.tanggalTerima)}</span>
                         </div>
@@ -1434,7 +1470,8 @@
                 `;
             }).join('');
 
-            renderTindakLanjutDetail();
+            const activeItem = statePengaduan.find(p => p.nomor === selectedPengaduanNomor);
+            if (activeItem) renderTindakLanjutDetail(activeItem);
         }
 
         function selectPengaduan(nomor) {
@@ -1442,136 +1479,127 @@
             renderDaftarPengaduan();
         }
 
-        function renderTindakLanjutDetail() {
+        function renderTindakLanjutDetail(item) {
             const wrap = document.getElementById('tindakLanjutDetailWrap');
-            const item = statePengaduan.find(p => p.nomor === selectedPengaduanNomor);
-            if (!item) return;
-
+            if (!wrap) return;
             const tl = item.tindakLanjut;
-            const saluranOpts = ['Datang langsung', 'Surat/kotak pengaduan', 'Telepon/pesan', 'Lainnya (Portal Web SI SEDALAS)'];
-            const statusOpts = ['Diterima', 'Dalam proses', 'Selesai', 'Diteruskan kepada pihak terkait'];
+
+            const tindakanRowsHtml = (tl.catatanTindakan || []).map((row, idx) => `
+                <tr class="border-b border-slate-200 bg-white">
+                    <td class="p-2">
+                        <input type="date" value="${row.tanggal || ''}" data-idx="${idx}" data-field="tanggal" class="tl-row-input w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    </td>
+                    <td class="p-2">
+                        <input type="text" value="${(row.tindakan || '').replace(/"/g, '&quot;')}" data-idx="${idx}" data-field="tindakan" placeholder="Tindakan dan hasil..." class="tl-row-input w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    </td>
+                    <td class="p-2">
+                        <input type="text" value="${(row.pic || '').replace(/"/g, '&quot;')}" data-idx="${idx}" data-field="pic" placeholder="Petugas/PIC" class="tl-row-input w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs">
+                    </td>
+                    <td class="p-2 text-center">
+                        <button type="button" onclick="removeCatatanRow(${idx})" class="text-rose-500 hover:text-rose-700 text-xs px-2 py-1" title="Hapus baris">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
 
             wrap.innerHTML = `
                 <div class="space-y-6">
-                    <!-- Top Header & Print Actions -->
+                    <!-- Top Header Lampiran Form 01 -->
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
                         <div>
                             <div class="flex items-center gap-2">
-                                <span class="font-mono font-extrabold text-base text-slate-900">${item.nomor}</span>
-                                ${getStatusBadgeHtml(tl.status)}
+                                <span class="px-2.5 py-0.5 rounded-md bg-blue-600 text-white font-bold text-[11px]">LAMPIRAN FORM 01</span>
+                                <span class="font-mono font-bold text-sm text-slate-900">${item.nomor}</span>
                             </div>
-                            <p class="text-xs text-slate-500 mt-0.5">
-                                Diterima: <strong>${formatIndonesianDate(item.tanggalTerima)}</strong> • Pelapor: <strong>${item.nama}</strong> (${item.kategoriPelapor})
-                            </p>
+                            <h3 class="font-display font-bold text-lg text-slate-900 mt-1">Lembar Tindak Lanjut Pengaduan</h3>
                         </div>
                         <div class="flex flex-wrap gap-2">
                             <button type="button" onclick="printForm01('${item.nomor}')" class="px-3.5 py-2 rounded-xl bg-white border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs font-bold transition flex items-center gap-1.5">
-                                <i class="fa-solid fa-print text-rose-600"></i> Cetak Form 01
+                                <i class="fa-solid fa-print"></i> Cetak Form 01
                             </button>
                             <button type="button" onclick="printLampiran01('${item.nomor}')" class="px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition flex items-center gap-1.5">
-                                <i class="fa-solid fa-print text-teal-400"></i> Cetak Lampiran Form 01
+                                <i class="fa-solid fa-print"></i> Cetak Lampiran Form 01
                             </button>
                         </div>
                     </div>
 
                     <!-- Ringkasan Laporan Awal (Form 01) -->
                     <div class="bg-white rounded-2xl p-4 border border-slate-200 space-y-2 text-xs">
-                        <div class="flex items-center justify-between font-bold text-slate-800">
-                            <span><i class="fa-solid fa-file-lines text-rose-500 mr-1.5"></i>Data Pengaduan Awal (Form 01)</span>
-                            <span class="text-slate-500 font-normal">${item.bersedia} (${item.kontak})</span>
+                        <div class="flex flex-wrap justify-between gap-2 text-slate-500 font-medium">
+                            <span><strong>Pelapor:</strong> ${item.nama} (${item.kategoriPelapor})</span>
+                            <span><strong>Kontak:</strong> ${item.kontak} (${item.bersedia})</span>
+                            <span><strong>Kejadian:</strong> ${item.waktuKejadian} di ${item.lokasi}</span>
                         </div>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1 text-slate-600">
-                            <div><strong>Waktu Kejadian:</strong> ${item.waktuKejadian}</div>
-                            <div><strong>Lokasi/Layanan:</strong> ${item.lokasi}</div>
-                            <div><strong>Pihak Terkait:</strong> ${item.pihak}</div>
-                        </div>
-                        <div class="pt-1 text-slate-700">
-                            <strong>Uraian Masalah:</strong> ${item.uraian}
-                        </div>
-                        <div class="text-slate-700">
-                            <strong>Harapan Penyelesaian:</strong> ${item.harapan}
-                        </div>
-                        <div class="text-slate-500 italic">
-                            <strong>Bukti:</strong> ${item.statusBukti} (${item.ketBukti})
+                        <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 space-y-1">
+                            <p><strong>Uraian Masalah (Form 01):</strong> ${item.uraian}</p>
+                            <p><strong>Harapan Penyelesaian:</strong> ${item.harapan}</p>
+                            <p><strong>Bukti:</strong> ${item.statusBukti} (${item.ketBukti})</p>
                         </div>
                     </div>
 
-                    <!-- FORM LAMPIRAN 01: LEMBAR TINDAK LANJUT PENGADUAN -->
-                    <form onsubmit="saveTindakLanjut(event, '${item.nomor}')" class="space-y-6">
+                    <!-- Form Lampiran 01 -->
+                    <form onsubmit="saveTindakLanjut(event, '${item.nomor}')" class="space-y-5">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggal Diterima & Nama Petugas Penerima</label>
-                                <input type="text" id="tl_petugasPenerima" value="${tl.petugasPenerima}"
-                                    class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-medium outline-none focus:border-blue-600">
+                                <input type="text" id="tl_petugas_penerima" value="${tl.petugasPenerima}"
+                                    class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs font-medium">
                             </div>
                             <div>
-                                <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Cara / Saluran Penyampaian</label>
-                                <select id="tl_saluran" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-xs font-medium outline-none focus:border-blue-600">
-                                    ${saluranOpts.map(opt => `<option value="${opt}" ${tl.saluran === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                                <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Saluran Penerimaan Pengaduan</label>
+                                <select id="tl_saluran" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs font-semibold">
+                                    <option value="Datang langsung" ${tl.saluran === 'Datang langsung' ? 'selected' : ''}>Datang langsung</option>
+                                    <option value="Surat/kotak pengaduan" ${tl.saluran === 'Surat/kotak pengaduan' ? 'selected' : ''}>Surat/kotak pengaduan</option>
+                                    <option value="Telepon/pesan" ${tl.saluran === 'Telepon/pesan' ? 'selected' : ''}>Telepon/pesan</option>
+                                    <option value="Lainnya (Web SI SEDALAS)" ${tl.saluran.includes('Lainnya') ? 'selected' : ''}>Lainnya (Web SI SEDALAS)</option>
                                 </select>
                             </div>
                             <div class="sm:col-span-2">
                                 <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Ringkasan Pokok Pengaduan</label>
-                                <textarea id="tl_ringkasan" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">${tl.ringkasan}</textarea>
+                                <textarea id="tl_ringkasan" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">${tl.ringkasan}</textarea>
                             </div>
                         </div>
 
                         <!-- A. Pemeriksaan dan Penugasan -->
                         <div class="space-y-3 pt-2 border-t border-slate-200">
-                            <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-lg bg-blue-600 text-white text-xs flex items-center justify-center">A</span>
-                                Pemeriksaan dan Penugasan
-                            </h4>
+                            <h4 class="font-display font-bold text-sm text-slate-900">A. Pemeriksaan dan Penugasan</h4>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Hasil Pemeriksaan Awal dan Hal yang Perlu Diklarifikasi</label>
+                                <textarea id="tl_pemeriksaan_awal" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">${tl.pemeriksaanAwal}</textarea>
+                            </div>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                <div class="sm:col-span-2">
-                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Hasil Pemeriksaan Awal dan Hal yang Perlu Diklarifikasi</label>
-                                    <textarea id="tl_pemeriksaanAwal" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">${tl.pemeriksaanAwal}</textarea>
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Penanggung Jawab Penanganan (PIC)</label>
+                                    <input type="text" id="tl_pic" value="${tl.pic}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Penanggung Jawab Penanganan (PIC)</label>
-                                    <input type="text" id="tl_pic" value="${tl.pic}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Target Penyelesaian yang Ditetapkan</label>
-                                    <input type="text" id="tl_targetWaktu" value="${tl.targetWaktu}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Target Penyelesaian yang Ditetapkan</label>
+                                    <input type="text" id="tl_target_waktu" value="${tl.targetWaktu}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">
                                 </div>
                             </div>
                         </div>
 
-                        <!-- B. Catatan Tindakan (Tabel Dinamis) -->
+                        <!-- B. Catatan Tindakan -->
                         <div class="space-y-3 pt-2 border-t border-slate-200">
                             <div class="flex items-center justify-between">
-                                <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
-                                    <span class="w-6 h-6 rounded-lg bg-blue-600 text-white text-xs flex items-center justify-center">B</span>
-                                    Catatan Tindakan
-                                </h4>
-                                <button type="button" onclick="addBarisTindakan('${item.nomor}')" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs border border-blue-200 transition">
+                                <h4 class="font-display font-bold text-sm text-slate-900">B. Catatan Tindakan</h4>
+                                <button type="button" onclick="addCatatanRow()" class="px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs border border-blue-200 transition">
                                     <i class="fa-solid fa-plus mr-1"></i> Tambah Baris Tindakan
                                 </button>
                             </div>
-                            <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white">
-                                <table class="w-full text-left border-collapse text-xs">
+                            <div class="overflow-x-auto rounded-xl border border-slate-200">
+                                <table class="w-full text-left border-collapse">
                                     <thead>
-                                        <tr class="bg-slate-100 text-slate-700 border-b border-slate-200">
+                                        <tr class="bg-slate-100 text-slate-700 text-[11px] uppercase">
                                             <th class="p-2.5 w-36">Tanggal</th>
                                             <th class="p-2.5">Tindakan dan Hasil</th>
-                                            <th class="p-2.5 w-40">Petugas/PIC</th>
-                                            <th class="p-2.5 w-10 text-center">Hapus</th>
+                                            <th class="p-2.5 w-44">Petugas/PIC</th>
+                                            <th class="p-2.5 w-12 text-center">Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tl_tabelTindakanBody" class="divide-y divide-slate-200">
-                                        ${(tl.catatanTindakan || []).map((row, idx) => `
-                                            <tr>
-                                                <td class="p-2"><input type="date" value="${row.tanggal || ''}" class="tl-row-tgl w-full px-2 py-1.5 rounded border border-slate-200 text-xs"></td>
-                                                <td class="p-2"><input type="text" value="${row.tindakan || ''}" placeholder="Uraian tindakan dan hasil..." class="tl-row-aksi w-full px-2.5 py-1.5 rounded border border-slate-200 text-xs"></td>
-                                                <td class="p-2"><input type="text" value="${row.pic || ''}" placeholder="Nama PIC" class="tl-row-pic w-full px-2.5 py-1.5 rounded border border-slate-200 text-xs"></td>
-                                                <td class="p-2 text-center">
-                                                    <button type="button" onclick="removeBarisTindakan('${item.nomor}', ${idx})" class="text-rose-500 hover:text-rose-700 p-1">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                        `).join('')}
+                                    <tbody id="tlCatatanTableBody">
+                                        ${tindakanRowsHtml}
                                     </tbody>
                                 </table>
                             </div>
@@ -1579,47 +1607,49 @@
 
                         <!-- C. Hasil dan Status Pengaduan -->
                         <div class="space-y-3 pt-2 border-t border-slate-200">
-                            <h4 class="font-display font-bold text-sm text-slate-900 flex items-center gap-2">
-                                <span class="w-6 h-6 rounded-lg bg-blue-600 text-white text-xs flex items-center justify-center">C</span>
-                                Hasil dan Status Pengaduan
-                            </h4>
+                            <h4 class="font-display font-bold text-sm text-slate-900">C. Hasil dan Status Pengaduan</h4>
                             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-                                ${statusOpts.map(st => `
+                                ${['Diterima', 'Dalam proses', 'Selesai', 'Diteruskan kepada pihak terkait'].map(st => `
                                     <label class="cursor-pointer">
                                         <input type="radio" name="tl_status" value="${st}" ${tl.status === st ? 'checked' : ''} class="peer sr-only">
-                                        <div class="p-2.5 rounded-xl border border-slate-200 bg-white text-center text-xs font-bold text-slate-600 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 transition">
+                                        <div class="p-2.5 rounded-xl border border-slate-300 bg-white text-center text-xs font-bold text-slate-700 peer-checked:bg-blue-600 peer-checked:text-white peer-checked:border-blue-600 transition">
                                             ${st}
                                         </div>
                                     </label>
                                 `).join('')}
                             </div>
 
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                                <div class="sm:col-span-2">
-                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Hasil Penyelesaian atau Alasan Diteruskan Beserta Tujuan Penerusan</label>
-                                    <textarea id="tl_hasilPenyelesaian" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">${tl.hasilPenyelesaian}</textarea>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Hasil Penyelesaian atau Alasan Diteruskan Beserta Tujuan Penerusan</label>
+                                <textarea id="tl_hasil" rows="2" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">${tl.hasilPenyelesaian}</textarea>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggal & Cara Tanggapan Disampaikan ke Pelapor</label>
+                                    <input type="text" id="tl_tgl_cara_tanggapan" value="${tl.tglCaraTanggapan}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggal & Cara Tanggapan Disampaikan ke Pelapor</label>
-                                    <input type="text" id="tl_tglCaraTanggapan" value="${tl.tglCaraTanggapan}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggal Penutupan & Bukti Penyelesaian</label>
+                                    <input type="text" id="tl_tgl_penutupan" value="${tl.tglPenutupan}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">
                                 </div>
                                 <div>
-                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggal Penutupan dan Bukti Penyelesaian</label>
-                                    <input type="text" id="tl_tglPenutupan" value="${tl.tglPenutupan}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Tanggapan Pelapor / Catatan Jika Tidak Dapat Dihubungi</label>
+                                    <input type="text" id="tl_tanggapan_pelapor" value="${tl.tanggapanPelapor}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">
                                 </div>
-                                <div class="sm:col-span-2">
-                                    <label class="block text-xs font-bold uppercase text-slate-700 mb-1">Tanggapan Pelapor atau Catatan Jika Pelapor Tidak Dapat Dihubungi</label>
-                                    <input type="text" id="tl_tanggapanPelapor" value="${tl.tanggapanPelapor}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs outline-none focus:border-blue-600">
+                                <div>
+                                    <label class="block text-xs font-semibold text-slate-700 mb-1">Kepala Sekolah / Penanggung Jawab</label>
+                                    <input type="text" id="tl_kepsek" value="${tl.kepsek || 'Kepala SDN 011 Balikpapan Tengah'}" class="w-full px-3.5 py-2 rounded-xl border border-slate-300 bg-white text-xs">
                                 </div>
                             </div>
                         </div>
 
-                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-slate-200">
-                            <p class="text-[11px] text-slate-500 italic">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-slate-200">
+                            <span class="text-[11px] text-slate-500 italic">
                                 Simpan lembar ini bersama formulir awal dan bukti tindak lanjut dengan akses terbatas kepada petugas terkait.
-                            </p>
-                            <button type="submit" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 shrink-0">
-                                <i class="fa-solid fa-floppy-disk"></i> Simpan Tindak Lanjut & Sinkronkan Cloud
+                            </span>
+                            <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 shrink-0">
+                                <i class="fa-solid fa-floppy-disk"></i> Simpan Tindak Lanjut (Lampiran 01)
                             </button>
                         </div>
                     </form>
@@ -1627,42 +1657,36 @@
             `;
         }
 
-        function syncCurrentTableRowsToState(nomor) {
-            const item = statePengaduan.find(p => p.nomor === nomor);
-            if (!item) return;
-            const tgls = document.querySelectorAll('.tl-row-tgl');
-            const aksis = document.querySelectorAll('.tl-row-aksi');
-            const pics = document.querySelectorAll('.tl-row-pic');
+        function syncCatatanDOMToState(item) {
             const rows = [];
-            for (let i = 0; i < tgls.length; i++) {
-                rows.push({
-                    tanggal: tgls[i].value,
-                    tindakan: aksis[i].value,
-                    pic: pics[i].value
-                });
-            }
+            const trs = document.querySelectorAll('#tlCatatanTableBody tr');
+            trs.forEach(tr => {
+                const tgl = tr.querySelector('input[data-field="tanggal"]')?.value || '';
+                const tdk = tr.querySelector('input[data-field="tindakan"]')?.value || '';
+                const pic = tr.querySelector('input[data-field="pic"]')?.value || '';
+                rows.push({ tanggal: tgl, tindakan: tdk, pic: pic });
+            });
             item.tindakLanjut.catatanTindakan = rows;
         }
 
-        function addBarisTindakan(nomor) {
-            const item = statePengaduan.find(p => p.nomor === nomor);
+        function addCatatanRow() {
+            const item = statePengaduan.find(p => p.nomor === selectedPengaduanNomor);
             if (!item) return;
-            syncCurrentTableRowsToState(nomor);
-            const todayISO = new Date().toISOString().split('T')[0];
+            syncCatatanDOMToState(item);
             item.tindakLanjut.catatanTindakan.push({
-                tanggal: todayISO,
+                tanggal: new Date().toISOString().split('T')[0],
                 tindakan: '',
-                pic: item.tindakLanjut.pic || 'Petugas Sekolah'
+                pic: item.tindakLanjut.pic || 'Petugas SDN 011'
             });
-            renderTindakLanjutDetail();
+            renderTindakLanjutDetail(item);
         }
 
-        function removeBarisTindakan(nomor, idx) {
-            const item = statePengaduan.find(p => p.nomor === nomor);
+        function removeCatatanRow(idx) {
+            const item = statePengaduan.find(p => p.nomor === selectedPengaduanNomor);
             if (!item) return;
-            syncCurrentTableRowsToState(nomor);
+            syncCatatanDOMToState(item);
             item.tindakLanjut.catatanTindakan.splice(idx, 1);
-            renderTindakLanjutDetail();
+            renderTindakLanjutDetail(item);
         }
 
         function saveTindakLanjut(e, nomor) {
@@ -1670,32 +1694,29 @@
             const item = statePengaduan.find(p => p.nomor === nomor);
             if (!item) return;
 
-            syncCurrentTableRowsToState(nomor);
-
-            const statusRadio = document.querySelector('input[name="tl_status"]:checked');
-            item.tindakLanjut.petugasPenerima = document.getElementById('tl_petugasPenerima').value.trim();
+            syncCatatanDOMToState(item);
+            item.tindakLanjut.petugasPenerima = document.getElementById('tl_petugas_penerima').value.trim();
             item.tindakLanjut.saluran = document.getElementById('tl_saluran').value;
             item.tindakLanjut.ringkasan = document.getElementById('tl_ringkasan').value.trim();
-            item.tindakLanjut.pemeriksaanAwal = document.getElementById('tl_pemeriksaanAwal').value.trim();
+            item.tindakLanjut.pemeriksaanAwal = document.getElementById('tl_pemeriksaan_awal').value.trim();
             item.tindakLanjut.pic = document.getElementById('tl_pic').value.trim();
-            item.tindakLanjut.targetWaktu = document.getElementById('tl_targetWaktu').value.trim();
-            item.tindakLanjut.status = statusRadio ? statusRadio.value : 'Diterima';
-            item.tindakLanjut.hasilPenyelesaian = document.getElementById('tl_hasilPenyelesaian').value.trim();
-            item.tindakLanjut.tglCaraTanggapan = document.getElementById('tl_tglCaraTanggapan').value.trim();
-            item.tindakLanjut.tglPenutupan = document.getElementById('tl_tglPenutupan').value.trim();
-            item.tindakLanjut.tanggapanPelapor = document.getElementById('tl_tanggapanPelapor').value.trim();
+            item.tindakLanjut.targetWaktu = document.getElementById('tl_target_waktu').value.trim();
+            item.tindakLanjut.status = document.querySelector('input[name="tl_status"]:checked')?.value || 'Diterima';
+            item.tindakLanjut.hasilPenyelesaian = document.getElementById('tl_hasil').value.trim();
+            item.tindakLanjut.tglCaraTanggapan = document.getElementById('tl_tgl_cara_tanggapan').value.trim();
+            item.tindakLanjut.tglPenutupan = document.getElementById('tl_tgl_penutupan').value.trim();
+            item.tindakLanjut.tanggapanPelapor = document.getElementById('tl_tanggapan_pelapor').value.trim();
+            item.tindakLanjut.kepsek = document.getElementById('tl_kepsek').value.trim();
 
             saveLocalData();
             refreshAllViews();
-
-            // Sync to Google Sheets if connected
-            sendToGoogleSheets({ action: 'UPSERT_PENGADUAN', data: item, label: `Lampiran 01 Tindak Lanjut (${nomor})` });
+            sendToGoogleSheets({ action: 'UPSERT_PENGADUAN', data: item, label: `Lampiran 01 Tindak Lanjut (${item.nomor})` });
             showToast(`Lembar Tindak Lanjut (${nomor}) berhasil diperbarui!`);
         }
 
         /**
          * ==========================================
-         * FORM 02 LOGIC (SURVEI KEPUASAN MASYARAKAT)
+         * FORM 02 LOGIC (SURVEI KEPUASAN LAYANAN SEKOLAH DASAR - 12 BUTIR)
          * ==========================================
          */
         function initForm02Metadata() {
@@ -1716,7 +1737,9 @@
                 { val: 'TB', label: 'TB', desc: 'Tidak/belum menilai', activeCls: 'peer-checked:bg-slate-700 peer-checked:text-white peer-checked:border-slate-700' }
             ];
 
-            container.innerHTML = ASPEK_LIST.map(a => `
+            container.innerHTML = ASPEK_LIST.map(a => {
+                const defaultTB = [2, 10, 12].includes(a.no);
+                return `
                 <div class="p-4 sm:p-5 rounded-2xl border border-slate-200 bg-slate-50/60 hover:bg-white hover:border-slate-300 transition">
                     <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                         <div class="space-y-1 max-w-xl">
@@ -1731,7 +1754,7 @@
                         <div class="grid grid-cols-5 gap-2 sm:w-96 shrink-0 pl-8 lg:pl-0">
                             ${scaleOptions.map(opt => `
                                 <div class="relative">
-                                    <input type="radio" name="aspek_${a.no}" id="aspek_${a.no}_${opt.val}" value="${opt.val}" ${opt.val === '4' && a.no !== 8 ? 'checked' : (a.no === 8 && opt.val === 'TB' ? 'checked' : '')} class="score-option peer sr-only">
+                                    <input type="radio" name="aspek_${a.no}" id="aspek_${a.no}_${opt.val}" value="${opt.val}" ${(!defaultTB && opt.val === '4') || (defaultTB && opt.val === 'TB') ? 'checked' : ''} class="score-option peer sr-only">
                                     <label for="aspek_${a.no}_${opt.val}" class="flex flex-col items-center justify-center p-2 rounded-xl border border-slate-200 bg-white cursor-pointer text-slate-700 hover:border-slate-300 transition ${opt.activeCls}">
                                         <span class="font-display font-extrabold text-sm">${opt.label}</span>
                                         <span class="text-[10px] leading-tight text-center opacity-80 mt-0.5 hidden sm:block">${opt.desc}</span>
@@ -1741,7 +1764,8 @@
                         </div>
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
 
         async function handleForm02Submit(e) {
@@ -1756,15 +1780,23 @@
                 }
             });
 
+            const tahunAjaran = document.getElementById('f02_tahun_ajaran').value;
+            const semester = document.getElementById('f02_semester').value;
+            const periodeGabungan = `${tahunAjaran} - Semester ${semester}`;
+
             const katSel = document.getElementById('f02_responden').value;
             const katLain = document.getElementById('f02_responden_lainnya').value.trim();
             const respondenFinal = (katSel === 'Lainnya' && katLain) ? `Lainnya (${katLain})` : katSel;
+            const kelasAnak = document.getElementById('f02_kelas_anak').value || '-';
 
             const newSurvei = {
                 id: 'SRV-' + String(stateSurvei.length + 1).padStart(3, '0'),
+                tahunAjaran: tahunAjaran,
+                semester: semester,
                 tanggal: document.getElementById('f02_tanggal').value,
-                periode: document.getElementById('f02_periode').value,
+                periode: periodeGabungan,
                 responden: respondenFinal,
+                kelasAnak: kelasAnak,
                 layanan: document.getElementById('f02_layanan').value.trim(),
                 skor: skorObj,
                 halBaik: document.getElementById('f02_hal_baik').value.trim() || '-',
@@ -1780,12 +1812,13 @@
             const origBtn2 = btnSubmit2.innerHTML;
             btnSubmit2.disabled = true;
             btnSubmit2.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim ke Google Apps Script...';
-            const syncRes2 = await sendToGoogleSheets({ action: 'INSERT_SURVEI', data: newSurvei, label: `Form 02 Survei Kepuasan (${newSurvei.id})` });
+            const syncRes2 = await sendToGoogleSheets({ action: 'INSERT_SURVEI', data: newSurvei, label: `Form 02 Survei Kepuasan SD (${newSurvei.id})` });
             btnSubmit2.disabled = false;
             btnSubmit2.innerHTML = origBtn2;
 
             // Reset form
             document.getElementById('formSurvei').reset();
+            document.getElementById('f02_responden_lainnya').classList.add('hidden');
             initForm02Metadata();
             renderForm02AspekQuestions();
 
@@ -1794,14 +1827,14 @@
                 : `<div class="px-3 py-2 rounded-xl bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold flex items-center gap-2"><i class="fa-solid fa-database mr-1"></i> Tersimpan di sistem aplikasi.</div>`;
 
             openCustomModal({
-                title: 'Terima Kasih Atas Penilaian Anda!',
-                subtitle: 'Survei Kepuasan Masyarakat (FORM 02) — SDN 011 Balikpapan Tengah',
+                title: 'Terima Kasih Atas Partisipasi Anda!',
+                subtitle: 'Survei Kepuasan Layanan Sekolah Dasar (FORM 02) — SDN 011 Balikpapan Tengah',
                 iconClass: 'fa-star',
                 iconBg: 'bg-amber-100 text-amber-700',
                 bodyHtml: `
                     ${syncBadgeModal2}
                     <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                        Penilaian anonim Anda telah masuk ke dalam <strong>Rekapitulasi Hasil Survei Kepuasan (Lampiran Form 02)</strong> dan menjadi dasar penentuan prioritas perbaikan layanan SDN 011 Balikpapan Tengah.
+                        Penilaian anonim Anda terhadap 12 butir layanan sekolah dasar telah masuk ke dalam <strong>Rekapitulasi Hasil Survei Kepuasan (Lampiran Form 02)</strong> untuk menentukan prioritas perbaikan layanan SDN 011 Balikpapan Tengah.
                     </p>
                 `,
                 footerHtml: `
@@ -1815,17 +1848,22 @@
 
         /**
          * ==========================================
-         * LAMPIRAN FORM 02 LOGIC (REKAPITULASI & PERHITUNGAN RESMI)
+         * LAMPIRAN FORM 02 LOGIC (REKAPITULASI 12 ASPEK & PERBANDINGAN KELOMPOK RESPONDEN)
          * ==========================================
-         * Aturan Perhitungan Sesuai Dokumen:
-         * - Jawaban sah (n) adalah satu pilihan skor 1, 2, 3, atau 4 pada sebuah aspek.
-         * - TB, jawaban kosong, dan pilihan ganda tidak dihitung.
-         * - Rata-rata per aspek = jumlah skor pada aspek tersebut ÷ jumlah jawaban sah.
-         * - Persentase puas = jumlah jawaban skor 3 dan 4 ÷ jumlah jawaban sah × 100%.
-         * - Jika tidak ada jawaban sah, tulis "belum ada data".
          */
-        function calculateRekapData(periodeFilter = 'ALL') {
-            const filteredSurvei = stateSurvei.filter(s => periodeFilter === 'ALL' || s.periode === periodeFilter);
+        function calculateRekapData(periodeFilter = 'ALL', respondenFilter = 'ALL') {
+            const filteredSurvei = stateSurvei.filter(s => {
+                const matchPeriode = periodeFilter === 'ALL' || s.periode === periodeFilter;
+                let matchResponden = true;
+                if (respondenFilter !== 'ALL') {
+                    if (respondenFilter === 'Lainnya') {
+                        matchResponden = String(s.responden || '').startsWith('Lainnya');
+                    } else {
+                        matchResponden = s.responden === respondenFilter;
+                    }
+                }
+                return matchPeriode && matchResponden;
+            });
             const totalFormulir = filteredSurvei.length;
 
             // Hitung formulir yang memiliki minimal 1 jawaban sah (1, 2, 3, atau 4)
@@ -1878,7 +1916,8 @@
 
         function renderRekapSurvei() {
             const periodeFilter = document.getElementById('rekap_periode_filter')?.value || 'ALL';
-            const { totalFormulir, formulirSahCount, rekapPerAspek, filteredSurvei } = calculateRekapData(periodeFilter);
+            const respondenFilter = document.getElementById('rekap_responden_filter')?.value || 'ALL';
+            const { totalFormulir, formulirSahCount, rekapPerAspek, filteredSurvei } = calculateRekapData(periodeFilter, respondenFilter);
 
             document.getElementById('rekap_total_form').textContent = totalFormulir;
             document.getElementById('rekap_form_sah').textContent = formulirSahCount;
@@ -1936,7 +1975,7 @@
 
             tfoot.innerHTML = `
                 <tr>
-                    <td class="py-3.5 px-4 text-slate-900">Rata-rata Keseluruhan Aspek Layanan Internal</td>
+                    <td class="py-3.5 px-4 text-slate-900">Rata-rata Keseluruhan 12 Aspek Layanan Internal</td>
                     <td class="py-3.5 px-4 text-center font-mono">${sumN}</td>
                     <td class="py-3.5 px-4 text-center font-mono">${sumSkor}</td>
                     <td class="py-3.5 px-4 text-center text-emerald-700 text-base">${overallAvg}</td>
@@ -1948,19 +1987,19 @@
             // Render Qualitative Feedback List
             const masukanContainer = document.getElementById('daftarMasukanContainer');
             if (filteredSurvei.length === 0) {
-                masukanContainer.innerHTML = `<div class="col-span-2 text-center py-6 text-xs text-slate-400">Belum ada masukan responden pada periode ini.</div>`;
+                masukanContainer.innerHTML = `<div class="col-span-2 text-center py-6 text-xs text-slate-400">Belum ada masukan responden pada filter ini.</div>`;
             } else {
                 masukanContainer.innerHTML = filteredSurvei.map(s => `
                     <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-2">
                         <div class="flex items-center justify-between text-slate-400">
-                            <span class="font-bold text-slate-700">${s.responden} • ${s.layanan}</span>
+                            <span class="font-bold text-slate-700">${s.responden} ${s.kelasAnak && s.kelasAnak !== '-' ? '• ' + s.kelasAnak : ''} • ${s.layanan}</span>
                             <span>${formatIndonesianDate(s.tanggal)}</span>
                         </div>
                         <div class="text-slate-700">
-                            <span class="font-bold text-emerald-700"><i class="fa-solid fa-thumbs-up mr-1"></i>Sudah Baik:</span> ${s.halBaik}
+                            <span class="font-bold text-emerald-700"><i class="fa-solid fa-thumbs-up mr-1"></i>Layanan Sudah Baik:</span> ${s.halBaik}
                         </div>
                         <div class="text-slate-700">
-                            <span class="font-bold text-amber-700"><i class="fa-solid fa-lightbulb mr-1"></i>Harapan Perbaikan:</span> ${s.perbaikan}
+                            <span class="font-bold text-amber-700"><i class="fa-solid fa-lightbulb mr-1"></i>Perbaikan Dibutuhkan:</span> ${s.perbaikan}
                         </div>
                     </div>
                 `).join('');
@@ -2197,7 +2236,8 @@
         function printLampiran02() {
             saveRencanaPerbaikanLocal();
             const periodeFilter = document.getElementById('rekap_periode_filter')?.value || 'ALL';
-            const { totalFormulir, formulirSahCount, rekapPerAspek } = calculateRekapData(periodeFilter);
+            const respondenFilter = document.getElementById('rekap_responden_filter')?.value || 'ALL';
+            const { totalFormulir, formulirSahCount, rekapPerAspek } = calculateRekapData(periodeFilter, respondenFilter);
 
             const printArea = document.getElementById('printableArea');
             printArea.innerHTML = `
@@ -2206,10 +2246,11 @@
                         <p class="text-xs font-bold uppercase tracking-widest">SDN 011 BALIKPAPAN TENGAH</p>
                         <h1 class="text-xl font-bold mt-0.5">Rekapitulasi Hasil Survei Kepuasan</h1>
                         <p class="text-xs font-semibold">LAMPIRAN FORM 02 &nbsp;|&nbsp; Diisi oleh pengelola survei</p>
+                        <p class="text-[11px] text-gray-700 mt-1">Rekap 12 butir survei layanan sekolah dasar untuk menentukan prioritas perbaikan. Pisahkan hasil orang tua/wali dan masyarakat bila kelompok responden perlu dibandingkan.</p>
                     </div>
 
                     <div class="grid grid-cols-2 gap-2">
-                        <p><strong>Periode survei:</strong> ${periodeFilter === 'ALL' ? 'Semua Periode' : periodeFilter}</p>
+                        <p><strong>Periode survei:</strong> ${periodeFilter === 'ALL' ? 'Semua Periode' : periodeFilter} ${respondenFilter !== 'ALL' ? '(' + respondenFilter + ')' : ''}</p>
                         <p><strong>Tanggal rekap:</strong> ${formatIndonesianDate(stateRencana.tanggalRekap)}</p>
                         <p><strong>Formulir terkumpul:</strong> ${totalFormulir}</p>
                         <p><strong>Formulir dengan minimal satu jawaban sah:</strong> ${formulirSahCount}</p>
@@ -2231,7 +2272,7 @@
                             <tbody>
                                 ${rekapPerAspek.map(r => `
                                     <tr>
-                                        <td class="border border-black p-1.5">${r.no}. ${r.kode}</td>
+                                        <td class="border border-black p-1.5">${r.no} &nbsp;${r.kode}</td>
                                         <td class="border border-black p-1.5 text-center">${r.n}</td>
                                         <td class="border border-black p-1.5 text-center">${r.n > 0 ? r.jumlahSkor : '-'}</td>
                                         <td class="border border-black p-1.5 text-center">${r.n > 0 ? r.rataRata.toFixed(2).replace('.', ',') : 'belum ada data'}</td>
@@ -2272,10 +2313,16 @@
         }
 
         function exportSurveiCSV() {
-            const headers = ['ID', 'Tanggal', 'Periode', 'Kategori Responden', 'Layanan', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'Hal Sudah Baik', 'Harapan Perbaikan'];
+            const headers = [
+                'ID', 'Tahun Ajaran', 'Semester', 'Tanggal', 'Kelompok Responden', 'Kelas Anak', 'Layanan Pernah Digunakan',
+                'A1_Pendampingan_Belajar', 'A2_Bantuan_Kesulitan_Belajar', 'A3_Informasi_Perkembangan_Anak', 'A4_Pembiasaan_Sikap_Baik',
+                'A5_Komunikasi_Dengan_Guru', 'A6_Perlakuan_Ramah_Adil', 'A7_Keamanan_Anak', 'A8_Kebersihan_Lingkungan',
+                'A9_Fasilitas_Belajar', 'A10_Administrasi_Murid', 'A11_Informasi_Kegiatan_Biaya', 'A12_Tindak_Lanjut_Keluhan',
+                'Layanan Sudah Baik', 'Perbaikan Dibutuhkan'
+            ];
             const rows = stateSurvei.map(s => [
-                s.id, s.tanggal, `"${s.periode}"`, `"${s.responden}"`, `"${s.layanan}"`,
-                s.skor[1], s.skor[2], s.skor[3], s.skor[4], s.skor[5], s.skor[6], s.skor[7], s.skor[8], s.skor[9],
+                s.id, `"${s.tahunAjaran || ''}"`, `"${s.semester || ''}"`, s.tanggal, `"${s.responden}"`, `"${s.kelasAnak || '-'}"`, `"${s.layanan}"`,
+                s.skor[1], s.skor[2], s.skor[3], s.skor[4], s.skor[5], s.skor[6], s.skor[7], s.skor[8], s.skor[9], s.skor[10], s.skor[11], s.skor[12],
                 `"${(s.halBaik || '').replace(/"/g, '""')}"`,
                 `"${(s.perbaikan || '').replace(/"/g, '""')}"`
             ]);
@@ -2283,11 +2330,11 @@
             const encodedUri = encodeURI(csvContent);
             const link = document.createElement('a');
             link.setAttribute('href', encodedUri);
-            link.setAttribute('download', `Rekap_Survei_SI_SEDALAS_SDN011_${new Date().toISOString().split('T')[0]}.csv`);
+            link.setAttribute('download', `Rekap_Survei_SD_SI_SEDALAS_SDN011_${new Date().toISOString().split('T')[0]}.csv`);
             document.body.appendChild(link);
             link.click();
             link.remove();
-            showToast('File CSV Rekap Survei berhasil diunduh!');
+            showToast('File CSV Rekap Survei 12 Aspek SD berhasil diunduh!');
         }
 
         /**
@@ -2518,10 +2565,14 @@
                             layanan: row[5],
                             skor: {
                                 1: row[6], 2: row[7], 3: row[8], 4: row[9], 5: row[10],
-                                6: row[11], 7: row[12], 8: row[13], 9: row[14]
+                                6: row[11], 7: row[12], 8: row[13], 9: row[14],
+                                10: row[17] || 'TB', 11: row[18] || 'TB', 12: row[19] || 'TB'
                             },
                             halBaik: row[15],
-                            perbaikan: row[16]
+                            perbaikan: row[16],
+                            tahunAjaran: row[20] || '',
+                            semester: row[21] || '',
+                            kelasAnak: row[22] || '-'
                         }));
                     }
                     saveLocalData();
